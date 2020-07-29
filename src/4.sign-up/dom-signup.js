@@ -4,6 +4,7 @@ import view from './signup.html';
 // import functions from './funciones-signup';
 import './estilos-signup.css'
 import {firebaseConfig} from '../firebaseConfig'
+import * as firebase from 'firebase';
 
 
 
@@ -120,7 +121,7 @@ eyeIcons.addEventListener('click', togglePassword1)
 
 
 /*------ SIGNUP (REGISTRARSE) -------*/
-firebase.initializeApp(firebaseConfig);
+
 
 const auth = firebase.auth();
 

@@ -1,4 +1,4 @@
-
+import * as firebase from 'firebase';
 
 let firebaseConfig = {
     apiKey: "AIzaSyCODu2k1AxjuhiU9zdTtFk5_gfFEGGfvgk",
@@ -10,6 +10,6 @@ let firebaseConfig = {
     appId: "1:954740746531:web:0bf18fbcea8c8842980496"
   };
 
-//   firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
 
-  export {firebaseConfig};
+ 

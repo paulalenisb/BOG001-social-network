@@ -14,7 +14,7 @@ const router =  (route) => {
         return content.appendChild(pages.login());
         case "#/sign-up": 
         return content.appendChild(pages.signup());
-        case "#/404": 
+        default : 
         return content.appendChild(pages.notFound());
         // default: 
         // return content.appendChild(pages.notFound())

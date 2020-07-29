@@ -46,6 +46,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "firebase": "^7.17.1",
     "sass-loader": "^9.0.2"
   }
 }
