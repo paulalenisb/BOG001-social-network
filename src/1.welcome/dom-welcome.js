@@ -1,4 +1,7 @@
-import view from '../views/home.html';
+
+import view from './welcome.html';
+import './estilos-welcome.css'
+
 
 export default () => {
    

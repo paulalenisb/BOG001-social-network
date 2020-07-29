@@ -1,4 +1,18 @@
-body {
-    margin:0px;
-    background-color: rosybrown;
+
+
+.menu ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
 }
+
+.menu li {
+    text-decoration: none;
+
+}
+.menu li a{
+    text-decoration: none;
+    color:white
+}
+
