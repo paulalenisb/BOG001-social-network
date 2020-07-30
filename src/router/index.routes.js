@@ -4,18 +4,24 @@ let content = document.getElementById('root');
 
 const router = (route) => {
     content.innerHTML = '';
+    let nodeDomPages = '';
     switch (route) {
         case "#/welcome":
-            return content.appendChild(pages.welcome());
+            nodeDomPages = pages.welcome()
+        break;    
         case "#/start":
-            return content.appendChild(pages.start());
+            nodeDomPages= pages.start();
+        break;
         case "#/login":
-            return content.appendChild(pages.login());
+            nodeDomPages= pages.login();
+        break;    
         case "#/sign-up":
-            return content.appendChild(pages.signup());
+            nodeDomPages = pages.signup();
+        break; 
         default:
-            return content.appendChild(pages.notFound());
+            nodeDomPages = pages.notFound();
     }
+    return content.appendChild(nodeDomPages)
 };
 
 export { router };

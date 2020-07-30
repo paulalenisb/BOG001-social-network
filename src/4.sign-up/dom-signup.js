@@ -2,8 +2,9 @@
 import view from './signup.html';
 import './estilos-signup.css'
 import '../Firebase/firebaseConfig'
+import{regularExpressions, fields,validateInputsValue} from './funciones-signup'
 import * as firebase from 'firebase';
-import {createNewUser, createGoogleAccount} from "../Firebase/firebaseAuth"
+import {createNewUser, createGoogleAccount} from '../Firebase/firebaseAuth'
 
 
 export default () => {
@@ -17,17 +18,7 @@ export default () => {
     console.log(inputs)
 
 
-    let regularExpressions = {
-        name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-        password: /^.{8,12}$/, // 8 a 12 dígitos.
-        email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-    }
-
-    let fields = {
-        username: false,
-        email: false,
-        password: false,
-    }
+   
 
     let messageError = {
         name: 'El nombre debe contener solo letras.',
@@ -40,29 +31,31 @@ export default () => {
     let validateForm = (e) => {
         switch (e.target.name) {  // Valor a comprobar
             case "username":
-                validateField(regularExpressions.name, e.target, 'name')
+                validateInputs(regularExpressions.name, e.target, 'name')
                 break;
             case "email":
-                validateField(regularExpressions.email, e.target, 'email');
+                validateInputs(regularExpressions.email, e.target, 'email');
                 break;
             case "password":
-                validateField(regularExpressions.password, e.target, 'password');
+                validateInputs(regularExpressions.password, e.target, 'password');
                 break;
         }
     }
 
-    // Comprobamos con las expresiones regulares si los valores digitados por el usuario son verdaderos o falsos
-    const validateField = (regularExpressions, input, field) => {
-        if (regularExpressions.test(input.value)) {
-            divElement.querySelector(`#${field}`).classList.remove('form-group-wrong');
-            divElement.querySelector(`#group-${field} .form-input-error`).textContent = "";
-            fields[field] = true;
-        } else {
-            divElement.querySelector(`#${field}`).classList.add('form-group-wrong');
-            divElement.querySelector(`#group-${field} .form-input-error`).textContent = messageError[field];
-            fields[field] = false;
-        }
+
+
+    let validateInputs = (regularExpressions, input, field) => {
+        console.log(validateInputsValue(regularExpressions, input, field))
+    if (validateInputsValue(regularExpressions, input, field)) {
+        divElement.querySelector(`#${field}`).classList.remove('form-group-wrong');
+        divElement.querySelector(`#group-${field} .form-input-error`).textContent = "";
+    }else {
+        divElement.querySelector(`#${field}`).classList.add('form-group-wrong');
+        divElement.querySelector(`#group-${field} .form-input-error`).textContent = messageError[field];
     }
+    }
+    // Comprobamos con las expresiones regulares si los valores digitados por el usuario son verdaderos o falsos
+    
 
     //Por cada input del formulario me  ejecuta un eventlistener
     inputs.forEach((input) => {
@@ -112,9 +105,9 @@ export default () => {
             window.location.hash = "#/welcome"
 
 
-            // auth
-            //     .createUserWithEmailAndPassword(email, password)
-            //     .then(userCredential => { window.location.hash = "#/welcome" }) //Redireccionar a otra vista
+            auth
+                .createUserWithEmailAndPassword(email, password)
+                .then(userCredential => { window.location.hash = "#/welcome" }) //Redireccionar a otra vista
         } else {
             divElement.querySelector('#form-message').classList.add('form-message-active');
         }

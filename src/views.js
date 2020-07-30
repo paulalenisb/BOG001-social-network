@@ -6,7 +6,7 @@ import signup from './4.sign-up/dom-signup'
 
 
 
-const pages ={
+const pages = {
    welcome: welcome,
    start: start,
    login: login,
