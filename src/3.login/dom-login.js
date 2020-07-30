@@ -2,7 +2,7 @@
 import view from './login.html';
 
 import{regularExpressions, fields,validateInputsValue} from '../4.sign-up/funciones-signup'
-import './estilos-login.css'
+import {loginUser} from '../Firebase/firebaseAuth'
 
 
 export default () => {
@@ -87,16 +87,47 @@ export default () => {
         const password = divElement.querySelector('#password-input').value;
 
         if (fields.email && fields.password) {
+            
+            
+            loginUser (email,password) 
+            window.location.hash = "#/start"
             form.reset();
-
-           
 
             //Redireccionar a otra vista
         } else {
-            divElement.querySelector('#form-message').classList.add('form-message-active');
+            alert("no estas registrado")
+            //divElement.querySelector('#form-message').classList.add('form-message-active');
         }
     })
 
     
     return divElement;
 };
+
+
+
+
+
+// function acceso() {
+//     var emailA = document.getElementById('emailA').value;
+//     var passA = document.getElementById('passwordA').value;
+//     firebase.auth().signInWithEmailAndPassword(emailA, passA)
+//         .catch(function (error) {
+//             var errorCode = error.code;
+//             var errorMessage = error.message;
+//             alert(errorMessage);
+// 		});
+// 		firebase.auth().signInWithEmailAndPassword(emailA, passwordA).catch(function(error) {
+// 			// Handle Errors here.
+// 			var errorCode = error.code;
+// 			var errorMessage = error.message;
+// 			alert(errorMessage);
+// 			// ...
+// 		  });
+// }
+
+//   // Initialize Firebase
+
+
+
+ 

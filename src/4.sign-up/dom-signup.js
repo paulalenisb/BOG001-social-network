@@ -104,10 +104,6 @@ export default () => {
             createNewUser(email,password);
             window.location.hash = "#/welcome"
 
-
-            auth
-                .createUserWithEmailAndPassword(email, password)
-                .then(userCredential => { window.location.hash = "#/welcome" }) //Redireccionar a otra vista
         } else {
             divElement.querySelector('#form-message').classList.add('form-message-active');
         }
