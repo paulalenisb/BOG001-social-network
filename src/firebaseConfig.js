@@ -11,5 +11,3 @@ let firebaseConfig = {
   };
 
   firebase.initializeApp(firebaseConfig);
-
- 

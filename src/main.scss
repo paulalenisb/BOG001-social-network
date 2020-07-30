@@ -1,18 +1,17 @@
-
-
-.menu ul{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    list-style: none;
+.menu {
+    z-index: 1;
+    position: relative;
+    ul{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        list-style: none;
+    }
+    li{
+        text-decoration: none;
+    }
+    li a{
+        text-decoration: none;
+        color:white
+    }
 }
-
-.menu li {
-    text-decoration: none;
-
-}
-.menu li a{
-    text-decoration: none;
-    color:white
-}
-
