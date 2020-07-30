@@ -1,10 +1,9 @@
 
 import view from './signup.html';
-// import firebase from './firebase-signup';
-// import functions from './funciones-signup';
 import './estilos-signup.css'
-import '../firebaseConfig'
+import '../Firebase/firebaseConfig'
 import * as firebase from 'firebase';
+import {createNewUser, createGoogleAccount} from "../Firebase/firebaseAuth"
 
 
 export default () => {
@@ -93,7 +92,7 @@ export default () => {
     eyeIcons.addEventListener('click', togglePassword1)
 
     /*------ SIGNUP (REGISTRARSE) -------*/
-    const auth = firebase.auth();
+    // const auth = firebase.auth();
 
     form.addEventListener('submit', (e) => {
         e.preventDefault(); // Para que no se reinicie el form
@@ -109,9 +108,13 @@ export default () => {
                 divElement.querySelector('#form-message-successful').classList.remove('form-message-successful-active');
             }, 5000);
 
-            auth
-                .createUserWithEmailAndPassword(email, password)
-                .then(userCredential => { window.location.hash = "#/welcome" }) //Redireccionar a otra vista
+            createNewUser(email,password);
+            window.location.hash = "#/welcome"
+
+
+            // auth
+            //     .createUserWithEmailAndPassword(email, password)
+            //     .then(userCredential => { window.location.hash = "#/welcome" }) //Redireccionar a otra vista
         } else {
             divElement.querySelector('#form-message').classList.add('form-message-active');
         }
@@ -121,15 +124,7 @@ export default () => {
     const googleButtonSignUp = divElement.querySelector('#sign-in-google');
 
     googleButtonSignUp.addEventListener('click', (e) => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider)
-            .then(result => {
-                console.log('¡Se creó un nuevo usario con Google!');
-                form.reset();
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        createGoogleAccount()
     })
 
     return divElement;

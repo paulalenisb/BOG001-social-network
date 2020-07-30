@@ -5,7 +5,7 @@ let content = document.getElementById('root');
 const router = (route) => {
     content.innerHTML = '';
     switch (route) {
-        case "#/":
+        case "#/welcome":
             return content.appendChild(pages.welcome());
         case "#/start":
             return content.appendChild(pages.start());
