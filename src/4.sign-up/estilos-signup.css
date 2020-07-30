@@ -187,7 +187,13 @@ a {
         max-width: 400px;
         height: 40px;
     }
-
+    .form-input-error {
+        font-size: 14px;
+       
+    }
+    .text-sn-sign-up{
+        font-size: 1.15em
+    }
   
 }
 
@@ -200,10 +206,10 @@ a {
     }
 
     .form-container {
-        border: 3px solid white;
+        border: 2px solid white;
         border-radius: 20px;
         width: 50%;
-        max-width: 600px;
+        max-width: 500px;
         position: relative;
         background-color: transparent;
         padding: 2%;
@@ -213,6 +219,6 @@ a {
     .form-sign-up {
         margin-top: 40px;
     }
-
+    
    
 }
