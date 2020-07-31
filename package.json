@@ -16,7 +16,8 @@
     "pretest": "npm run htmlhint && npm run eslint && npm run stylelint",
     "test": "jest --coverage",
     "start": "serve src/",
-    "web": "webpack-dev-server"
+    "web": "webpack-dev-server",
+    "eslintfix": "eslint --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

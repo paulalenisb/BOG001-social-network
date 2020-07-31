@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
-
-body{
+body {
     margin: 0;
     padding: 0;
     background: url(../images/Mobile_bg_Leratto.jpg) center no-repeat;
@@ -13,7 +12,7 @@ body{
     color: #f4f4f4;
 }
 
-.overlay{
+.overlay {
     background: rgba(0,0,0,0.5);
     position: fixed;
     top: 0;
@@ -27,7 +26,7 @@ body{
     align-items: center;
 }
 
-.logo{
+.logo {
     background: url(../images/Logo_Leratto.png) center no-repeat;
     background-size: cover;
     width: 150px;
@@ -35,7 +34,7 @@ body{
     margin: auto;
 }
 
-.form-input, .form-group-input{
+.form-input, .form-group-input {
     background: none;
     display: flex;
     text-align: center;
@@ -50,16 +49,16 @@ body{
     margin: 20px auto;
 }
 
-.form-group-input{
+.form-group-input {
     justify-content: center;
     align-items: center;
 }
 
-.form-sign-up{
+.form-sign-up {
     margin-top: 40px;
 }
 
-.text-password{
+.text-password {
     border: none;
     background: none;
     font-size: 16px;
@@ -73,14 +72,14 @@ body{
     text-align: center;
 }
 
-.fas fa-eye, .fas fa-eye-slash{
+.fas fa-eye, .fas fa-eye-slash {
     float: right;
     width: 30px;
     height: 30px;
     padding-right: 10px;
 }
 
-.btn-sign-up{
+.btn-sign-up {
     font-size: 16px;
     background-color: #f4f4f448 ;
     display: flex;
@@ -99,11 +98,11 @@ body{
     margin-bottom: 20px;
 }
 
-.text-sn-sign-up{
+.text-sn-sign-up {
     text-align: center;
 }
 
-.sn-sign-up{
+.sn-sign-up {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -148,11 +147,11 @@ a {
     text-align: center;
 }
 
-#eye-open{
+#eye-open {
     display: none;
 }
 
-.show{
+.show {
     display: block;
 }
 
@@ -169,7 +168,7 @@ a {
         background-size: cover;
     } 
 
-    .logo{
+    .logo {
         width: 200px;
         height: 200px;
     }
@@ -189,12 +188,10 @@ a {
     }
     .form-input-error {
         font-size: 14px;
-       
     }
     .text-sn-sign-up{
         font-size: 1.15em
     }
-  
 }
 
 /*--------- ESTILOS DESKTOP ---------*/
@@ -219,6 +216,4 @@ a {
     .form-sign-up {
         margin-top: 40px;
     }
-    
-   
 }
