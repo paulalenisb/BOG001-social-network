@@ -1,121 +1,103 @@
-
 import view from './signup.html';
-import './estilos-signup.css'
-import '../Firebase/firebaseConfig'
-import{regularExpressions, fields,validateInputsValue} from './funciones-signup'
-import * as firebase from 'firebase';
-import {createNewUser, createGoogleAccount} from '../Firebase/firebaseAuth'
-
+import './estilos-signup.css';
+import '../Firebase/firebaseConfig';
+import { regularExpressions, fields, validateInputsValue } from './funciones-signup';
+import { createNewUser, createGoogleAccount } from '../Firebase/firebaseAuth';
+// import * as firebase from 'firebase';
 
 export default () => {
+  const divElement = document.createElement('div');
+  divElement.innerHTML = view;
 
-    const divElement = document.createElement('div');
-    divElement.innerHTML = view;
+  const form = divElement.querySelector('#form');
+  const inputs = divElement.querySelectorAll('#form input');
+  // console.log(inputs)
 
-    let form = divElement.querySelector('#form');
-    // querySelectorAll nos devuelve un array con cada uno de los inputs
-    let inputs = divElement.querySelectorAll('#form input');
-    console.log(inputs)
+  const messageError = {
+    name: 'El nombre debe contener solo letras.',
+    email: 'El correo es inválido',
+    password: 'La contraseña tiene que ser de 8 dígitos.',
+  };
 
-
-   
-
-    let messageError = {
-        name: 'El nombre debe contener solo letras.',
-        email: 'El correo es inválido',
-        password: 'La contraseña tiene que ser de 8 dígitos.',
+  /* ------ VALIDACIÓN INPUTS FORMULARIO -------*/
+  const validateForm = (e) => {
+    switch (e.target.name) { // Valor a comproba * Con target accedemos a la propiedad  name de cada input ()
+      case 'username':
+        validateInputs(regularExpressions.name, e.target, 'name');
+        break;
+      case 'email':
+        validateInputs(regularExpressions.email, e.target, 'email');
+        break;
+      case 'password':
+        validateInputs(regularExpressions.password, e.target, 'password');
+        break;
     }
+  };
 
-    // Función para  comprobar los fields cuando presionemos la tecla o cuando se haga click por fuera 
-    // con target accedemos a la propiedad  name de cada input ()
-    let validateForm = (e) => {
-        switch (e.target.name) {  // Valor a comprobar
-            case "username":
-                validateInputs(regularExpressions.name, e.target, 'name')
-                break;
-            case "email":
-                validateInputs(regularExpressions.email, e.target, 'email');
-                break;
-            case "password":
-                validateInputs(regularExpressions.password, e.target, 'password');
-                break;
-        }
-    }
-
-
-
-    let validateInputs = (regularExpressions, input, field) => {
-        console.log(validateInputsValue(regularExpressions, input, field))
+  let validateInputs = (regularExpressions, input, field) => {
+    console.log(validateInputsValue(regularExpressions, input, field));
     if (validateInputsValue(regularExpressions, input, field)) {
-        divElement.querySelector(`#${field}`).classList.remove('form-group-wrong');
-        divElement.querySelector(`#group-${field} .form-input-error`).textContent = "";
-    }else {
-        divElement.querySelector(`#${field}`).classList.add('form-group-wrong');
-        divElement.querySelector(`#group-${field} .form-input-error`).textContent = messageError[field];
+      divElement.querySelector(`#${field}`).classList.remove('form-group-wrong');
+      divElement.querySelector(`#group-${field} .form-input-error`).textContent = '';
+    } else {
+      divElement.querySelector(`#${field}`).classList.add('form-group-wrong');
+      divElement.querySelector(`#group-${field} .form-input-error`).textContent = messageError[field];
     }
+  };
+
+  // Por cada input del formulario ejecuta un eventlistener
+  inputs.forEach((input) => {
+    input.addEventListener('blur', validateForm);
+  });
+
+  /* ------ OCULTAR/MOSTRAR CONTRASEÑA -------*/
+  const togglePassword1 = () => {
+    const pwd = divElement.querySelector('#password-input');
+    const eyeOpen = divElement.querySelector('#eye-open');
+    const eyeClose = divElement.querySelector('#eye-close');
+
+    if (pwd.type === 'password') {
+      pwd.type = 'text';
+      eyeOpen.style.display = 'block';
+      eyeClose.style.display = 'none';
+    } else {
+      pwd.type = 'password';
+      eyeOpen.style.display = 'none';
+      eyeClose.style.display = 'block';
     }
-    // Comprobamos con las expresiones regulares si los valores digitados por el usuario son verdaderos o falsos
-    
+  };
 
-    //Por cada input del formulario me  ejecuta un eventlistener
-    inputs.forEach((input) => {
-        input.addEventListener('blur', validateForm)
-    });
+  const eyeIcons = divElement.querySelector('.eye');
+  eyeIcons.addEventListener('click', togglePassword1);
 
-    let togglePassword1 = () => {
+  /* ------ SIGNUP (REGISTRARSE) -------*/
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); // Para que no se reinicie el form
 
-        let pwd = divElement.querySelector('#password-input')
-        let eyeOpen = divElement.querySelector('#eye-open')
-        let eyeClose = divElement.querySelector('#eye-close')
+    const email = divElement.querySelector('#email').value;
+    const password = divElement.querySelector('#password-input').value;
 
-        if (pwd.type === 'password') {
-            pwd.type = 'text';
-            eyeOpen.style.display = 'block';
-            eyeClose.style.display = 'none';
-        }
-        else {
-            pwd.type = 'password';
-            eyeOpen.style.display = "none"
-            eyeClose.style.display = "block";
-        }
+    if (fields.name && fields.email && fields.password) {
+      form.reset();
+
+      divElement.querySelector('#form-message-successful').classList.add('form-message-successful-active');
+      setTimeout(() => {
+        divElement.querySelector('#form-message-successful').classList.remove('form-message-successful-active');
+      }, 5000);
+
+      createNewUser(email, password);
+      window.location.hash = '#/welcome';
+    } else {
+      divElement.querySelector('#form-message').classList.add('form-message-active');
     }
+  });
 
-    let eyeIcons = divElement.querySelector('.eye')
+  /* ------ SIGNUP (REGISTRARSE) GOOGLE -------*/
+  const googleButtonSignUp = divElement.querySelector('#sign-in-google');
 
-    eyeIcons.addEventListener('click', togglePassword1)
+  googleButtonSignUp.addEventListener('click', (e) => {
+    createGoogleAccount();
+  });
 
-    /*------ SIGNUP (REGISTRARSE) -------*/
-    // const auth = firebase.auth();
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault(); // Para que no se reinicie el form
-
-        const email = divElement.querySelector('#email').value;
-        const password = divElement.querySelector('#password-input').value;
-
-        if (fields.name && fields.email && fields.password) {
-            form.reset();
-
-            divElement.querySelector('#form-message-successful').classList.add('form-message-successful-active');
-            setTimeout(() => {
-                divElement.querySelector('#form-message-successful').classList.remove('form-message-successful-active');
-            }, 5000);
-
-            createNewUser(email,password);
-            window.location.hash = "#/welcome"
-
-        } else {
-            divElement.querySelector('#form-message').classList.add('form-message-active');
-        }
-    })
-
-    /*------ SIGNUP (REGISTRARSE) GOOGLE -------*/
-    const googleButtonSignUp = divElement.querySelector('#sign-in-google');
-
-    googleButtonSignUp.addEventListener('click', (e) => {
-        createGoogleAccount()
-    })
-
-    return divElement;
-
+  return divElement;
 };
