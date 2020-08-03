@@ -85,6 +85,13 @@ export default () => {
 
   eyeIcons.addEventListener('click', togglePassword1);
 
+  // let emailTaken = divElement.querySelector('#form-message');
+  // let emailTakenMessage = `<p> El correo ya esta registrado <p>`
+
+  // emailTaken.innerHTML = emailTakenMessage
+  
+ 
+
   /* ------ SIGNUP (REGISTRARSE) -------*/
   // const auth = firebase.auth();
 
@@ -107,7 +114,7 @@ export default () => {
       }, 5000);
 
       createNewUser(email, password);
-      window.location.hash = '#/welcome';
+      window.location.hash = '#/login';
     } else {
       divElement
         .querySelector('#form-message')

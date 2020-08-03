@@ -4,8 +4,39 @@ import { auth } from './firebaseConfig';
 export const createNewUser = (email, password) => {
   auth
     .createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => { });
+    .then((userCredential) => {
+    })
+    .catch((error) => {
+      let errorCode = error.code;
+      let errorMessage = error.message;
+      if (errorCode == 'auth/email-already-in-use') {
+        alert('El correo ya esta registrado')
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+    });
 };
+
+// firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+//   // Handle Errors here.
+//   var errorCode = error.code;
+//   var errorMessage = error.message;
+//   // [START_EXCLUDE]
+//   if (errorCode == 'The email address is already in use by another account.') {
+//     alert('The password is too weak.');
+//   } else {
+//     alert(errorMessage);
+//   }
+//   console.log(error);
+//   // [END_EXCLUDE]
+// });
+
+
+
+
+
+
 export const loginUser = (email, password) => {
   auth
     .signInWithEmailAndPassword(email, password)

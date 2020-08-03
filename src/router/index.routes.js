@@ -9,9 +9,6 @@ const router = (route) => {
     case '#/welcome':
       nodeDomPages = pages.welcome();
       break;
-    case '#/start':
-      nodeDomPages = pages.start();
-      break;
     case '#/login':
       nodeDomPages = pages.login();
       break;
