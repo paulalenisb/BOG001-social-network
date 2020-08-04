@@ -1,12 +1,8 @@
 import view from './signup.html';
 import './estilos-signup.css';
 import '../Firebase/firebaseConfig';
-import {
-  regularExpressions,
-  fields,
-  validateInputsValue,
-} from './funciones-signup';
-import * as firebase from 'firebase';
+import { regularExpressions, fields, validateInputsValue } from './funciones-signup';
+/* import * as firebase from 'firebase'; */
 import { createNewUser, createGoogleAccount } from '../Firebase/firebaseAuth';
 
 export default () => {
@@ -16,7 +12,6 @@ export default () => {
   const form = divElement.querySelector('#form');
   // querySelectorAll nos devuelve un array con cada uno de los inputs
   const inputs = divElement.querySelectorAll('#form input');
-  console.log(inputs);
 
   const messageError = {
     name: 'El nombre debe contener solo letras.',
@@ -24,7 +19,22 @@ export default () => {
     password: 'La contraseña tiene que ser de 8 dígitos.',
   };
 
-  // Función para  comprobar los fields cuando presionemos la tecla o cuando se haga click por fuera
+  const validateInputs = (regularExpressions, input, field) => {
+    /* console.log(validateInputsValue(regularExpressions, input, field)); */
+    if (validateInputsValue(regularExpressions, input, field)) {
+      divElement
+        .querySelector(`#${field}`)
+        .classList.remove('form-group-wrong');
+      divElement.querySelector(
+        `#group-${field} .form-input-error`,
+      ).textContent = '';
+    } else {
+      divElement.querySelector(`#${field}`).classList.add('form-group-wrong');
+      divElement.querySelector(
+        `#group-${field} .form-input-error`,
+      ).textContent = messageError[field];
+    }
+  };
   // con target accedemos a la propiedad  name de cada input ()
   const validateForm = (e) => {
     switch (
@@ -41,24 +51,6 @@ export default () => {
         break;
     }
   };
-
-  let validateInputs = (regularExpressions, input, field) => {
-    console.log(validateInputsValue(regularExpressions, input, field));
-    if (validateInputsValue(regularExpressions, input, field)) {
-      divElement
-        .querySelector(`#${field}`)
-        .classList.remove('form-group-wrong');
-      divElement.querySelector(
-        `#group-${field} .form-input-error`,
-      ).textContent = '';
-    } else {
-      divElement.querySelector(`#${field}`).classList.add('form-group-wrong');
-      divElement.querySelector(
-        `#group-${field} .form-input-error`,
-      ).textContent = messageError[field];
-    }
-  };
-  // Comprobamos con las expresiones regulares si los valores digitados por el usuario son verdaderos o falsos
 
   // Por cada input del formulario me  ejecuta un eventlistener
   inputs.forEach((input) => {
@@ -82,19 +74,9 @@ export default () => {
   };
 
   const eyeIcons = divElement.querySelector('.eye');
-
   eyeIcons.addEventListener('click', togglePassword1);
 
-  // let emailTaken = divElement.querySelector('#form-message');
-  // let emailTakenMessage = `<p> El correo ya esta registrado <p>`
-
-  // emailTaken.innerHTML = emailTakenMessage
-  
- 
-
   /* ------ SIGNUP (REGISTRARSE) -------*/
-  // const auth = firebase.auth();
-
   form.addEventListener('submit', (e) => {
     e.preventDefault(); // Para que no se reinicie el form
 
@@ -102,19 +84,18 @@ export default () => {
     const password = divElement.querySelector('#password-input').value;
 
     if (fields.name && fields.email && fields.password) {
-      form.reset();
-
-      divElement
+      /* divElement
         .querySelector('#form-message-successful')
         .classList.add('form-message-successful-active');
       setTimeout(() => {
         divElement
           .querySelector('#form-message-successful')
           .classList.remove('form-message-successful-active');
-      }, 5000);
+      }, 5000); */
 
       createNewUser(email, password);
-      window.location.hash = '#/login';
+      form.reset();
+      /* window.location.hash = '#/login'; */
     } else {
       divElement
         .querySelector('#form-message')
@@ -128,6 +109,5 @@ export default () => {
   googleButtonSignUp.addEventListener('click', (e) => {
     createGoogleAccount();
   });
-
   return divElement;
 };

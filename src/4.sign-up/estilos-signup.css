@@ -100,6 +100,7 @@ body {
 
 .text-sn-sign-up {
     text-align: center;
+    margin-top: 0px;
 }
 
 .sn-sign-up {
@@ -190,7 +191,7 @@ a {
         font-size: 14px;
     }
     .text-sn-sign-up{
-        font-size: 1.15em
+        font-size: 1.15em;
     }
 }
 

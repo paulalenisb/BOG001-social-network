@@ -16,25 +16,25 @@ export default () => {
   };
 
   /* ------ VALIDACIÓN INPUTS FORMULARIO -------*/
-  const validateForm = (e) => {
-    switch (e.target.name) { // Valor a comproba * Con target accedemos a la propiedad  name de cada input ()
-      case 'email':
-        validateInputs(regularExpressions.email, e.target, 'email');
-        break;
-      case 'password':
-        validateInputs(regularExpressions.password, e.target, 'password');
-        break;
-    }
-  };
-
-  let validateInputs = (regularExpressions, input, field) => {
-    console.log(validateInputsValue(regularExpressions, input, field));
+  const validateInputs = (regularExpressions, input, field) => {
+    // console.log(validateInputsValue(regularExpressions, input, field));
     if (validateInputsValue(regularExpressions, input, field)) {
       divElement.querySelector(`#${field}`).classList.remove('form-group-wrong');
       divElement.querySelector(`#group-${field} .form-input-error`).textContent = '';
     } else {
       divElement.querySelector(`#${field}`).classList.add('form-group-wrong');
       divElement.querySelector(`#group-${field} .form-input-error`).textContent = messageError[field];
+    }
+  };
+
+  const validateForm = (e) => {
+    switch (e.target.name) {
+      case 'email':
+        validateInputs(regularExpressions.email, e.target, 'email');
+        break;
+      case 'password':
+        validateInputs(regularExpressions.password, e.target, 'password');
+        break;
     }
   };
 
@@ -82,23 +82,3 @@ export default () => {
 
   return divElement;
 };
-
-// function acceso() {
-//     var emailA = document.getElementById('emailA').value;
-//     var passA = document.getElementById('passwordA').value;
-//     firebase.auth().signInWithEmailAndPassword(emailA, passA)
-//         .catch(function (error) {
-//             var errorCode = error.code;
-//             var errorMessage = error.message;
-//             alert(errorMessage);
-// 		});
-// 		firebase.auth().signInWithEmailAndPassword(emailA, passwordA).catch(function(error) {
-// 			// Handle Errors here.
-// 			var errorCode = error.code;
-// 			var errorMessage = error.message;
-// 			alert(errorMessage);
-// 			// ...
-// 		  });
-// }
-
-//   // Initialize Firebase
