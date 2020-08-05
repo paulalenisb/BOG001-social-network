@@ -1,6 +1,45 @@
-<div class= "login">
-<h1>login</h1>
-<h1>laretto la mejor comida</h1>
-    <p>son las mejores</p>
-    <button id= "btnClick" >Click me</button>
-</div>
+<section class="sign-up">
+    <div class="overlay">
+        <!-- logo -->
+        <div class="form-container">
+            <header>
+                <div class="logo">
+                </div>
+            </header>
+
+            <form action="" class="form-sign-up" id="form">
+
+                <!-- Correo  -->
+                <div id="group-email">
+                    <input type="email" class="form-input" name="email" id="email" placeholder="correo@correo.com"
+                        autocomplete="off">
+                    <p class="form-input-error"></p>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group" id="group-password">
+                    <div class="form-group-input" id="password">
+                        <input type="password" class="text-password" name="password" id="password-input"
+                            placeholder="Contraseña" autocomplete="off">
+                        <span class="eye">
+                            <i class="fas fa-eye-slash" id="eye-close"></i> <i class="fas fa-eye " id="eye-open"></i>
+                        </span>
+                    </div>
+                    <p class="form-input-error"></p>
+                </div>
+
+                <!-- Botón validación / Google & Facebook -->
+                <div class="form-group form-group-btn-sign-up">
+                    <button type="submit" class="btn-sign-up">INICIAR SESIÓN</button>
+                </div>
+
+                <p class="text-sn-sign-up">También puedes iniciar con</p>
+                <div class="sn-sign-up">
+                    <button class="btn-sn-sign-up" id="sign-in-facebook"><i class="fab fa-facebook-f"></i></button>
+                    <button class="btn-sn-sign-up" id="sign-in-google"><i class="fab fa-google"></i></button>
+                </div>
+                <p class="text-sn-sign-up">¿No tienes cuenta? <b> <a href="#/sign-up">Regístrate</a></b></p>
+            </form>
+        </div>
+    </div>
+</section>

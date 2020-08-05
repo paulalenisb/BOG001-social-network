@@ -1,21 +1,24 @@
-import { pages } from '../views.js'
+import { pages } from '../views.js';
 
-let content = document.getElementById('root');
+const content = document.getElementById('root');
 
 const router = (route) => {
-    content.innerHTML = '';
-    switch (route) {
-        case "#/welcome":
-            return content.appendChild(pages.welcome());
-        case "#/start":
-            return content.appendChild(pages.start());
-        case "#/login":
-            return content.appendChild(pages.login());
-        case "#/sign-up":
-            return content.appendChild(pages.signup());
-        default:
-            return content.appendChild(pages.notFound());
-    }
+  content.innerHTML = '';
+  let nodeDomPages = '';
+  switch (route) {
+    case '#/welcome':
+      nodeDomPages = pages.welcome();
+      break;
+    case '#/login':
+      nodeDomPages = pages.login();
+      break;
+    case '#/sign-up':
+      nodeDomPages = pages.signup();
+      break;
+    default:
+      nodeDomPages = pages.notFound();
+  }
+  return content.appendChild(nodeDomPages);
 };
 
 export { router };
