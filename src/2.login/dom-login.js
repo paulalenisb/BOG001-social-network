@@ -1,6 +1,6 @@
 import view from './login.html';
-import { regularExpressions, fields, validateInputsValue } from '../4.sign-up/funciones-signup';
-import { loginUser } from '../Firebase/firebaseAuth';
+import { regularExpressions, fields, validateInputsValue } from '../3.sign-up/funciones-signup';
+import { loginUser } from '../firebase/firebaseAuth';
 
 export default () => {
   const divElement = document.createElement('div');
