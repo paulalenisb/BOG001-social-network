@@ -6,7 +6,7 @@ const errorAuth = {
 };
 
 const errorMessageAuth = (code) => {
-  if (errorAuth[code]) {git a
+  if (errorAuth[code]) {
     return errorAuth[code];
   }
   return 'Surgió un error, intenta nuevamente';
