@@ -1,0 +1,39 @@
+$blue-black: #111319;
+$dark-gray: #1D212B;
+$medium-gray:#707070;
+$yellow: #FDBF04;
+$white: #FFFFFF;
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome{
+    background:$blue-black;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &-logo-img{
+        width:200px;
+    }  
+    &-title{
+        text-align: center;
+        font-size: 18px;
+    }
+    
+}
+
+
+// .img-logo-welcome{
+//     display:block;
+//     margin:auto;
+//     }

@@ -3,7 +3,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: url(../images/Mobile_bg_Leratto.jpg) center no-repeat;
+    /* background: url(../images/Mobile_bg_Leratto.jpg) center no-repeat; */
     background-color: #333333;
     background-attachment: fixed;
     background-size: cover;

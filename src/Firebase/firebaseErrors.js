@@ -20,3 +20,11 @@ export const revealErrorMessage = (code) => {
     errorContainer.classList.add('error-message-auth');
   }
 };
+
+
+export const sendEmailMessage = () => {
+  const errorContainer = document.querySelector('#alerts');
+        errorContainer.innerText = 'Verifica tu correo';          
+        errorContainer.classList.add('error-message-auth');
+          
+}

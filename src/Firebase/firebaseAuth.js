@@ -1,12 +1,15 @@
 import * as firebase from 'firebase';
 import { auth } from './firebaseConfig';
-import { revealErrorMessage } from './firebaseErrors';
+import { revealErrorMessage, sendEmailMessage } from './firebaseErrors';
+
 
 export const createNewUser = (email, password) => {
   auth
     .createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
-    })
+      sendEmail ();
+        })
+    
     .catch((error) => {
       revealErrorMessage(error.code);
       throw error;
@@ -16,7 +19,7 @@ export const createNewUser = (email, password) => {
 export const loginUser = (email, password) => {
   auth
     .signInWithEmailAndPassword(email, password)
-    .then((userCredential) => { })
+    .then((userCredential) => {})
     .catch((error) => {
       revealErrorMessage(error.code);
       throw error;
@@ -35,6 +38,15 @@ export const createGoogleAccount = () => {
     });
 };
 
+const sendEmail = () => {
+  let user = firebase.auth().currentUser;
+user.sendEmailVerification().then(function () {
+sendEmailMessage();
+// Email sent.
+}).catch(function (error) {
+// An error happened.
+})
+}
 // firebase.auth().onAuthStateChanged(function (user) {
 //     if (user) {
 //         var displayName = user.displayName;
@@ -45,19 +57,15 @@ export const createGoogleAccount = () => {
 //         var uid = user.uid;
 //         // var textoVerificado = '';
 //         if (emailVerified === false) {
-//             alert( 'Email no verificado');
+//                   
 //         }
 // else {
-//            alert( 'Email verificado');
+//       ;
 // }
 // }
 //   });
 
-//   function sendEmail () {
-//     var user = firebase.auth().currentUser;
-// user.sendEmailVerification().then(function () {
-// // Email sent.
-// }).catch(function (error) {
-// // An error happened.
-// })
-// }
+
+
+
+
