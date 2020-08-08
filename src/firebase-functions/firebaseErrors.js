@@ -28,3 +28,4 @@ export const sendEmailMessage = () => {
         errorContainer.classList.add('error-message-auth');
           
 }
+

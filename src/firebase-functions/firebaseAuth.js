@@ -1,6 +1,7 @@
 import * as firebase from 'firebase';
 import { auth } from './firebaseConfig';
 import { revealErrorMessage, sendEmailMessage } from './firebaseErrors';
+// import {setupUI} from '../main'
 
 
 export const createNewUser = (email, password) => {
@@ -67,5 +68,27 @@ sendEmailMessage();
 
 
 
+export const exit = () => {
+  auth
+    .signOut()
+    .then( function () {
+      console.log("logOut")
+    })
+    .catch( function (error){
+      // An error happened.
+    });
+};
 
 
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+    console.log('user logged in: ', user);
+    // setupUI(user);
+   
+  } else {
+    console.log('user logged out');
+    // setupUI();
+  }
+   
+})

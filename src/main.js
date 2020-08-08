@@ -9,3 +9,8 @@ router(window.location.hash);
 window.addEventListener('hashchange', () => {
   router(window.location.hash);
 });
+
+// const 
+// const loggedOutviews = divElement.querySelector('.sign-up')
+
+// console.log(loggedOutviews)

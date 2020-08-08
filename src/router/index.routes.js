@@ -18,10 +18,14 @@ const router = (route) => {
     case '#/post':
       nodeDomPages = pages.post();
       break;
+    case '#/profile':
+      nodeDomPages = pages.profile();
+      break;
     default:
       nodeDomPages = pages.notFound();
   }
   return content.appendChild(nodeDomPages);
+ 
 };
 
 export { router };

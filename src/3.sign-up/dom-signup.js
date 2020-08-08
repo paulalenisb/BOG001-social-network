@@ -1,12 +1,13 @@
 import view from './signup.html';
 import './estilos-signup.css';
-import '../firebase/firebaseConfig';
+import '../firebase-functions/firebaseConfig';
 import { regularExpressions, fields, validateInputsValue } from './funciones-signup';
 /* import * as firebase from 'firebase'; */
-import { createNewUser, createGoogleAccount } from '../firebase/firebaseAuth';
+import { createNewUser, createGoogleAccount } from '../firebase-functions/firebaseAuth';
 
 export default () => {
   const divElement = document.createElement('div');
+  divElement.className = "logged-out";
   divElement.innerHTML = view;
 
   const form = divElement.querySelector('#form');
