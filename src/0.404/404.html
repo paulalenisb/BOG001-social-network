@@ -12,10 +12,11 @@
           <div class="post-body">
 
             <h1 class="h4">Crea tu recomendación</h1>
+            
 
             <form id="post-form">
               <div class="form-group">
-                <input type="text" id="post-title" class="form-control" class="Task Title" placeholder="Agrega el nombre del restaurante" >
+                <input type="text" id="post-title" class="form-control" class="Task Title" placeholder="Restaurante" >
               </div>
               <div class="form-group">
                 <textarea id="post-description" rows="3" class="form-control" placeholder="Antoja a todos con tu experiencia gastronómica"></textarea>
@@ -25,10 +26,18 @@
                 Publicar
               </button>
 
+              <div>
+                <p id="timeline-post"></p>
+
+              </div>
             </form>
           </div>
         </div>
       </div>
+
+      <div id="post-container"></div>
+
+      
 
 <!-- rules_version = '2';
 service cloud.firestore {
