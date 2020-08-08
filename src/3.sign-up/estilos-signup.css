@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
-
-body {
-    margin: 0;
-    padding: 0;
+/* .menu {display:none} */
+.sign-up {
     background: url(../images/Mobile_bg_Leratto.jpg) center no-repeat;
-    background-color: #333333;
     background-attachment: fixed;
     background-size: cover;
-    font-family: 'Lato', sans-serif;
-    font-size: 16px;
-    color: #f4f4f4;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
 }
 
 .overlay {
@@ -79,7 +79,7 @@ body {
     padding-right: 10px;
 }
 
-.btn-sign-up {
+.btn-submit {
     font-size: 16px;
     background-color: #f4f4f448 ;
     display: flex;
@@ -163,7 +163,7 @@ a {
 /*--------- ESTILOS TABLET ---------*/
 @media screen and (min-width: 768px) {
     
-    body {
+    .sign-up {
         background: url(../images/backgroung_Leratto.JPG) center no-repeat;
         background-attachment: fixed;
         background-size: cover;

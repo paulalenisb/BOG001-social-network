@@ -1,5 +1,5 @@
 import view from './post.html';
-import './estilos-post.css';
+import './estilos-post.scss';
 import '../firebase/firebaseConfig';
 
 export default () => {
@@ -8,3 +8,6 @@ export default () => {
 
   return divElement;
 };
+
+const navRoutes = document.getElementById('nav-routes');
+navRoutes.classList.add('hide');

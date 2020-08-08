@@ -39,6 +39,16 @@ module.exports = {
           ],
         },
         {
+          test: /\.svg$/,
+          loader: 'svg-inline-loader'
+        },
+        /* {
+          rules: [{
+            test: /\.(svg)(\?.*)?$/,
+            loader: 'raw-loader'
+            }]
+        }, */
+        {
           test: /\.html$/i,
           loader: "html-loader",
         },
