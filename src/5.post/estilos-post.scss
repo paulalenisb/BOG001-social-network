@@ -29,10 +29,6 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	i {
-		color: $yellow; 
-		font-size: 30px;
-	}
 }
 
  // Header
@@ -46,9 +42,6 @@ body {
 		width: 170px;
 		height: auto;
 	}   
-	.btn-dark-mode {
-		display: none;
-	}
 }
 
 // Button dark mode
@@ -97,7 +90,8 @@ body {
 	@extend .center;
 	flex-direction: column;
 	width: 80%;
-	max-width: 350px;
+	min-width: 270px;
+	/* max-width: 350px; */
 	margin: auto;
 	background-color: $medium-blue;
 	border-radius: 20px;
@@ -112,57 +106,62 @@ body {
 
 .post-form-title-container {display:none;}
 
-.form-group-post {
-	/* background-color: aqua; */
-	margin-bottom: 10px;
-	width: 90%;
-	display: flex;
-	align-items: center;
-}
-
-.user-photo-name {
-	display: flex;
-	margin-top: 10px;
-	img {
-		width: 35px;
-		height: 35px;
-		border-radius: 50%;
-		margin-right: 10px;
-	}
-	h3 {margin: auto 0;}	
-}
-
-#post-title {
-	/* background-color: aqua; */
-	background-color: transparent;
+.info-post-container {
 	width: 80%;
-	margin-left: 10px;
-	border: none;
-	border-bottom: 2px solid $medium-gray;
-	font-family: $font-lato;
-	font-size: 18px;
-	color: $medium-gray;
-}	
-
-#post-description {
-	background-color: transparent;
-	width: 100%;
-	border: none;
-	font-family: $font-lato;
-	color: $medium-gray;
+	.form-group-post {
+		margin-bottom: 10px;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		i {
+			color: $yellow; 
+			font-size: 30px;
+		}
+	}
+	.user-photo-name {
+		display: flex;
+		margin-top: 10px;
+		img {
+			width: 35px;
+			height: 35px;
+			border-radius: 50%;
+			margin-right: 10px;
+		}
+		h3 {margin: auto 0;}	
+	}
+	#post-title {
+		background-color: transparent;
+		width: 80%;
+		margin-left: 10px;
+		border: none;
+		border-bottom: 2px solid $medium-gray;
+		font-family: $font-lato;
+		font-size: 18px;
+		color: $medium-gray;
+	}	
+	#post-description {
+		background-color: transparent;
+		width: 100%;
+		border: none;
+		font-family: $font-lato;
+		color: $medium-gray;
+	}
 }
 
 .filters-post-container {
 	@extend .center;
 	flex-wrap: wrap;
+	width: 80%;
+	box-sizing: border-box;
 	border: 1px solid $medium-gray;
 	border-radius: 10px;
 	padding: 10px;
 	margin-top: 2%;
-	width: 80%;
 	p {
+		width: 100%;
 		margin: 0 0 2% 0;
 		font-size: 15px;
+		text-align: center;
 	}
 	.select-post {
 		width:45%;
@@ -186,44 +185,65 @@ footer{
 	position: fixed;
 	bottom: 0;
 	background-color: $medium-blue;
+	.footer-container {display: none;}
+	#nav-mobile-tablet ul{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		list-style-type: none;
+		padding: 0;
+		margin: 5px 0;
+		height: 60px;
+		p {
+			margin: 0; 
+			text-align: center;
+			font-size: 13px;
+		}
+		img {
+			width: 40px;
+			height: auto;
+		}
+	} 
 }
 
-#nav-mobile-tablet ul{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	list-style-type: none;
-	padding: 0;
-	margin: 5px 0;
-	height: 60px;
-	p {
-		margin: 0; 
-		text-align: center;
-		font-size: 13px;
-	}
-	img {
-		width: 40px;
-		height: auto;
-	}
-} 
 
 /*--------- ESTILOS TABLET ---------*/
 @media screen and (min-width: 768px) {
+	// Form
+	#post-form {max-width: 900px;}
+
+	.info-post-container {
+		width: 80%;
+		.form-group-post {
+			width: 100%;
+			margin-bottom: 20px;
+			/* background-color: wheat; */
+		}
+	}
+	
+	.filters-post-container {
+		width: 80%;
+		p {
+			margin: 0;
+			font-size: 18px;
+		}
+		.select-post {
+			width:45%;
+			height: 35px;
+			font-size: 15px;
+		}
+	}
 }
 
 /*--------- ESTILOS DESKTOP ---------*/
-@media screen and (min-width: 1024px) {
-	
-	//General
-	.post i {font-size: 40px;}
-	
+@media screen and (min-width: 1024px) {	
 	// Header
 	.header {
 		#nav-desktop {display: block;} 
 		.btn-dark-mode {display: none;} // Cambia
 		justify-content: space-around;
 		width: 100%;
-		height: 70px;
+		height: 75px;
 		top: 0;
 		background-color: $medium-blue;
 	}
@@ -254,32 +274,31 @@ footer{
 		flex-wrap: wrap;
 		justify-content: space-around;
 		text-align: center;
-		max-width: 950px;
+		max-width: 1000px;
 	}
 	
-	.form-group-post {
-		width: 100%;
-		margin-bottom: 25px;
-		/* background-color: wheat; */
-	}
-
 	.post-form-title {display:none}
 
 	.info-post-container, .filters-post-container {margin-top: 5%;}
+
 	.info-post-container {
 		display: flex;
 		flex-direction: column;
 		width: 40%;
-		/* background-color: aquamarine; */
+		.form-group-post {
+			width: 100%;
+			margin-bottom: 25px;
+			/* background-color: yellowgreen; */
+			i {font-size: 40px;}
+		}
 		.post-form-title-container{
 			display: block;
 			width: 100%;
 			text-align: left;
-			/* h2 {margin: 3% 0;} */
+			h2 {margin: 0;}
 		}
 		.user-photo-name {
 			margin-top: 0;
-			margin-bottom: 0;
 			img {
 				width: 45px;
 				height: 45px;
@@ -287,12 +306,10 @@ footer{
 			h3 {font-size: 25px;}
 		}
 		#post-title {
-			/* background-color: violet; */
 			width: 80%;
 			font-size: 20px;
 		}	
 		#post-description {
-			/* background-color: violet; */
 			font-size: 17px;
 			min-width: 380px;
 			min-height: 100px;
@@ -314,13 +331,23 @@ footer{
 		}
 	}
 
-	.post .btn-submit {
-		// width: 100%; (No aplica width)
+	.btn-post {
+		max-width: 350px;
 		background-color: yellowgreen;
 	}
 
 	// Footer
 	#nav-mobile-tablet {display:none;}
-	footer {height: 45px;}
 	
+	footer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 50px;
+		.footer-container {
+			display: block;		
+			p {font-size: 16px;
+			color: yellowgreen}
+		}
+	}
 }
