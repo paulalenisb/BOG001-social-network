@@ -15,8 +15,17 @@ const router = (route) => {
     case '#/sign-up':
       nodeDomPages = pages.signup();
       break;
+    case '#/home':
+      nodeDomPages = pages.home();
+      break;
+    case '#/filtro':
+      nodeDomPages = pages.filtro();
+      break;
     case '#/post':
       nodeDomPages = pages.post();
+      break;
+    case '#/perfil':
+      nodeDomPages = pages.perfil();
       break;
     default:
       nodeDomPages = pages.notFound();

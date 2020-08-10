@@ -1,6 +1,6 @@
-import view from './404.html';
-import './estilos-404.scss';
-/* import '../firebase/firebaseConfig'; */
+import view from './home.html';
+import './estilos-home.scss';
+/* import {  } from './funciones-home'; */
 
 export default () => {
 
