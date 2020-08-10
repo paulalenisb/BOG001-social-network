@@ -1,6 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+// Variables
+$dark-blue: #111319;
+$medium-blue: #1D212B;
+$medium-gray: #707070;
+$yellow: #FDBF04;
+$white: #FFFFFF;
+$font-lato: 'Lato', sans-serif;
+
 .home {
     height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.container{
+	margin-top: 100px;
+}
+.post-container{
+    background-color: $medium-blue;
+    color: #f4f4f4;
+    margin: 10px;
 }
