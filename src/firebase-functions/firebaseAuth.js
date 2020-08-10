@@ -1,16 +1,19 @@
-import * as firebase from 'firebase';
-import { auth } from './firebaseConfig';
-import { revealErrorMessage, sendEmailMessage } from './firebaseErrors';
-// import {setupUI} from '../main'
+import * as firebase from "firebase";
+import { auth } from "./firebaseConfig";
+import { revealErrorMessage, sendEmailMessage } from "./firebaseErrors";
+import { setupUI } from "../views";
 
-
-export const createNewUser = (email, password) => {
+export const createNewUser = (email, password, names) => {
   auth
     .createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      sendEmail ();
-        })
-    
+    .then((result) => {
+      result.user.updateProfile({
+        displayName: names,
+      });
+      sendEmail();
+      signOut();
+    })
+
     .catch((error) => {
       revealErrorMessage(error.code);
       throw error;
@@ -20,7 +23,17 @@ export const createNewUser = (email, password) => {
 export const loginUser = (email, password) => {
   auth
     .signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {})
+    .then((result) => {
+      if (result.user.emailVerified) {
+        //  const userName = divElement.querySelector('#user-name');
+        //  username.innerHTML=`${result.user.displayName}`
+        console.log(user.displayName);
+        window.location.hash = "#/post";
+      } else {
+        console.log("por favor realice la verificacion");
+        exit();
+      }
+    })
     .catch((error) => {
       revealErrorMessage(error.code);
       throw error;
@@ -33,21 +46,26 @@ export const createGoogleAccount = () => {
   auth
     .signInWithPopup(provider)
     .then((result) => {
-      form.reset();
+      window.location.hash = "#/post";
     })
-    .catch((err) => {
-    });
+    .catch((err) => {});
 };
 
 const sendEmail = () => {
+  const configuration = {
+    url: "http://localhost:8080",
+  };
   let user = firebase.auth().currentUser;
-user.sendEmailVerification().then(function () {
-sendEmailMessage();
-// Email sent.
-}).catch(function (error) {
-// An error happened.
-})
-}
+  user
+    .sendEmailVerification()
+    .then(function () {
+      sendEmailMessage();
+      // Email sent.
+    })
+    .catch(function (error) {
+      // An error happened.
+    });
+};
 // firebase.auth().onAuthStateChanged(function (user) {
 //     if (user) {
 //         var displayName = user.displayName;
@@ -58,7 +76,7 @@ sendEmailMessage();
 //         var uid = user.uid;
 //         // var textoVerificado = '';
 //         if (emailVerified === false) {
-//                   
+//
 //         }
 // else {
 //       ;
@@ -66,29 +84,53 @@ sendEmailMessage();
 // }
 //   });
 
-
-
 export const exit = () => {
   auth
     .signOut()
-    .then( function () {
-      console.log("logOut")
+    .then(function () {
+      console.log("logOut");
     })
-    .catch( function (error){
+    .catch(function (error) {
       // An error happened.
     });
 };
 
-
-
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged((user) => {
+  console.log(user);
   if (user) {
-    console.log('user logged in: ', user);
-    // setupUI(user);
-   
+    // console.log('user logged in: ', user);
+    setupUI(user);
   } else {
-    console.log('user logged out');
-    // setupUI();
+    // console.log('user logged out');
+    setupUI();
   }
-   
-})
+});
+
+export const authWithFacebook = () => {
+  const provider = new firebase.auth.FacebookAuthProvider();
+    auth
+    .signInWithPopup(provider)
+    .then((result) => {
+      window.location.hash = "#/post";
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+// auth.onAuthStateChanged((user) => {
+//   if (user) {
+//     console.log("signin");
+//     fs.collection("posts")
+//       .get()
+//       .then((snapshot) => {
+//         setupPosts(snapshot.docs);
+//         loginCheck(user);
+//       });
+//   } else {
+//     console.log("signout");
+//     setupPosts([]);
+//     loginCheck(user);
+//   }
+// });
+

@@ -18,6 +18,10 @@ export const revealErrorMessage = (code) => {
   if (errorContainer) {
     errorContainer.innerText = errorMessage;
     errorContainer.classList.add('error-message-auth');
+    setTimeout(() => {
+        errorContainer.classList.add('hide');
+         
+        }, 5000);
   }
 };
 
@@ -26,6 +30,11 @@ export const sendEmailMessage = () => {
   const errorContainer = document.querySelector('#alerts');
         errorContainer.innerText = 'Verifica tu correo';          
         errorContainer.classList.add('error-message-auth');
-          
-}
+        setTimeout(() => {
+          errorContainer.classList.add('hide');
+           
+          }, 5000);
+    }
+      
+
 

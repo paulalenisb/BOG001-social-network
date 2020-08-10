@@ -73,7 +73,7 @@ export default () => {
 
     if (fields.email && fields.password) {
       loginUser(email, password);
-      window.location.hash = '#/login';
+      window.location.hash = '#/post';
       form.reset();
     } else {
       alert('no estas registrado');

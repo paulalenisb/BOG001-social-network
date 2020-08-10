@@ -16,9 +16,28 @@ const pages = {
 
 export { pages };
 
-const loggedOutviews = document.querySelector('.log-in')
+const loggedOutLinks = document.querySelectorAll('.logged-out');
+const loggedInLinks = document.querySelectorAll('.logged-in');
+const userName = document.querySelector('.user-name')
 
-console.log(loggedOutviews)
+console.log(loggedOutLinks,loggedInLinks)
+
+export const setupUI = (user) => {
+  if (user) {
+    loggedInLinks.forEach(item => item.style.display = 'block');
+    loggedOutLinks.forEach(item => item.style.display = 'none');
+  } else {
+    // userName.innerHTML = '';
+    loggedInLinks.forEach(item => item.style.display = 'none');
+    loggedOutLinks.forEach(item => item.style.display = 'block');
+  }
+};
+
+
+
+// const loggedOutviews = document.querySelector('.log-in')
+
+// console.log(loggedOutviews)
 
 // export const setupUI = (user) => {
 //   if (user) {
