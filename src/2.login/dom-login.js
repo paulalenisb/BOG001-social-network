@@ -1,6 +1,6 @@
 import view from './login.html';
 import { regularExpressions, fields, validateInputsValue } from '../3.sign-up/funciones-signup';
-import { loginUser } from '../firebase-functions/firebaseAuth';
+import { loginUser } from '../firebase/firebaseAuth';
 
 export default () => {
   const divElement = document.createElement('div');
@@ -73,11 +73,12 @@ export default () => {
 
     if (fields.email && fields.password) {
       loginUser(email, password);
-      window.location.hash = '#/post';
       form.reset();
     } else {
-      alert('no estas registrado');
-      // divElement.querySelector('#form-message').classList.add('form-message-active');
+      divElement
+        .querySelector('#form-message')
+        .classList.add('form-message-active');
+      
     }
   });
 

@@ -11,7 +11,7 @@ export const createNewUser = (email, password, names) => {
         displayName: names,
       });
       sendEmail();
-      signOut();
+      exit();
     })
 
     .catch((error) => {
@@ -25,12 +25,8 @@ export const loginUser = (email, password) => {
     .signInWithEmailAndPassword(email, password)
     .then((result) => {
       if (result.user.emailVerified) {
-        //  const userName = divElement.querySelector('#user-name');
-        //  username.innerHTML=`${result.user.displayName}`
-        console.log(user.displayName);
         window.location.hash = "#/post";
       } else {
-        console.log("por favor realice la verificacion");
         exit();
       }
     })
@@ -51,13 +47,14 @@ export const createGoogleAccount = () => {
     .catch((err) => {});
 };
 
+
 const sendEmail = () => {
-  const configuration = {
-    url: "http://localhost:8080",
+  const config = {
+    url: "http://localhost:8080/#/welcome",
   };
   let user = firebase.auth().currentUser;
   user
-    .sendEmailVerification()
+    .sendEmailVerification(config)
     .then(function () {
       sendEmailMessage();
       // Email sent.
@@ -66,23 +63,20 @@ const sendEmail = () => {
       // An error happened.
     });
 };
-// firebase.auth().onAuthStateChanged(function (user) {
-//     if (user) {
-//         var displayName = user.displayName;
-//         var email = user.email;
-//         var emailVerified = user.emailVerified;
-//         var photoURL = user.photoURL;
-//         var isAnonymous = user.isAnonymous;
-//         var uid = user.uid;
-//         // var textoVerificado = '';
-//         if (emailVerified === false) {
-//
-//         }
-// else {
-//       ;
-// }
-// }
-//   });
+
+
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        let displayName = user.displayName;
+        let email = user.email;
+        let emailVerified = user.emailVerified;
+        let photoURL = user.photoURL;
+        let isAnonymous = user.isAnonymous;
+        let uid = user.uid;
+        
+        console.log(displayName,email)
+}
+  });
 
 export const exit = () => {
   auth
@@ -98,10 +92,8 @@ export const exit = () => {
 auth.onAuthStateChanged((user) => {
   console.log(user);
   if (user) {
-    // console.log('user logged in: ', user);
     setupUI(user);
   } else {
-    // console.log('user logged out');
     setupUI();
   }
 });
@@ -117,20 +109,4 @@ export const authWithFacebook = () => {
       console.error(error);
     });
 };
-
-// auth.onAuthStateChanged((user) => {
-//   if (user) {
-//     console.log("signin");
-//     fs.collection("posts")
-//       .get()
-//       .then((snapshot) => {
-//         setupPosts(snapshot.docs);
-//         loginCheck(user);
-//       });
-//   } else {
-//     console.log("signout");
-//     setupPosts([]);
-//     loginCheck(user);
-//   }
-// });
 

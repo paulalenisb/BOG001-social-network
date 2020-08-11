@@ -1,9 +1,9 @@
 import view from './signup.html';
 import './estilos-signup.css';
-import '../firebase-functions/firebaseConfig';
+import '../firebase/firebaseConfig';
 import { regularExpressions, fields, validateInputsValue } from './funciones-signup';
 /* import * as firebase from 'firebase'; */
-import { createNewUser, createGoogleAccount, authWithFacebook } from '../firebase-functions/firebaseAuth';
+import { createNewUser, createGoogleAccount, authWithFacebook } from '../firebase/firebaseAuth';
 
 export default () => {
   const divElement = document.createElement('div');
