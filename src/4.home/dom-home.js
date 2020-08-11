@@ -13,8 +13,9 @@ export default () => {
     let id = '';
 
     //Cuando la ventana cargue, traer el contenido del DOM, se ejecuta el evento de getEditPosts
-    window.addEventListener('DOMContentLoaded', async (e) => {
-      onGetPosts((querySnapshot) => {
+    // window.addEventListener('Load', async (e) => {
+      // console.log('DOMContentLoaded');
+      onGetPosts(async(querySnapshot) => {
         postContainer.innerHTML = '';
         
         //Con querySnapshot recorremos los objetos que hemos creado en docs
@@ -68,7 +69,7 @@ export default () => {
             });
           });
         });
-      });
+      // });
       
 
     return divElement;
