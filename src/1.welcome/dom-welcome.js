@@ -1,14 +1,17 @@
 import view from './welcome.html';
-import './estilos-welcome.css';
+import './estilos-welcome.scss';
 
 export default () => {
   const divElement = document.createElement('div');
   divElement.innerHTML = view;
 
-  const btnClick = divElement.querySelector('#btnClick');
-  btnClick.addEventListener('click', () => {
-    alert('click');
-  });
+  window.addEventListener("load", function () {
+    setTimeout(() => {
+    window.location.hash = '#/login';  
+    }, 6000); 
+    
+    
+});
 
   return divElement;
 };

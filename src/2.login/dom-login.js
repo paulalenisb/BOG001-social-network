@@ -4,6 +4,7 @@ import { loginUser } from '../firebase/firebaseAuth';
 
 export default () => {
   const divElement = document.createElement('div');
+  divElement.className = "logged-out";
   divElement.innerHTML = view;
 
   const form = divElement.querySelector('#form');
@@ -72,11 +73,12 @@ export default () => {
 
     if (fields.email && fields.password) {
       loginUser(email, password);
-      window.location.hash = '#/login';
       form.reset();
     } else {
-      alert('no estas registrado');
-      // divElement.querySelector('#form-message').classList.add('form-message-active');
+      divElement
+        .querySelector('#form-message')
+        .classList.add('form-message-active');
+      
     }
   });
 

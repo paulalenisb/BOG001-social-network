@@ -26,11 +26,14 @@ const router = (route) => {
       break;
     case '#/perfil':
       nodeDomPages = pages.perfil();
+    case '#/profile':
+      nodeDomPages = pages.profile();
       break;
     default:
       nodeDomPages = pages.notFound();
   }
   return content.appendChild(nodeDomPages);
+ 
 };
 
 export { router };
