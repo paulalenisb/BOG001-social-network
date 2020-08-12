@@ -5,13 +5,11 @@ export default () => {
   const divElement = document.createElement('div');
   divElement.innerHTML = view;
 
-  window.addEventListener("load", function () {
+  window.addEventListener('load', () => {
     setTimeout(() => {
-    window.location.hash = '#/login';  
-    }, 6000); 
-    
-    
-});
+      window.location.hash = '#/login';
+    }, 4000);
+  });
 
   return divElement;
 };

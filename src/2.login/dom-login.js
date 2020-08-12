@@ -1,10 +1,10 @@
 import view from './login.html';
 import { regularExpressions, fields, validateInputsValue } from '../3.sign-up/funciones-signup';
-import { loginUser } from '../firebase/firebaseAuth';
+import { loginUser, authWithFacebook, authGoogleAccount } from '../firebase-functions/firebaseAuth';
 
 export default () => {
   const divElement = document.createElement('div');
-  divElement.className = "logged-out";
+  divElement.className = 'logged-out';
   divElement.innerHTML = view;
 
   const form = divElement.querySelector('#form');
@@ -78,8 +78,19 @@ export default () => {
       divElement
         .querySelector('#form-message')
         .classList.add('form-message-active');
-      
     }
+  });
+  /* ------ SIGNUP (REGISTRARSE) FACEBOOK -------*/
+  const facebookButtonSignUp = divElement.querySelector('#sign-in-facebook');
+
+  facebookButtonSignUp.addEventListener('click', (e) => {
+    authWithFacebook();
+  });
+  /* ------ SIGNUP (REGISTRARSE) GOOGLE -------*/
+  const googleButtonSignUp = divElement.querySelector('#sign-in-google');
+
+  googleButtonSignUp.addEventListener('click', (e) => {
+    authGoogleAccount();
   });
 
   return divElement;

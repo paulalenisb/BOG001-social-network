@@ -24,8 +24,6 @@ const router = (route) => {
     case '#/post':
       nodeDomPages = pages.post();
       break;
-    case '#/perfil':
-      nodeDomPages = pages.perfil();
     case '#/profile':
       nodeDomPages = pages.profile();
       break;
@@ -33,7 +31,6 @@ const router = (route) => {
       nodeDomPages = pages.notFound();
   }
   return content.appendChild(nodeDomPages);
- 
 };
 
 export { router };

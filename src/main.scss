@@ -4,6 +4,8 @@ $medium-blue: #1D212B;
 $medium-gray:#707070;
 $yellow: #FDBF04;
 $white: #FFFFFF;
+$red:  #981a1a;
+$green:  #1a986e;
 
 .menu {
     z-index: 1;
@@ -19,7 +21,7 @@ $white: #FFFFFF;
     }
     li a{
         text-decoration: none;
-        color:white
+        color:$white
     }
 }
 
@@ -42,10 +44,25 @@ $white: #FFFFFF;
     margin: 4% auto;
     text-align: center;
     font-size: 20px;
-    background-color: #981a1a;
+    background-color: $red;
     border-radius: 20px;
     height: 40px;
 }
+
+.email-message-auth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:$white;
+    margin: 4% auto;
+    text-align: center;
+    font-size: 20px;
+    background-color: $green;
+    border-radius: 20px;
+    height: 40px;
+}
+
+
 
 .hide {
  display: none;
