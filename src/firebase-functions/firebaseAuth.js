@@ -1,7 +1,38 @@
 import * as firebase from 'firebase';
 import { auth } from './firebaseConfig';
 import { revealErrorMessage, sendEmailMessage } from './firebaseErrors';
-import { setupUI } from '../views';
+// import { setupUI } from '../views';
+import {db} from './firebaseStore';
+
+// -----LOGOUT----//
+export const exit = () => {
+  auth
+    .signOut()
+    .then(() => {
+      console.log('logOut');
+    })
+    .catch((error) => {
+      // An error happened.
+    });
+};
+
+//-------- SEND EMAIL-----//
+const sendEmail = () => {
+  const config = {
+    url: 'http://localhost:8080/#/welcome',
+  };
+  const user = firebase.auth().currentUser;
+  user
+    .sendEmailVerification(config)
+    .then(() => {
+      sendEmailMessage();
+      // Email sent.
+    })
+    .catch((error) => {
+      // An error happened.
+    });
+};
+
 
 export const createNewUser = (email, password, names) => {
   auth
@@ -29,6 +60,9 @@ export const loginUser = (email, password) => {
       } else {
         exit();
       }
+    })
+    .then(function (){
+      return updateUserInfo();
     })
     .catch((error) => {
       revealErrorMessage(error.code);
@@ -59,21 +93,6 @@ export const authWithFacebook = () => {
     });
 };
 
-const sendEmail = () => {
-  const config = {
-    url: 'http://localhost:8080/#/welcome',
-  };
-  const user = firebase.auth().currentUser;
-  user
-    .sendEmailVerification(config)
-    .then(() => {
-      sendEmailMessage();
-      // Email sent.
-    })
-    .catch((error) => {
-      // An error happened.
-    });
-};
 
 
 firebase.auth().onAuthStateChanged((user) => {
@@ -85,26 +104,35 @@ firebase.auth().onAuthStateChanged((user) => {
     const isAnonymous = user.isAnonymous;
     const uid = user.uid;
 
-    console.log(displayName, email);
+    // console.log(displayName, email);
   }
 });
 
-export const exit = () => {
-  auth
-    .signOut()
-    .then(() => {
-      console.log('logOut');
-    })
-    .catch((error) => {
-      // An error happened.
-    });
-};
 
-auth.onAuthStateChanged((user) => {
-  console.log(user);
-  if (user) {
-    setupUI(user);
-  } else {
-    setupUI();
-  }
-});
+
+// auth.onAuthStateChanged((user) => {
+//   console.log(user);
+//   if (user) {
+//     setupUI(user);
+//   } else {
+//     setupUI();
+//   }
+// });
+
+
+const updateUserInfo = () => {
+  const currentUser = auth.currentUser;
+  const email = currentUser.email;
+  const name = currentUser.displayName;
+  const photo = currentUser.photoURL
+  // console.log('you are' + currentUser);
+  const uid = currentUser.uid;
+  const userData = {
+    // lastloginTime: new Date(), 
+    name:name,
+    email: email,
+    photo:photo  
+   }
+  return db.doc(`/users/${uid}`).set(userData,  {merge: true});
+
+}

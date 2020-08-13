@@ -3,21 +3,20 @@ import * as firebase from 'firebase';
 export const db = firebase.firestore();
 
 // Creamos el post en firebase con su colecciones y el objeto del doc
-export const savePost = (title, description) => db.collection('review').doc().set({
-  title,
+export const savePost = (title, description, typeOfFood, price, quality,location) => db.collection('review').doc().set({
+  title, 
   description,
-  /* details: {
-    typeFood: ['#FastFood', '#DeMar'],
-    price: [1, 2, 3],
-    starts: [1, 2, 3],
-    ubication: ['Zonat', 'ZonaG']
-    }, */
+  typeOfFood,
+  price,
+  quality,
+  location,
 });
 
 // De mi colección de reviews traeme todo
 export const getPosts = () => db.collection('review').get();
 
-// Cada vez que mis posts se actualicen, agreguen o borren, actualizar en tiempo real el timeline con el metodo onSnapshot()
+// Cada vez que mis posts se actualicen, agreguen o borren, actualizar en tiempo real
+// el timeline con el método onSnapshot()
 export const onGetPosts = callback => db.collection('review').onSnapshot(callback);
 
 // Para eliminar un post necesito su id

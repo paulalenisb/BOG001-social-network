@@ -50,6 +50,8 @@ export default () => {
       case 'password':
         validateInputs(regularExpressions.password, e.target, 'password');
         break;
+      default:
+        '';
     }
   };
 

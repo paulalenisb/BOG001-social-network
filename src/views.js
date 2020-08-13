@@ -23,8 +23,8 @@ export { pages };
 
 // Mostrar paginas según el estado del usuario
 
-const loggedOutLinks = document.querySelectorAll('.logged-out');
-const loggedInLinks = document.querySelectorAll('.logged-in');
+// const loggedOutLinks = document.querySelectorAll('.logged-out');
+// const loggedInLinks = document.querySelectorAll('.logged-in');
 
 // export const setupUI = (user) => {
 //   if (user) {

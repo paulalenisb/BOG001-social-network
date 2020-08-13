@@ -1,6 +1,14 @@
 import view from './login.html';
-import { regularExpressions, fields, validateInputsValue } from '../3.sign-up/funciones-signup';
-import { loginUser, authWithFacebook, authGoogleAccount } from '../firebase-functions/firebaseAuth';
+import {
+  regularExpressions,
+  fields,
+  validateInputsValue,
+} from '../3.sign-up/funciones-signup';
+import {
+  loginUser,
+  authWithFacebook,
+  authGoogleAccount,
+} from '../firebase-functions/firebaseAuth';
 
 export default () => {
   const divElement = document.createElement('div');
@@ -20,11 +28,17 @@ export default () => {
   const validateInputs = (regularExpressions, input, field) => {
     // console.log(validateInputsValue(regularExpressions, input, field));
     if (validateInputsValue(regularExpressions, input, field)) {
-      divElement.querySelector(`#${field}`).classList.remove('form-group-wrong');
-      divElement.querySelector(`#group-${field} .form-input-error`).textContent = '';
+      divElement
+        .querySelector(`#${field}`)
+        .classList.remove('form-group-wrong');
+      divElement.querySelector(
+        `#group-${field} .form-input-error`,
+      ).textContent = '';
     } else {
       divElement.querySelector(`#${field}`).classList.add('form-group-wrong');
-      divElement.querySelector(`#group-${field} .form-input-error`).textContent = messageError[field];
+      divElement.querySelector(
+        `#group-${field} .form-input-error`,
+      ).textContent = messageError[field];
     }
   };
 
@@ -36,6 +50,8 @@ export default () => {
       case 'password':
         validateInputs(regularExpressions.password, e.target, 'password');
         break;
+      default:
+        '';
     }
   };
 

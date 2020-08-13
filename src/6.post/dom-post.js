@@ -11,7 +11,9 @@ export default () => {
   const postForm = divElement.querySelector('#post-form');
 
 
-  // El estado para editar el post es false porque al empezar la vista nuestro formulario no se va actualizar todavia
+  // El estado para editar el post es false porque al empezar la vista nuestro
+  // formulario no se va actualizar todavía
+
   const editPostStatus = false;
   const id = '';
 
@@ -46,11 +48,15 @@ export default () => {
     // Capturar el nombre y la descripción del restaurante
     const title = postForm['post-title'];
     const description = postForm['post-description'];
+    const typeOfFood = postForm['post-type-food'];
+    const price = postForm['post-price'];
+    const quality = postForm['post-quality'];
+    const location = postForm['post-location'];
 
     try {
       // Si no se esta editando el post, realiza la promesa
       // if (!editPostStatus){
-      await savePost(title.value, description.value);
+      await savePost(title.value, description.value,typeOfFood.value,price.value, quality.value, location.value);
       // } //Si se edita el post
       // else {
       //     await updatePost(id, {
@@ -67,7 +73,7 @@ export default () => {
       postForm.reset();
       window.location.hash = '#/home';
     } catch (error) {
-
+      alert(error);
     }
   });
 
