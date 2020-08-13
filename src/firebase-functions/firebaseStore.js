@@ -3,14 +3,20 @@ import * as firebase from 'firebase';
 export const db = firebase.firestore();
 
 // Creamos el post en firebase con su colecciones y el objeto del doc
-export const savePost = (title, description, typeOfFood, price, quality,location) => db.collection('review').doc().set({
+export const savePost = ( name, userPhoto, title, description, typeOfFood, price, quality,location, foodPhoto) => db.collection('review').doc().set({
+  name,
+  userPhoto,
   title, 
   description,
   typeOfFood,
   price,
   quality,
   location,
+  foodPhoto,
 });
+
+
+
 
 // De mi colección de reviews traeme todo
 export const getPosts = () => db.collection('review').get();

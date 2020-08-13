@@ -48,6 +48,7 @@ export default () => {
       // Mostrar los post//
       postContainer.innerHTML += `
             <div class="post-container"> 
+              <h3>${post.name}</h3>
               <h3>${post.title}</h3>
               <p>${post.description}</p>
               <p>${post.typeOfFood}</p>

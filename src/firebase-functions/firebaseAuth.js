@@ -4,7 +4,9 @@ import { revealErrorMessage, sendEmailMessage } from './firebaseErrors';
 // import { setupUI } from '../views';
 import {db} from './firebaseStore';
 
-// -----LOGOUT----//
+export const lerattoUser = auth.currentUser;
+
+/* ------ LOGOUT -------*/
 export const exit = () => {
   auth
     .signOut()
@@ -16,7 +18,7 @@ export const exit = () => {
     });
 };
 
-//-------- SEND EMAIL-----//
+/* ------ SEND EMAIL -------*/
 const sendEmail = () => {
   const config = {
     url: 'http://localhost:8080/#/welcome',
@@ -33,14 +35,13 @@ const sendEmail = () => {
     });
 };
 
-
+/* ------ CREAR CUENTA -------*/
 export const createNewUser = (email, password, names) => {
   auth
     .createUserWithEmailAndPassword(email, password)
     .then((result) => {
-      result.user.updateProfile({
-        displayName: names,
-      });
+      // result.user.updateProfile({
+      //   displayName: names,
       sendEmail();
       exit();
     })
@@ -51,11 +52,15 @@ export const createNewUser = (email, password, names) => {
     });
 };
 
+/* ------ LOGIN USER -------*/
 export const loginUser = (email, password) => {
   auth
     .signInWithEmailAndPassword(email, password)
     .then((result) => {
+
       if (result.user.emailVerified) {
+        console.log(result.user)
+        localStorage.setItem('userSession', JSON.stringify(result.user));
         window.location.hash = '#/home';
       } else {
         exit();
@@ -70,6 +75,7 @@ export const loginUser = (email, password) => {
     });
 };
 
+/* ------ AUTH GOOGLE -------*/
 export const authGoogleAccount = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -81,6 +87,7 @@ export const authGoogleAccount = () => {
     .catch((err) => {});
 };
 
+/* ------ AUTH FACEBOOK-------*/
 export const authWithFacebook = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
   auth
@@ -93,8 +100,7 @@ export const authWithFacebook = () => {
     });
 };
 
-
-
+/* ------ AUTH STATE CHANGED -------*/
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     const displayName = user.displayName;
@@ -109,7 +115,6 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 
-
 // auth.onAuthStateChanged((user) => {
 //   console.log(user);
 //   if (user) {
@@ -119,20 +124,19 @@ firebase.auth().onAuthStateChanged((user) => {
 //   }
 // });
 
-
-const updateUserInfo = () => {
+const updateUserInfo = ( ) => {
   const currentUser = auth.currentUser;
-  const email = currentUser.email;
   const name = currentUser.displayName;
   const photo = currentUser.photoURL
-  // console.log('you are' + currentUser);
+  const email = currentUser.email;
   const uid = currentUser.uid;
+
   const userData = {
     // lastloginTime: new Date(), 
     name:name,
     email: email,
     photo:photo  
-   }
+  }
   return db.doc(`/users/${uid}`).set(userData,  {merge: true});
-
 }
+

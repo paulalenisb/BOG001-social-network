@@ -2,7 +2,7 @@ import view from './post.html';
 import './estilos-post.scss';
 import '../firebase-functions/firebaseConfig';
 import { savePost } from '../firebase-functions/firebaseStore';
-
+import { lerattoUser } from '../firebase-functions/firebaseAuth';
 
 export default () => {
   const divElement = document.createElement('div');
@@ -41,6 +41,10 @@ export default () => {
   //     });
   //   });
   // });
+  
+  /* const userName=  postForm['post-user-name']; //Campo de impresión userName
+  userName.textContent = lerattoUser.email;
+  console.log(lerattoUser.email) */
 
   postForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -53,10 +57,13 @@ export default () => {
     const quality = postForm['post-quality'];
     const location = postForm['post-location'];
 
+
+    
+
     try {
       // Si no se esta editando el post, realiza la promesa
       // if (!editPostStatus){
-      await savePost(title.value, description.value,typeOfFood.value,price.value, quality.value, location.value);
+      await savePost(title.value, description.value, typeOfFood.value, price.value, quality.value, location.value);
       // } //Si se edita el post
       // else {
       //     await updatePost(id, {
