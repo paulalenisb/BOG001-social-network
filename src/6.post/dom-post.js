@@ -2,7 +2,7 @@ import view from './post.html';
 import './estilos-post.scss';
 import '../firebase-functions/firebaseConfig';
 import { savePost } from '../firebase-functions/firebaseStore';
-import { lerattoUser } from '../firebase-functions/firebaseAuth';
+/* import { lerattoUser } from '../firebase-functions/firebaseAuth'; */
 
 export default () => {
   const divElement = document.createElement('div');
@@ -41,10 +41,41 @@ export default () => {
   //     });
   //   });
   // });
+
+  // onst createEvent = async () => {
+  //   const infLocalStorage = localStorage.getItem('session');
+  //   const convetInfoJson = JSON.parse(infLocalStorage);
+  //   const IdUser = convetInfoJson.user.uid;
+  //   const nameUser = convetInfoJson.user.displayName;
+  //   const photoURL = convetInfoJson.user.photoURL;
+  //   const hour = document.getElementById('time').value;
+  //   const date = document.getElementById('date').value;
+  //   const sport = document.getElementById('sport').value;
+  //   const place = document.getElementById('place').value;
+  //   const description = document.getElementById('description').value;
+
+  //   const file = container.querySelector('#image').files;
+  //   let imgURL = '';
+  //   if (file.length) {
+  //     imgURL = await saveImg(file[0]);
+  //   }
+
+  //   const eventToCreate = {
+  //     id: IdUser,
+  //     nombre: nameUser,
+  //     photo: photoURL,
+  //     fechaPublicacion: timeStamp,
+  //     hora: hour,
+  //     fechaEvento: date,
+  //     deporte: sport,
+  //     lugar: place,
+  //     descripcion: description,
+  //   };
   
-  /* const userName=  postForm['post-user-name']; //Campo de impresión userName
+  const userName = postForm['post-user-name']; 
+  const userPhoto = postForm['post-user-photo'];
   userName.textContent = lerattoUser.email;
-  console.log(lerattoUser.email) */
+  console.log(lerattoUser.email) 
 
   postForm.addEventListener('submit', async (e) => {
     e.preventDefault();

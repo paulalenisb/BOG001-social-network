@@ -2,6 +2,19 @@ import * as firebase from 'firebase';
 
 export const db = firebase.firestore();
 
+export const userSave = user => db.collection('users').doc(user.id).set(user);
+
+export const createUserProfile = async () => {
+  const userLocalStorage = localStorage.getItem('userSession');
+  const convertObjJson = JSON.parse(userLocalStorage);
+  const userId = convertObjJson.user.uid;
+
+  return db.collection('users').where('id', '==', userId).get();
+};
+
+export const updateUserInfo = async user => db.collection('users').doc(user.id).update(user);
+
+
 // Creamos el post en firebase con su colecciones y el objeto del doc
 export const savePost = ( name, userPhoto, title, description, typeOfFood, price, quality,location, foodPhoto) => db.collection('review').doc().set({
   name,
