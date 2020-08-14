@@ -2,14 +2,12 @@ import view from './post.html';
 import './estilos-post.scss';
 import '../firebase-functions/firebaseConfig';
 import { savePost } from '../firebase-functions/firebaseStore';
-/* import { lerattoUser } from '../firebase-functions/firebaseAuth'; */
 
 export default () => {
   const divElement = document.createElement('div');
   divElement.innerHTML = view;
 
   const postForm = divElement.querySelector('#post-form');
-
 
   // El estado para editar el post es false porque al empezar la vista nuestro
   // formulario no se va actualizar todavía
@@ -18,7 +16,6 @@ export default () => {
   const id = '';
 
   // Cuando la ventana cargue, traer el contenido del DOM, se ejecuta el evento de getEditPosts
-
 
   // const btnEdit = postContainer.querySelectorAll('.btn-edit');
 
@@ -42,44 +39,23 @@ export default () => {
   //   });
   // });
 
-  // onst createEvent = async () => {
-  //   const infLocalStorage = localStorage.getItem('session');
-  //   const convetInfoJson = JSON.parse(infLocalStorage);
-  //   const IdUser = convetInfoJson.user.uid;
-  //   const nameUser = convetInfoJson.user.displayName;
-  //   const photoURL = convetInfoJson.user.photoURL;
-  //   const hour = document.getElementById('time').value;
-  //   const date = document.getElementById('date').value;
-  //   const sport = document.getElementById('sport').value;
-  //   const place = document.getElementById('place').value;
-  //   const description = document.getElementById('description').value;
+  const userLocalStorage = localStorage.getItem('userSession');
+  const convertObjJson = JSON.parse(userLocalStorage);
+  const userId = convertObjJson.uid;
+  const userName = convertObjJson.displayName;
+  const userPhotoURL = convertObjJson.photoURL;
 
-  //   const file = container.querySelector('#image').files;
-  //   let imgURL = '';
-  //   if (file.length) {
-  //     imgURL = await saveImg(file[0]);
-  //   }
+  const userNameDom = divElement.querySelector('#post-user-name'); 
+  const userPhotoDom = divElement.querySelector('#post-user-photo');
 
-  //   const eventToCreate = {
-  //     id: IdUser,
-  //     nombre: nameUser,
-  //     photo: photoURL,
-  //     fechaPublicacion: timeStamp,
-  //     hora: hour,
-  //     fechaEvento: date,
-  //     deporte: sport,
-  //     lugar: place,
-  //     descripcion: description,
-  //   };
-  
-  const userName = postForm['post-user-name']; 
-  const userPhoto = postForm['post-user-photo'];
-  userName.textContent = lerattoUser.email;
-  console.log(lerattoUser.email) 
+  userNameDom.textContent = `${userName}`;
+  userPhotoDom.src = `${userPhotoURL}`;
 
   postForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    console.log(convertObjJson);
+    
     // Capturar el nombre y la descripción del restaurante
     const title = postForm['post-title'];
     const description = postForm['post-description'];
@@ -89,12 +65,10 @@ export default () => {
     const location = postForm['post-location'];
 
 
-    
-
     try {
       // Si no se esta editando el post, realiza la promesa
       // if (!editPostStatus){
-      await savePost(title.value, description.value, typeOfFood.value, price.value, quality.value, location.value);
+      await savePost(userId, userName, userPhotoURL, title.value, description.value, typeOfFood.value, price.value, quality.value, location.value);
       // } //Si se edita el post
       // else {
       //     await updatePost(id, {

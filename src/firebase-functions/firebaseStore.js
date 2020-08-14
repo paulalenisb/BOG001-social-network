@@ -14,9 +14,9 @@ export const createUserProfile = async () => {
 
 export const updateUserInfo = async user => db.collection('users').doc(user.id).update(user);
 
-
 // Creamos el post en firebase con su colecciones y el objeto del doc
-export const savePost = ( name, userPhoto, title, description, typeOfFood, price, quality,location, foodPhoto) => db.collection('review').doc().set({
+export const savePost = ( uid, name, userPhoto, title, description, typeOfFood, price, quality,location/* , foodPhoto */) => db.collection('review').doc().set({
+  uid,
   name,
   userPhoto,
   title, 
@@ -25,17 +25,15 @@ export const savePost = ( name, userPhoto, title, description, typeOfFood, price
   price,
   quality,
   location,
-  foodPhoto,
+  /* foodPhoto, */
 });
-
-
 
 
 // De mi colección de reviews traeme todo
 export const getPosts = () => db.collection('review').get();
 
-// Cada vez que mis posts se actualicen, agreguen o borren, actualizar en tiempo real
-// el timeline con el método onSnapshot()
+/* Cada vez que mis posts se actualicen, agreguen o borren, actualizar en tiempo real
+el timeline con el método onSnapshot() */
 export const onGetPosts = callback => db.collection('review').onSnapshot(callback);
 
 // Para eliminar un post necesito su id

@@ -48,6 +48,7 @@ export default () => {
       // Mostrar los post//
       postContainer.innerHTML += `
             <div class="post-container"> 
+              <img src="${post.userPhoto}" class="user-photo">
               <h3>${post.name}</h3>
               <h3>${post.title}</h3>
               <p>${post.description}</p>
@@ -90,14 +91,11 @@ export default () => {
     //         id = doc.id;
     //         postForm['btn-post-form'].innerText = 'Actualizar';
     //       } catch (error) {
-
-
   //       }
   //     });
   //   });
   // });
   });
-
 
   return divElement;
 };
