@@ -137,14 +137,14 @@ body {
 		border-bottom: 2px solid $medium-gray;
 		font-family: $font-lato;
 		font-size: 18px;
-		color: $medium-gray;
+		color: $white;
 	}	
 	#post-description {
 		background-color: transparent;
 		width: 100%;
 		border: none;
 		font-family: $font-lato;
-		color: $medium-gray;
+		color: $white;
 	}
 }
 
@@ -350,4 +350,8 @@ footer{
 			color: yellowgreen}
 		}
 	}
+}
+
+.btn-upload-file{
+	width:20px
 }

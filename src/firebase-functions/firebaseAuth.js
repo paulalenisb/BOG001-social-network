@@ -6,6 +6,7 @@ import { userSave } from './firebaseStore';
 
 // export const lerattoUser = auth.currentUser;
 
+
 /* ------ LOGOUT -------*/
 export const exit = () => {
   auth

@@ -56,6 +56,7 @@ export default () => {
               <p>${post.price}</p>
               <p>${post.quality}</p>
               <p>${post.location}</p>
+              <img src="${post.foodPhoto}" class="food-photo" >
               <!-- Los atributos data-*  permiten almacenar información adicional sobre un elemento HTML -->
               <button class='btn-delete' data-id="${doc.id}"> Eliminar </button>
               <button class='btn-edit' data-id="${doc.id}"> Editar </button>

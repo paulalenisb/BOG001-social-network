@@ -1,7 +1,10 @@
 import view from './post.html';
 import './estilos-post.scss';
 import '../firebase-functions/firebaseConfig';
-import { savePost } from '../firebase-functions/firebaseStore';
+import firebase from 'firebase';
+import {auth} from '../firebase-functions/firebaseConfig'
+
+import { savePost, uploadImgFood } from '../firebase-functions/firebaseStore';
 
 export default () => {
   const divElement = document.createElement('div');
@@ -39,6 +42,22 @@ export default () => {
   //   });
   // });
 
+ 
+  const btnUploadFile = divElement.querySelector('#btn-upload-file')
+  btnUploadFile.addEventListener('change', e => {
+    const file = e.target.files[0]
+    const user = auth.currentUser
+    uploadImgFood(file, user.uid) 
+  })
+
+  // const urlFood = localStorage.getItem('imgNewPost');
+  // const urlImgFoodJson = JSON.stringify(urlFood)
+
+  // console.log(urlImgFoodJson)
+ 
+  
+
+
   const userLocalStorage = localStorage.getItem('userSession');
   const convertObjJson = JSON.parse(userLocalStorage);
   const userId = convertObjJson.uid;
@@ -53,7 +72,10 @@ export default () => {
 
   postForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+    const urlFood = localStorage.getItem('imgNewPost');
+    const urlImgFoodJson = JSON.stringify(urlFood)
+    console.log(urlImgFoodJson)
+ 
     console.log(convertObjJson);
     
     // Capturar el nombre y la descripción del restaurante
@@ -68,7 +90,7 @@ export default () => {
     try {
       // Si no se esta editando el post, realiza la promesa
       // if (!editPostStatus){
-      await savePost(userId, userName, userPhotoURL, title.value, description.value, typeOfFood.value, price.value, quality.value, location.value);
+      await savePost(userId, userName, userPhotoURL, title.value, description.value, typeOfFood.value, price.value, quality.value, location.value,urlFood );
       // } //Si se edita el post
       // else {
       //     await updatePost(id, {
