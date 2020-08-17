@@ -70,6 +70,8 @@ export default () => {
   userNameDom.textContent = `${userName}`;
   userPhotoDom.src = `${userPhotoURL}`;
 
+
+  
   postForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const urlFood = localStorage.getItem('imgNewPost');
@@ -85,6 +87,11 @@ export default () => {
     const price = postForm['post-price'];
     const quality = postForm['post-quality'];
     const location = postForm['post-location'];
+
+  //   if (title.value === "" || description.value === "" || typeOfFood.value  price.value) {
+  //     alert(" Todos los campos son obligatorios");
+  //     return false;
+  // }
 
 
     try {

@@ -61,15 +61,17 @@
 
       <!-- Title post -->
       <div class="form-group-post">
-        <i class="fas fa-image"></i>
-          <label for="btn-upload-file"></label>
-          <input type="file" value="upload" id="btn-upload-file" class="btn-upload-file" />
-        <input type="text" id="post-title" class="form-control" class="Task Title" placeholder="Restaurante">
+      
+          <label for="btn-upload-file">
+            <i class="fas fa-image"></i>
+          <input required type="file" value="upload" id="btn-upload-file" class="btn-upload-file" />
+          </label>
+        <input  type="text" id="post-title" class="form-control" class="Task Title" placeholder="Restaurante" required>
       </div>
 
       <!-- Description post -->
       <div class="form-group-post">
-        <textarea id="post-description" rows="3" class="form-control" placeholder="Antoja a todos con tu experiencia gastronómica"></textarea>
+        <textarea required id="post-description"  class="form-control" placeholder="Antoja a todos con tu experiencia gastronómica"></textarea>
       </div>
     </div>
     
@@ -78,7 +80,7 @@
       <p>Agrega a tu recomentación</p>
 
       <!-- Select #TipoDeComida -->
-      <select class="select-post" id="post-type-food"> 
+      <select required class="select-post" id="post-type-food"> 
         <option value="#TipoDeComida">#TipoDeComida</option>
         <option value="#FastFood">#FastFood</option>
         <option value="#DelMar">#DelMar</option>
@@ -92,15 +94,15 @@
       </select>
 
       <!-- Select Rango de precio -->
-      <select class="select-post" id="post-price">
-        <option value="Precio">Rango de precio</option>
-        <option value="$ 0 - 20k">$ 0 - 20k</option>
-        <option value="$$ 21k - 50k">$$ 21k - 50k</option>
-        <option value="$$$ 51k ">$$$ 51k +</option>
+      <select required class="select-post" id="post-price">
+        <option value="Precio">Precio</option>
+        <option value="1">$ 0 - 20k</option>
+        <option value="2">$$ 21k - 50k</option>
+        <option value="3">$$$ 51k +</option>
       </select>
 
       <!-- Select Calidad -->
-      <select class="select-post" id="post-quality"> 
+      <select required class="select-post" id="post-quality"> 
         <option value="Calidad">Calidad</option>
         <option value="1">★☆☆</option> 
         <option value="2">★★☆</option>
@@ -108,7 +110,7 @@
       </select>
 
       <!-- Select Ubicación -->
-      <select class="select-post" id ="post-location">
+      <select required class="select-post" id ="post-location">
         <option value="Ubicación">Ubicación</option>
         <option value="ZonaT">Zona T</option>
         <option value="ZonaG">Zona G</option>

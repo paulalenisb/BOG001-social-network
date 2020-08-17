@@ -36,11 +36,16 @@ body {
     @extend .center;
 	width: 100%;
 	position: fixed;
-	top: 10px;
+	top: 0px;
+	background: $dark-blue;
+	.btn-dark-mode {display: none;} 
 	#nav-desktop {display: none;}
 	.logo-views {
 		width: 170px;
 		height: auto;
+		margin-top:10px;
+		
+		
 	}   
 }
 
@@ -353,5 +358,8 @@ footer{
 }
 
 .btn-upload-file{
-	width:20px
+	width:0.1px;
+	height:0.1px;
+	position:absolute;
+	z-index:-1;
 }
