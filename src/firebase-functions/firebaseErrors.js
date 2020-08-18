@@ -27,7 +27,7 @@ export const revealErrorMessage = (code) => {
 export const sendEmailMessage = () => {
   const errorContainer = document.querySelector('#alerts');
   errorContainer.innerText = 'Verifica tu correo';
-  errorContainer.classList.add('.email-message-auth');
+  errorContainer.classList.add('email-message-auth');
   setTimeout(() => {
     errorContainer.classList.add('hide');
   }, 5000);
