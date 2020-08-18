@@ -13,6 +13,7 @@ export const exit = () => {
     .signOut()
     .then(() => {
       console.log('logOut');
+      localStorage.clear()
     })
     .catch((error) => {
       // An error happened.
@@ -37,27 +38,28 @@ const sendEmail = () => {
 };
 
 /* ------ CREAR CUENTA -------*/
-export const createNewUser = (email, password, names) => {
+export const createNewUser = (email, password, username) => {
   auth
     .createUserWithEmailAndPassword(email, password)
     .then((result) => {
       result.user.updateProfile({
-        displayName: username,
-      });
-      sendEmail();
-    }).then(()=>{
+        displayName: username,   
+    })
+    .then(()=>{
       const user = {
         id: result.user.uid,
         usuario: result.user.displayName,
         correo: result.user.email,
       };
       userSave(user);
-      // exit();
+      sendEmail();
+      exit();
     })
     .catch((error) => {
       revealErrorMessage(error.code);
       throw error;
-    })
+    });
+  })
     .catch((error) => {
       revealErrorMessage(error.code);
       throw error;

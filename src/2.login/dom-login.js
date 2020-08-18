@@ -80,12 +80,13 @@ export default () => {
   const eyeIcons = divElement.querySelector('.eye');
   eyeIcons.addEventListener('click', togglePassword1);
 
-  /* ------ SIGNUP (REGISTRARSE) -------*/
+  /* ------ lOGIN -------*/
   form.addEventListener('submit', (e) => {
     e.preventDefault(); // Para que no se reinicie el form
 
     const email = divElement.querySelector('#email').value;
     const password = divElement.querySelector('#password-input').value;
+ 
 
     if (fields.email && fields.password) {
       loginUser(email, password);
