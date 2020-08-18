@@ -47,13 +47,13 @@ export default () => {
         post.quality = "★★★";
       }
       if (post.price === "1") {
-        post.quality = "$ 0 - 20k";
+        post.price = "$ 0 - 20k";
       }
       if (post.price === "2") {
-        post.quality = "$$ 21k - 50k";
+        post.price = "$$ 21k - 50k";
       }
       if (post.price === "3") {
-        post.quality = "$$$ 51k +";
+        post.price = "$$$ 51k +";
       }
 
       // Mostrar los post//
@@ -92,7 +92,11 @@ export default () => {
         <p class="post-description">${post.description}</p>
       </div>
       <div>
-        <p class="post-options">...</p>
+      <select name="options" id="user-options" class="post-options">
+      <option value="..." class="post-options-main">...</option>
+      <option value="Editar" id="post-delete" class="post-options-delete">Editar</option>
+      <option value="Eliminar" class="post-options-info">Eliminar</option>
+    </select>  
       </div>
     </div>
     <!-- Los atributos data-*  permiten almacenar información adicional sobre un elemento HTML -->
