@@ -113,6 +113,14 @@ export const authWithFacebook = () => {
   auth
     .signInWithPopup(provider)
     .then((result) => {
+      const user = {
+        id: result.user.uid,
+        usuario: result.user.displayName,
+        correo: result.user.email,
+        photo: result.user.photoURL,
+      };
+      userSave(user);
+      localStorage.setItem('userSession', JSON.stringify(result.user));
       window.location.hash = '#/home';
     })
     .catch((error) => {
