@@ -19,7 +19,7 @@ export const savePost = ( uid, name, userPhoto, title, description, typeOfFood, 
   uid,
   name,
   userPhoto,
-  title, 
+  title,
   description,
   typeOfFood,
   price,
@@ -38,7 +38,7 @@ export const onGetPosts = callback => db.collection('review').onSnapshot(callbac
 
 // Para eliminar un post necesito su id
 export const deletePost = id => db.collection('review').doc(id).delete();
-console.log(deletePost)
+// console.log(deletePost)
 // Editar el post con su respectivo id
 export const getEditPost = id => db.collection('review').doc(id).get();
 
