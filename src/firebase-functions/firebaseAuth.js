@@ -40,18 +40,20 @@ const sendEmail = () => {
 export const createNewUser = (email, password, names) => {
   auth
     .createUserWithEmailAndPassword(email, password)
-    .then((result) => {
-      result.user.updateProfile({
-        displayName: username,
-      });
-      sendEmail();
-    }).then(()=>{
+    // .then((result) => {
+    //   // result.user.updateProfile({
+    //   //   displayName: username,
+    //   // });
+    // sendEmail(config);
+    // })
+    .then((result)=>{
       const user = {
         id: result.user.uid,
         usuario: result.user.displayName,
         correo: result.user.email,
       };
       userSave(user);
+      sendEmail();
       // exit();
     })
     .catch((error) => {
