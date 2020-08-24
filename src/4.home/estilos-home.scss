@@ -23,7 +23,7 @@ $font-lato: 'Lato', sans-serif;
     background-color: $medium-blue;
     color: #f4f4f4;
     margin: 10px;
-    height:340px;
+    height:345px;
     width: 330px;
     box-sizing: border-box;
     border-radius: 20px;
@@ -130,15 +130,15 @@ $font-lato: 'Lato', sans-serif;
 
 .post-options{
     float: right;
-    margin-right: 10px;
-    margin-top:-25px;
+    // margin-right: 10px;
+    margin-top:-10px;
     color:$yellow;
     background: transparent;
     border:none;
     appearance:none;
     width: 40px;
     height: min-content;
-    font-size:1.3em;
+    font-size:1.7em;
     letter-spacing: 0.1em;
     font-weight: bold;
 }
@@ -196,7 +196,7 @@ $font-lato: 'Lato', sans-serif;
     // }
 
     .post-description{
-        margin: 0;
+        // margin: 0;
     }
 
     .post-container-info{

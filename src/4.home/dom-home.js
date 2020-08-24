@@ -99,16 +99,12 @@ export default () => {
       <i type="button" id="btn-like" class="far fa-heart"></i>
     </div>
   </div>
-  <div>
     <p class="post-description">${post.description}</p>
-  </div>
-  <div>
   <select name="options" id="user-options" class="post-options">
   <option value="..." class="post-options-main">...</option>
   <option value="Editar" id="post-delete" class="post-options-delete">Editar</option>
   <option value="Eliminar" class="post-options-info">Eliminar</option>
 </select>  
-  </div>
 </div>
 </div>
 </div>`;
