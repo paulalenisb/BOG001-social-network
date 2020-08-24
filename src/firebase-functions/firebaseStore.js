@@ -4,6 +4,7 @@ export const db = firebase.firestore();
 
 export const userSave = user => db.collection('users').doc(user.id).set(user);
 
+
 export const createUserProfile = async () => {
   const userLocalStorage = localStorage.getItem('userSession');
   const convertObjJson = JSON.parse(userLocalStorage);

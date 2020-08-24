@@ -57,6 +57,18 @@ export default () => {
         post.price = "$$$ 51k +";
       }
 
+      /* const userLocalStorage = localStorage.getItem('userSession');
+      const convertObjJson = JSON.parse(userLocalStorage);
+      const userPhotoURL = convertObjJson.photoURL;
+
+      const userProfile = (userPhotoURL) => {
+        if (userPhotoURL) {
+          return userPhotoURL;
+        }
+        return 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg';
+      }; */
+
+      
       // Mostrar los post//
       postContainer.innerHTML += `
       <div class="post-container">
