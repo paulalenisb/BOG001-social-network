@@ -15,18 +15,4 @@ export default () => {
 };
 
 
-
-// export const savePost = ( uid,name, userPhoto, title, description, typeOfFood, price, quality,location, foodPhoto) => {
-  //   db.collection('review').add({
-  //   name,
-  //   userPhoto,
-  //   title, 
-  //   description,
-  //   typeOfFood,
-  //   price,
-  //   quality,
-  //   location,
-  //   foodPhoto,
-  // })
-  // };
   

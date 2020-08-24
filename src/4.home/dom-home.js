@@ -1,7 +1,8 @@
 import view from "./home.html";
 import "./estilos-home.scss";
 import "../firebase-functions/firebaseConfig";
-import { onGetPosts, deletePost } from "../firebase-functions/firebaseStore";
+import { onGetPosts, deletePost, savePost } from "../firebase-functions/firebaseStore";
+
 
 export default () => {
   const divElement = document.createElement("div");
@@ -110,6 +111,10 @@ export default () => {
 // const textHolderlikes =postContainer.querySelectorAll('.post-container-likes-icon')
 
     // Función para cambiar el estado de los likes
+    // const deletePost = () =>{
+    //   savePost.uid
+      
+    // }
     const btnLike = postContainer.querySelectorAll(".fa-heart");
 
     btnLike.forEach((btn) => {

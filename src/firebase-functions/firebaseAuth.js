@@ -13,6 +13,7 @@ export const exit = () => {
     .signOut()
     .then(() => {
       console.log('logOut');
+      localStorage.clear()
     })
     .catch((error) => {
       // An error happened.
@@ -37,16 +38,14 @@ const sendEmail = () => {
 };
 
 /* ------ CREAR CUENTA -------*/
-export const createNewUser = (email, password, names) => {
+export const createNewUser = (email, password, username) => {
   auth
     .createUserWithEmailAndPassword(email, password)
-    // .then((result) => {
-    //   // result.user.updateProfile({
-    //   //   displayName: username,
-    //   // });
-    // sendEmail(config);
-    // })
-    .then((result)=>{
+    .then((result) => {
+      result.user.updateProfile({
+        displayName: username,   
+    })
+    .then(()=>{
       const user = {
         id: result.user.uid,
         usuario: result.user.displayName,
@@ -54,12 +53,13 @@ export const createNewUser = (email, password, names) => {
       };
       userSave(user);
       sendEmail();
-      // exit();
+      exit();
     })
     .catch((error) => {
       revealErrorMessage(error.code);
       throw error;
-    })
+    });
+  })
     .catch((error) => {
       revealErrorMessage(error.code);
       throw error;
@@ -113,6 +113,14 @@ export const authWithFacebook = () => {
   auth
     .signInWithPopup(provider)
     .then((result) => {
+      const user = {
+        id: result.user.uid,
+        usuario: result.user.displayName,
+        correo: result.user.email,
+        photo: result.user.photoURL,
+      };
+      userSave(user);
+      localStorage.setItem('userSession', JSON.stringify(result.user));
       window.location.hash = '#/home';
     })
     .catch((error) => {
