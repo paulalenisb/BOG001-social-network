@@ -67,51 +67,51 @@ export default () => {
       
       // Mostrar los post//
       postContainer.innerHTML += `
-      <div class="post-container">
-      <div class="post-container-info" id="post-main-info">
-        <div class="post-container-info-main">
-          <h3 class="post-title">${post.title}</h3>
-          <div class="post-location">
-            <i class="fas fa-map-marker-alt"></i>
-            <p class="post-location-info">${post.location}</p> 
-          </div>
-        </div>
-        <div class="post-container-food">
-          <p class="post-type-food">${post.typeOfFood}</p>
-        </div>
-        <div class="post-container-price">
-          <p class="post-price">${post.price}</p>
-        </div>
-        <div class="post-container-quality">
-          <p class="post-quality">${post.quality}</p>
-        </div>
-      </div>
-      <img src="${post.foodPhoto}" class="post-food-photo" />
-      <div class="post-user-info">
-        <div class="post-user-data">
-          <img src="${userProfile(post.userPhoto)}" class="post-user-data-photo"/>
-          <h3 class="post-user-data-name">${post.name} </h3>
-        </div>
-        <div class="post-container-likes">
-          <p class="post-container-likes-icon"></p>
-          <i type="button" id="btn-like" class="far fa-heart"></i>
-        </div>
-      </div>
-      <div>
-        <p class="post-description">${post.description}</p>
-      </div>
-      <div>
-      <select name="options" id="user-options" class="post-options">
-      <option value="..." class="post-options-main">...</option>
-      <option value="Editar" id="post-delete" class="post-options-delete">Editar</option>
-      <option value="Eliminar" class="post-options-info">Eliminar</option>
-    </select>  
+  <div class="post-container">
+  <img src="${post.foodPhoto}" class="post-food-photo-web"/>
+  <div class="post-allinfo">
+  <div class="post-container-info" id="post-main-info">
+    <div class="post-container-info-main">
+      <h3 class="post-title">${post.title}</h3>
+      <div class="post-location">
+        <i class="fas fa-map-marker-alt"></i>
+        <p class="post-location-info">${post.location}</p> 
       </div>
     </div>
-    <!-- Los atributos data-*  permiten almacenar información adicional sobre un elemento HTML -->
-    <button class='btn-delete' data-id="${doc.id}"> Eliminar </button>
-    <button class='btn-edit' data-id="${doc.id}"> Editar </button>
-    </div>`;
+    <div class="post-container-food">
+      <p class="post-type-food">${post.typeOfFood}</p>
+    </div>
+    <div class="post-container-price">
+      <p class="post-price">${post.price}</p>
+    </div>
+    <div class="post-container-quality">
+      <p class="post-quality">${post.quality}</p>
+    </div>
+  </div>
+  <img src="${post.foodPhoto}" class="post-food-photo-mobile"/>
+  <div class="post-user-info">
+    <div class="post-user-data">
+      <img src="${post.userPhoto}" class="post-user-data-photo"/>
+      <h3 class="post-user-data-name">${post.name} </h3>
+    </div>
+    <div class="post-container-likes">
+      <p class="post-container-likes-icon"></p>
+      <i type="button" id="btn-like" class="far fa-heart"></i>
+    </div>
+  </div>
+  <div>
+    <p class="post-description">${post.description}</p>
+  </div>
+  <div>
+  <select name="options" id="user-options" class="post-options">
+  <option value="..." class="post-options-main">...</option>
+  <option value="Editar" id="post-delete" class="post-options-delete">Editar</option>
+  <option value="Eliminar" class="post-options-info">Eliminar</option>
+</select>  
+  </div>
+</div>
+</div>
+</div>`;
     });
 
 
