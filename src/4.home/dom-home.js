@@ -57,16 +57,12 @@ export default () => {
         post.price = "$$$ 51k +";
       }
 
-      /* const userLocalStorage = localStorage.getItem('userSession');
-      const convertObjJson = JSON.parse(userLocalStorage);
-      const userPhotoURL = convertObjJson.photoURL;
-
       const userProfile = (userPhotoURL) => {
         if (userPhotoURL) {
           return userPhotoURL;
         }
-        return 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg';
-      }; */
+        return 'src/images/userDefault.png';
+      };
 
       
       // Mostrar los post//
@@ -93,7 +89,7 @@ export default () => {
       <img src="${post.foodPhoto}" class="post-food-photo" />
       <div class="post-user-info">
         <div class="post-user-data">
-          <img src="${post.userPhoto}" class="post-user-data-photo"/>
+          <img src="${userProfile(post.userPhoto)}" class="post-user-data-photo"/>
           <h3 class="post-user-data-name">${post.name} </h3>
         </div>
         <div class="post-container-likes">

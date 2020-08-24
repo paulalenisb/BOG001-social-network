@@ -59,18 +59,18 @@ export default () => {
   const userName = convertObjJson.displayName;
   const userPhotoURL = convertObjJson.photoURL;
   
-  /* const userProfile = (userPhotoURL) => {
+  const userProfile = (userPhotoURL) => {
     if (userPhotoURL) {
       return userPhotoURL;
     }
-    return 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg';
-  }; */
+    return 'src/images/userDefault.png';
+  };
 
   const userNameDom = divElement.querySelector('#post-user-name'); 
   const userPhotoDom = divElement.querySelector('#post-user-photo');
 
   userNameDom.textContent = `${userName}`;
-  userPhotoDom.src = `${userPhotoURL}`;/* userProfile(userPhotoURL) */ /* 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg' */;
+  userPhotoDom.src = userProfile(userPhotoURL);/* userProfile(userPhotoURL) */ /* 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg' */;
 
   postForm.addEventListener('submit', async (e) => {
     e.preventDefault();
