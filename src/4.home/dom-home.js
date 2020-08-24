@@ -57,6 +57,14 @@ export default () => {
         post.price = "$$$ 51k +";
       }
 
+      const userProfile = (userPhotoURL) => {
+        if (userPhotoURL) {
+          return userPhotoURL;
+        }
+        return 'src/images/userDefault.png';
+      };
+
+      
       // Mostrar los post//
       postContainer.innerHTML += `
   <div class="post-container">
