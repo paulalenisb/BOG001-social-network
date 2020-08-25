@@ -1,9 +1,17 @@
 import view from "./home.html";
 import "./estilos-home.scss";
 import "../firebase-functions/firebaseConfig";
-import { onGetPosts, deletePost, savePost } from "../firebase-functions/firebaseStore";
+import {
+  onGetPosts,
+  deletePost,
+  savePost,
+} from "../firebase-functions/firebaseStore";
+import * as firebase from "firebase";
+import { auth } from "../firebase-functions/firebaseConfig";
 
+// const userId = auth.currentUser.uid
 
+const db = firebase.firestore();
 export default () => {
   const divElement = document.createElement("div");
   divElement.innerHTML = view;
@@ -15,8 +23,12 @@ export default () => {
   // window.addEventListener('Load', async (e) => {
   // console.log('DOMContentLoaded');
   onGetPosts(async (querySnapshot) => {
+    let citiesRef = db.collection("review");
+    let query = citiesRef.where("uid", "==", true);
+    console.log(query);
     postContainer.innerHTML = "";
-
+    let selectOptions = "";
+    const userId = auth.currentUser.uid;
     // Con querySnapshot recorremos los objetos que hemos creado en docs
     querySnapshot.forEach((doc) => {
       const post = doc.data();
@@ -37,6 +49,16 @@ export default () => {
       //   }
       //   return stars
       // }
+      let selectOptions = "";
+      if (userId === post.uid) {
+        selectOptions = `
+      <select name="options" id="${post.uid}" data-id="${doc.id}"class="post-options">
+       <option value="" class="post-options-main">...</option>
+       <option value="Editar"  class="post-options-edit" id="${post.uid}" data-id="${doc.id}">Editar</option>
+       <option value="Eliminar" class="post-options-delete" id="delete${post.uid}" data-id="${doc.id}">Eliminar</option>
+       </select>  
+        `;
+      }
 
       if (post.quality === "1") {
         post.quality = "★☆☆";
@@ -93,70 +115,68 @@ export default () => {
         <p class="post-description">${post.description}</p>
       </div>
       <div>
-      <select name="options" id="user-options" class="post-options">
-      <option value="..." class="post-options-main">...</option>
-      <option value="Editar" id="post-delete" class="post-options-delete">Editar</option>
-      <option value="Eliminar" class="post-options-info">Eliminar</option>
-    </select>  
+      ${selectOptions}
       </div>
     </div>
     <!-- Los atributos data-*  permiten almacenar información adicional sobre un elemento HTML -->
-    <button class='btn-delete' data-id="${doc.id}"> Eliminar </button>
-    <button class='btn-edit' data-id="${doc.id}"> Editar </button>
+    <button class='btn-edit' data-id="${post.id}"> Editar </button>
     </div>`;
-    });
+     
 
+  
+      const btnLike = postContainer.querySelectorAll(".fa-heart");
 
-// let count = 0;
-// const textHolderlikes =postContainer.querySelectorAll('.post-container-likes-icon')
-
-    // Función para cambiar el estado de los likes
-    // const deletePost = () =>{
-    //   savePost.uid
-      
-    // }
-    const btnLike = postContainer.querySelectorAll(".fa-heart");
-
-    btnLike.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        let count = 0;
-        e.target.classList.toggle("fill-heart");
-        e.target.textContent = ++count;
-    })
-  });
-    // Función para eliminar post
-    const btnDelete = postContainer.querySelectorAll(".btn-delete");
-
-    btnDelete.forEach((btn) => {
-      btn.addEventListener("click", async (e) => {
-        try {
-          await deletePost(e.target.dataset.id);
-          // console.log(e.target.dataset.id)
-        } catch (error) {
-          alert(error);
-        }
+      btnLike.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          let count = 0;
+          e.target.classList.toggle("fill-heart");
+          e.target.textContent = ++count;
+        });
       });
+      // Función para eliminar post
+
+      
+
+      const btnOptions = postContainer.querySelectorAll(".post-options");
+      btnOptions.forEach((btn) => {
+        btn.addEventListener("change", async(e) => {
+          if (btn.value === "Eliminar" ) {
+            try {
+              await deletePost(e.target.dataset.id);
+            } catch (error) {
+              alert(error);
+          }
+          }else if (btn.value === "Editar" ){
+             console.log("chevre")
+          }
+        });
+      });
+      // }
+     
+
+      // btnOptions.forEach((btn) => {
+      //   btn.addEventListener("change", async (e) => {
+      //     if (btn.value === "Editar" && e.target.id == userId) {
+      //       // window.location.hash= '#/post'
+      //     }
+
+      // try {
+      //   const doc = await getEditPost(e.target.dataset.id);
+      //   const post = doc.data();
+      //   postForm['post-title'].value = post.title;
+      //   postForm['post-description'].value = post.description;
+
+      //   // El estado del post es true porque ya lo vamos a editar
+      //   editPostStatus = true;
+      //   id = doc.id;
+      //   postForm['btn-post-form'].innerText = 'Actualizar';
+      // } catch (error) {
+      // }
+      //   });
+      // });
+
+      
     });
-
-    const btnEdit = postContainer.querySelectorAll(".btn-edit");
-
-    //   btnEdit.forEach((btn) => {
-    //     btn.addEventListener('click', async (e) => {
-    //       try {
-    //         const doc = await getEditPost(e.target.dataset.id);
-    //         const post = doc.data();
-    //         postForm['post-title'].value = post.title;
-    //         postForm['post-description'].value = post.description;
-
-    //         // El estado del post es true porque ya lo vamos a editar
-    //         editPostStatus = true;
-    //         id = doc.id;
-    //         postForm['btn-post-form'].innerText = 'Actualizar';
-    //       } catch (error) {
-    //       }
-    //     });
-    //   });
-    // });
   });
 
   return divElement;

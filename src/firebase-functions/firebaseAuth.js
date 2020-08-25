@@ -122,6 +122,7 @@ export const authWithFacebook = () => {
       userSave(user);
       localStorage.setItem('userSession', JSON.stringify(result.user));
       window.location.hash = '#/home';
+
     })
     .catch((error) => {
       console.error(error);
@@ -167,4 +168,7 @@ export const authWithFacebook = () => {
 //   }
 //   return db.doc(`/users/${uid}`).set(userData,  {merge: true});
 // }
+
+// console.log(userSave(user))
+
 

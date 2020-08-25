@@ -87,6 +87,7 @@ export default () => {
     const price = postForm['post-price'];
     const quality = postForm['post-quality'];
     const location = postForm['post-location'];
+    let likes = 0;
 
   //   if (title.value === "" || description.value === "" || typeOfFood.value  price.value) {
   //     alert(" Todos los campos son obligatorios");
@@ -97,7 +98,7 @@ export default () => {
     try {
       // Si no se esta editando el post, realiza la promesa
       // if (!editPostStatus){
-      await savePost(userId, userName, userPhotoURL, title.value, description.value, typeOfFood.value, price.value, quality.value, location.value,urlFood );
+      await savePost(userId, userName, userPhotoURL, title.value, description.value, typeOfFood.value, price.value, quality.value, location.value,urlFood, likes );
       // } //Si se edita el post
       // else {
       //     await updatePost(id, {
