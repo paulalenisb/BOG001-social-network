@@ -79,49 +79,54 @@ export default () => {
         post.price = "$$$ 51k +";
       }
 
+      const userProfile = (userPhotoURL) => {
+        if (userPhotoURL) {
+          return userPhotoURL;
+        }
+        return 'src/images/userDefault.png';
+      };
+
+      
       // Mostrar los post//
       postContainer.innerHTML += `
-      <div class="post-container">
-      <div class="post-container-info" id="post-main-info">
-        <div class="post-container-info-main">
-          <h3 class="post-title">${post.title}</h3>
-          <div class="post-location">
-            <i class="fas fa-map-marker-alt"></i>
-            <p class="post-location-info">${post.location}</p> 
-          </div>
-        </div>
-        <div class="post-container-food">
-          <p class="post-type-food">${post.typeOfFood}</p>
-        </div>
-        <div class="post-container-price">
-          <p class="post-price">${post.price}</p>
-        </div>
-        <div class="post-container-quality">
-          <p class="post-quality">${post.quality}</p>
-        </div>
-      </div>
-      <img src="${post.foodPhoto}" class="post-food-photo" />
-      <div class="post-user-info">
-        <div class="post-user-data">
-          <img src="${post.userPhoto}" class="post-user-data-photo"/>
-          <h3 class="post-user-data-name">${post.name} </h3>
-        </div>
-        <div class="post-container-likes">
-          <p class="post-container-likes-icon"></p>
-          <i type="button" id="btn-like" class="far fa-heart"></i>
-        </div>
-      </div>
-      <div>
-        <p class="post-description">${post.description}</p>
-      </div>
-      <div>
-      ${selectOptions}
+  <div class="post-container">
+  <img src="${post.foodPhoto}" class="post-food-photo-web"/>
+  <div class="post-allinfo">
+  <div class="post-container-info" id="post-main-info">
+    <div class="post-container-info-main">
+      <h3 class="post-title">${post.title}</h3>
+      <div class="post-location">
+        <i class="fas fa-map-marker-alt"></i>
+        <p class="post-location-info">${post.location}</p> 
       </div>
     </div>
-    <!-- Los atributos data-*  permiten almacenar información adicional sobre un elemento HTML -->
-    <button class='btn-edit' data-id="${post.id}"> Editar </button>
-    </div>`;
-     
+    <div class="post-container-food">
+      <p class="post-type-food">${post.typeOfFood}</p>
+    </div>
+    <div class="post-container-price">
+      <p class="post-price">${post.price}</p>
+    </div>
+    <div class="post-container-quality">
+      <p class="post-quality">${post.quality}</p>
+    </div>
+  </div>
+  <img src="${post.foodPhoto}" class="post-food-photo-mobile"/>
+  <div class="post-user-info">
+    <div class="post-user-data">
+      <img src="${post.userPhoto}" class="post-user-data-photo"/>
+      <h3 class="post-user-data-name">${post.name} </h3>
+    </div>
+    <div class="post-container-likes">
+      <p class="post-container-likes-icon"></p>
+      <i type="button" id="btn-like" class="far fa-heart"></i>
+    </div>
+  </div>
+    <p class="post-description">${post.description}</p>
+  ${selectOptions} 
+</div>
+</div>
+</div>`;
+    });
 
   
       const btnLike = postContainer.querySelectorAll(".fa-heart");
@@ -147,12 +152,10 @@ export default () => {
               alert(error);
           }
           }else if (btn.value === "Editar" ){
-             console.log("chevre")
+            console.log("chevre")
           }
         });
       });
-      // }
-     
 
       // btnOptions.forEach((btn) => {
       //   btn.addEventListener("change", async (e) => {
@@ -176,7 +179,7 @@ export default () => {
       // });
 
       
-    });
+  
   });
 
   return divElement;
