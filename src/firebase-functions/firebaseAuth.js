@@ -12,7 +12,6 @@ export const exit = () => {
   auth
     .signOut()
     .then(() => {
-      console.log('logOut');
       localStorage.clear()
     })
     .catch((error) => {
@@ -50,8 +49,11 @@ export const createNewUser = (email, password, username) => {
         id: result.user.uid,
         usuario: result.user.displayName,
         correo: result.user.email,
+        photo: 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg'
       };
       userSave(user);
+      /* console.log(user); */
+      
       sendEmail();
       exit();
     })
@@ -72,7 +74,6 @@ export const loginUser = (email, password) => {
     .signInWithEmailAndPassword(email, password)
     .then((result) => {
       if (result.user.emailVerified) {
-        // console.log(result.user)
         localStorage.setItem('userSession', JSON.stringify(result.user));
         window.location.hash = '#/home';
       } else {
@@ -122,6 +123,7 @@ export const authWithFacebook = () => {
       userSave(user);
       localStorage.setItem('userSession', JSON.stringify(result.user));
       window.location.hash = '#/home';
+
     })
     .catch((error) => {
       console.error(error);
@@ -167,4 +169,7 @@ export const authWithFacebook = () => {
 //   }
 //   return db.doc(`/users/${uid}`).set(userData,  {merge: true});
 // }
+
+// console.log(userSave(user))
+
 

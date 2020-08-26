@@ -3,7 +3,6 @@ import './estilos-post.scss';
 import '../firebase-functions/firebaseConfig';
 import firebase from 'firebase';
 import {auth} from '../firebase-functions/firebaseConfig'
-
 import { savePost, uploadImgFood } from '../firebase-functions/firebaseStore';
 
 export default () => {
@@ -42,7 +41,6 @@ export default () => {
   //   });
   // });
 
- 
   const btnUploadFile = divElement.querySelector('#btn-upload-file')
   btnUploadFile.addEventListener('change', e => {
     const file = e.target.files[0]
@@ -54,30 +52,32 @@ export default () => {
   // const urlImgFoodJson = JSON.stringify(urlFood)
 
   // console.log(urlImgFoodJson)
- 
-  
-
 
   const userLocalStorage = localStorage.getItem('userSession');
   const convertObjJson = JSON.parse(userLocalStorage);
   const userId = convertObjJson.uid;
   const userName = convertObjJson.displayName;
   const userPhotoURL = convertObjJson.photoURL;
+  
+  const userProfile = (userPhotoURL) => {
+    if (userPhotoURL) {
+      return userPhotoURL;
+    }
+    return 'src/images/userDefault.png';
+  };
 
   const userNameDom = divElement.querySelector('#post-user-name'); 
   const userPhotoDom = divElement.querySelector('#post-user-photo');
 
   userNameDom.textContent = `${userName}`;
-  userPhotoDom.src = `${userPhotoURL}`;
+  userPhotoDom.src = userProfile(userPhotoURL);/* userProfile(userPhotoURL) */ /* 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg' */;
 
-
-  
   postForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const urlFood = localStorage.getItem('imgNewPost');
     const urlImgFoodJson = JSON.stringify(urlFood)
     console.log(urlImgFoodJson)
- 
+
     console.log(convertObjJson);
     
     // Capturar el nombre y la descripción del restaurante
@@ -87,6 +87,7 @@ export default () => {
     const price = postForm['post-price'];
     const quality = postForm['post-quality'];
     const location = postForm['post-location'];
+    let likes = 0;
 
   //   if (title.value === "" || description.value === "" || typeOfFood.value  price.value) {
   //     alert(" Todos los campos son obligatorios");
@@ -97,7 +98,7 @@ export default () => {
     try {
       // Si no se esta editando el post, realiza la promesa
       // if (!editPostStatus){
-      await savePost(userId, userName, userPhotoURL, title.value, description.value, typeOfFood.value, price.value, quality.value, location.value,urlFood );
+      await savePost(userId, userName, userPhotoURL, title.value, description.value, typeOfFood.value, price.value, quality.value, location.value,urlFood, likes );
       // } //Si se edita el post
       // else {
       //     await updatePost(id, {

@@ -32,13 +32,15 @@ export const savePost = ( uid, name, userPhoto, title, description, typeOfFood, 
 // De mi colección de reviews traeme todo
 export const getPosts = () => db.collection('review').get();
 
+
+
 /* Cada vez que mis posts se actualicen, agreguen o borren, actualizar en tiempo real
 el timeline con el método onSnapshot() */
 export const onGetPosts = callback => db.collection('review').onSnapshot(callback);
 
 // Para eliminar un post necesito su id
 export const deletePost = id => db.collection('review').doc(id).delete();
-// console.log(deletePost)
+
 // Editar el post con su respectivo id
 export const getEditPost = id => db.collection('review').doc(id).get();
 
@@ -71,3 +73,35 @@ export const uploadImgFood = (file, uid) => {
     }
   )
 }
+
+
+// db.collection("users").get().then((querySnapshot) => {
+//   querySnapshot.(doc) => {
+//       console.log(`${doc.id}`);
+//   // });
+// });
+
+// db.collection("users").get().then((querySnapshot) => {
+//   querySnapshot.forEach((doc) => {
+//       console.log(`${doc.data().id}`);
+//   });
+// });
+
+// var docRef = db.collection("users").doc().id;
+
+// docRef.get().then(function(doc) {
+//     if (doc.exists) {
+//         console.log("Document data:", doc.data());
+//     } else {
+//         // doc.data() will be undefined in this case
+//         console.log("No such document!");
+//     }
+// }).catch(function(error) {
+//     console.log("Error getting document:", error);
+// });
+
+// db.collection("stories").where("author", "==", user.uid).get()
+
+// var user = firebase.auth().currentUser;
+
+// db.collectionGroup("posts").where("author", "==", user.uid).get()
