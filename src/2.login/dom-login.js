@@ -86,16 +86,11 @@ export default () => {
 
     const email = divElement.querySelector('#email').value;
     const password = divElement.querySelector('#password-input').value;
- 
 
     if (fields.email && fields.password) {
       loginUser(email, password);
       form.reset();
-    } else {
-      divElement
-        .querySelector('#form-message')
-        .classList.add('form-message-active');
-    }
+    } 
   });
   /* ------ SIGNUP (REGISTRARSE) FACEBOOK -------*/
   const facebookButtonSignUp = divElement.querySelector('#sign-in-facebook');

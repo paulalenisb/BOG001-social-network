@@ -6,7 +6,7 @@ const router = (route) => {
   content.innerHTML = '';
   let nodeDomPages = '';
   switch (route) {
-    case '#/welcome':
+    case '':
       nodeDomPages = pages.welcome();
       break;
     case '#/login':

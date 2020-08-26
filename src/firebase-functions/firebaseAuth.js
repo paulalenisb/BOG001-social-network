@@ -22,7 +22,7 @@ export const exit = () => {
 /* ------ SEND EMAIL -------*/
 const sendEmail = () => {
   const config = {
-    url: 'http://localhost:8080/#/welcome',
+    url: 'http://localhost:8080/',
   };
   const user = firebase.auth().currentUser;
   user

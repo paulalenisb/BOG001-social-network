@@ -186,20 +186,26 @@ $font-lato: 'Lato', sans-serif;
 
     .post-allinfo{
         margin-left: 20px;
-        
         width: 500px;
         font-size: 1.3em;
+    }
+
+    .post-location{
+        margin-top: 10px; 
     }
 
     // .post-user-info{
         
     // }
 
-   
-
     .post-container-info{
         margin-right: 10px;
         justify-content: space-between;
+    }
+
+    .post-location-info{
+        margin: 0px;
+        margin-left: 10px;
     }
 
     .post-options{
@@ -221,6 +227,10 @@ $font-lato: 'Lato', sans-serif;
     
     .post-container-likes{
         margin-right: 0;
+    }
+
+    .post-description{
+        margin-left: 0px;
     }
 
 }
