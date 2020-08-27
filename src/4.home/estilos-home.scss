@@ -3,9 +3,10 @@
 // Variables
 $dark-blue: #111319;
 $medium-blue: #1D212B;
+$black-opacity: rgba(0,0,0,0.5);
 $medium-gray: #707070;
 $yellow: #FDBF04;
-$white: #FFFFFF;
+$white: #f4f4f4;
 $font-lato: 'Lato', sans-serif;
 
 .home {
@@ -21,7 +22,7 @@ $font-lato: 'Lato', sans-serif;
 }
 .post-container{
     background-color: $medium-blue;
-    color: #f4f4f4;
+    color: $white;
     margin: 10px;
     height:345px;
     width: 330px;
@@ -78,7 +79,6 @@ $font-lato: 'Lato', sans-serif;
 .post-food-photo-web{
     display: none;
 }
-
 
 .post-user-info{
     display: flex;
@@ -149,6 +149,68 @@ $font-lato: 'Lato', sans-serif;
     transition:0.4s
 }
 
+.overlay {
+    background:$black-opacity;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+}
+
+.modal {
+    background-color: $medium-blue;
+    width: 300px;
+    height: auto;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.modal-text {
+    color: $white;
+    font-weight: bold;
+    text-align: center;
+}
+
+button {
+    font-family: $font-lato;
+    font-weight: bold;
+    font-size: 18px;
+
+}
+
+.btn-modal-confirm-delete {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   
+    
+    // align-content: ;
+    // justify-content: space-around;
+}
+
+.btn-modal{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: $white;
+    // border-radius: 5px;
+    // margin-bottom: 10px;
+    border-top: 0.1px solid #f4f4f43b;
+    height: 50px;
+}
+.modal-delete{
+    color: $yellow;
+}
+
+// .modal-cancel{
+//     border-bottom: 0.5px solid $medium-gray;
+// }
 /*--------- ESTILOS TABLET ---------*/
 @media screen and (min-width: 768px) {
     .container{

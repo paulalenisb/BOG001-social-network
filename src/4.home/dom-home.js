@@ -1,13 +1,18 @@
 import view from "./home.html";
 import "./estilos-home.scss";
 import "../firebase-functions/firebaseConfig";
-import { onGetPosts, deletePost, savePost } from "../firebase-functions/firebaseStore";
+import {
+  db,
+  onGetPosts,
+  deletePost,
+  savePost,
+} from "../firebase-functions/firebaseStore";
 import * as firebase from "firebase";
 import { auth } from "../firebase-functions/firebaseConfig";
 
 // const userId = auth.currentUser.uid
 
-const db = firebase.firestore();
+// const db = firebase.firestore();
 export default () => {
   const divElement = document.createElement("div");
   divElement.innerHTML = view;
@@ -18,7 +23,6 @@ export default () => {
   // Cuando la ventana cargue, traer el contenido del DOM, se ejecuta el evento de getEditPosts
 
   onGetPosts(async (querySnapshot) => {
-
     postContainer.innerHTML = "";
     let selectOptions = "";
     const userId = auth.currentUser.uid;
@@ -37,7 +41,7 @@ export default () => {
       if (post.quality === "3") {
         post.quality = "★★★";
       }
-      
+
       /* ------ Impresión Precio -------*/
       if (post.price === "1") {
         post.price = "$ 0 - 20k";
@@ -72,7 +76,7 @@ export default () => {
         if (userPhotoURL) {
           return userPhotoURL;
         }
-        return 'src/images/userDefault.png';
+        return "src/images/userDefault.png";
       };
 
       /* ------ Literal Select Eliminar/Borrar post -------*/
@@ -81,8 +85,8 @@ export default () => {
         selectOptions = `
         <select name="options" id="${post.uid}" data-id="${doc.id}"class="post-options">
           <option value="" class="post-options-main">...</option>
-          <option value="Editar"  class="post-options-edit" id="${post.uid}" data-id="${doc.id}">Editar</option>
-          <option value="Eliminar" class="post-options-delete" id="delete${post.uid}" data-id="${doc.id}">Eliminar</option>
+          <option value="Editar"  class="post-options-edit" id="${post.uid}" data-id="${doc.id}" onclick>Editar</option>
+          <option value="Eliminar" class="post-options-delete">Eliminar</option>
         </select>  
         `;
       }
@@ -113,7 +117,9 @@ export default () => {
         <img src="${post.foodPhoto}" class="post-food-photo-mobile"/>
         <div class="post-user-info">
           <div class="post-user-data">
-            <img src="${userProfile(post.userPhoto)}" class="post-user-data-photo"/>
+            <img src="${userProfile(
+              post.userPhoto
+            )}" class="post-user-data-photo"/>
             <h3 class="post-user-data-name">${post.name} </h3>
           </div>
           <div class="post-container-likes">
@@ -126,56 +132,110 @@ export default () => {
       </div>
       </div>
       </div>`;
-    });
-
-      /* ------ Likes -------*/
-      const btnLike = postContainer.querySelectorAll(".fa-heart");
-
-      btnLike.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          let count = 0;
-          e.target.classList.toggle("fill-heart");
-          e.target.textContent = ++count;
-        });
-      });
 
       /* ------ Eliminar/Borrar post -------*/
       const btnOptions = postContainer.querySelectorAll(".post-options");
+      const modalDeletePost = divElement.querySelector(".modal-delete");
+
       btnOptions.forEach((btn) => {
-        btn.addEventListener("change", async(e) => {
-          if (btn.value === "Eliminar" ) {
-            try {
-              await deletePost(e.target.dataset.id);
-            } catch (error) {
-              alert(error);
-          }
-          }else if (btn.value === "Editar" ){
-            console.log("chevre")
+        btn.addEventListener("change", () => {
+          modalDeletePost.innerHTML = "";
+
+          if (btn.value === "Eliminar") {
+            // const post = doc.data();
+            if (userId === post.uid) {
+
+            modalDeletePost.innerHTML += `
+            <div class="overlay">
+              <div class="modal">
+                <p class="modal-text"> ¿Eliminar publicación? </p>
+                  <div class="btn-modal-confirm-delete">
+                    <button class="btn-modal modal-delete" id="delete${post.uid}" data-id="${doc.id}">Eliminar</button>
+                    <button class="btn-modal modal-cancel">Cancelar</button>
+                  </div>
+              </div>
+            </div> `;
+
+            const btnModalDelete = modalDeletePost.querySelector(
+              ".modal-delete"
+            );
+              btnModalDelete.addEventListener("click",  async(e) => {
+                try {
+                  await deletePost(e.target.dataset.id);
+                  modalDeletePost.style.display = 'none';
+                } catch (error) {
+                  alert(error);
+                }
+              });
+            
+
+            }
+          } else if (btn.value === "Editar") {
+            console.log("chevre");
           }
         });
       });
+    });
 
-      // btnOptions.forEach((btn) => {
-      //   btn.addEventListener("change", async (e) => {
-      //     if (btn.value === "Editar" && e.target.id == userId) {
-      //       // window.location.hash= '#/post'
-      //     }
+    /* ------ Likes -------*/
+    const btnLike = postContainer.querySelectorAll(".fa-heart");
 
-      // try {
-      //   const doc = await getEditPost(e.target.dataset.id);
-      //   const post = doc.data();
-      //   postForm['post-title'].value = post.title;
-      //   postForm['post-description'].value = post.description;
+    btnLike.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        let count = 0;
+        e.target.classList.toggle("fill-heart");
+        e.target.textContent = ++count;
+      });
+    });
 
-      //   // El estado del post es true porque ya lo vamos a editar
-      //   editPostStatus = true;
-      //   id = doc.id;
-      //   postForm['btn-post-form'].innerText = 'Actualizar';
-      // } catch (error) {
-      // }
-      //   });
-      // });
+    //   const btnDelete = postContainer.querySelectorAll('.btn-delete');
 
+    // btnDelete.forEach((btn) => {
+    //   btn.addEventListener('click', async (e) => {
+    //     try {
+    //       await deletePost(e.target.dataset.id);
+    //       // console.log(e.target.dataset.id)
+    //     } catch (error) {
+    //       alert(error);
+    //     }
+    //   });
+    // });
+
+    // const btnOptions = postContainer.querySelectorAll(".post-options");
+    //   btnOptions.forEach((btn) => {
+    //     btn.addEventListener("change", async(e) => {
+    //       if (btn.value === "Eliminar" ) {
+    //         try {
+    //           await deletePost(e.target.dataset.id);
+    //         } catch (error) {
+    //           alert(error);
+    //       }
+    //       }else if (btn.value === "Editar" ){
+    //         console.log("chevre")
+    //       }
+    //     });
+    //   });
+
+    // btnOptions.forEach((btn) => {
+    //   btn.addEventListener("change", async (e) => {
+    //     if (btn.value === "Editar" && e.target.id == userId) {
+    //       // window.location.hash= '#/post'
+    //     }
+
+    // try {
+    //   const doc = await getEditPost(e.target.dataset.id);
+    //   const post = doc.data();
+    //   postForm['post-title'].value = post.title;
+    //   postForm['post-description'].value = post.description;
+
+    //   // El estado del post es true porque ya lo vamos a editar
+    //   editPostStatus = true;
+    //   id = doc.id;
+    //   postForm['btn-post-form'].innerText = 'Actualizar';
+    // } catch (error) {
+    // }
+    //   });
+    // });
   });
 
   return divElement;
