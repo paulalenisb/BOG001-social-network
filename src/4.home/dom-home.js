@@ -1,10 +1,10 @@
 import view from "./home.html";
 import "./estilos-home.scss";
 import "../firebase-functions/firebaseConfig";
-import { onGetPosts, deletePost, savePost } from "../firebase-functions/firebaseStore";
 import * as firebase from "firebase";
+import { onGetPosts, deletePost, savePost } from "../firebase-functions/firebaseStore";
 import { auth } from "../firebase-functions/firebaseConfig";
-
+import { headerTemplate, footerTemplate} from "../header-footer/header-footer";
 // const userId = auth.currentUser.uid
 
 export default () => {
@@ -179,6 +179,9 @@ export default () => {
       // });
 
   });
+
+  divElement.insertAdjacentElement('afterbegin', headerTemplate());
+  divElement.insertAdjacentElement('beforeend', footerTemplate());
 
   return divElement;
 };
