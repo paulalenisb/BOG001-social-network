@@ -1,7 +1,7 @@
 import view from './profile.html';
 import { exit } from '../firebase-functions/firebaseAuth';
 import './estilos-profile.scss';
-import { headerTemplate, footerTemplate} from "../header/header-footer";
+import { headerTemplate, footerTemplate} from '../header-footer/header-footer';
 
 export default () => {
   const divElement = document.createElement('div');

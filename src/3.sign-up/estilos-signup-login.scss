@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
-/* .menu {display:none} */
+
 // Variables
 $dark-blue: #111319;
 $medium-blue: #1D212B;
@@ -39,8 +39,6 @@ $font-lato: 'Lato', sans-serif;
 }
 
 .logo {
-    background: url(../images/Logo_Leratto.png) center no-repeat;
-    background-size: cover;
     width: 150px;
     height: 150px;
     margin: auto;

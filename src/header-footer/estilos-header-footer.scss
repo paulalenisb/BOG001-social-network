@@ -12,7 +12,7 @@ $font-lato: 'Lato', sans-serif;
 .center {
     display: flex;
     align-items: center;
-    justify-content: center;
+	justify-content: center;
 }
 
 // Header
@@ -130,6 +130,7 @@ footer{
 		padding: 0;
 		margin: 5px 0;
 		height: 60px;
+		li {margin: 0 20px;}
 		p {
 			margin: 0; 
 			text-align: center;
@@ -139,9 +140,23 @@ footer{
 			width: 40px;
 			height: auto;
 		}
-		li {margin: 0 20px;}
-    } 
-    
+	} 
+
+	.btn {
+		fill: none;
+		stroke: $white;
+		stroke-width: 3px;
+		width: 38px;
+		height: auto;
+	}
+
+	.active {
+		fill: $yellow;
+		stroke: none;
+		width: 38px;
+		height: auto;
+	}
+
     // Foooter
     footer {
 		display: flex;
@@ -162,4 +177,18 @@ footer{
 			p {font-size: 16px;}
 		}
     }
+}
+
+.btn {
+	border: none;
+	outline: none;
+	/* padding: 10px 16px; */
+	background-color: transparent;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+.active {
+	background-color: transparent;
+	color: red;
 }

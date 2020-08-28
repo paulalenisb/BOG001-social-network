@@ -4,7 +4,7 @@ import '../firebase-functions/firebaseConfig';
 import firebase from 'firebase';
 import {auth} from '../firebase-functions/firebaseConfig'
 import { savePost, uploadImgFood } from '../firebase-functions/firebaseStore';
-import { headerTemplate, footerTemplate} from "../header/header-footer";
+import { headerTemplate, footerTemplate} from '../header-footer/header-footer';
 
 export default () => {
   const divElement = document.createElement('div');
