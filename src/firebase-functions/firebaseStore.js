@@ -15,7 +15,7 @@ export const createUserProfile = async () => {
 export const updateUserInfo = async user => db.collection('users').doc(user.id).update(user);
 
 // Creamos el post en firebase con su colecciones y el objeto del doc
-export const savePost = ( uid, name, userPhoto, title, description, typeOfFood, price, quality, location, foodPhoto, date) => db.collection('review').doc().set({
+export const savePost = ( uid, name, userPhoto, title, description, typeOfFood, price, quality, location, foodPhoto, date,likes) => db.collection('review').doc().set({
   uid,
   name,
   userPhoto,
@@ -26,7 +26,8 @@ export const savePost = ( uid, name, userPhoto, title, description, typeOfFood, 
   quality,
   location,
   foodPhoto,
-  date: firebase.firestore.Timestamp.now()
+  date: firebase.firestore.Timestamp.now(),
+  likes,
 });
 
 

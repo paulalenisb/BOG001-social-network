@@ -90,7 +90,7 @@ getValuesToEdit(postStorageEditing)
   userPhotoDom.src = userProfile(
     userPhotoURL
   ); /* userProfile(userPhotoURL) */ /* 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg' */
- 
+  let likes= 0;
   postForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -99,7 +99,7 @@ getValuesToEdit(postStorageEditing)
   const urlImgFoodJson = JSON.stringify(urlFood)
   console.log(urlImgFoodJson)
 
-    let likes = 0;
+    
 
     try {
       // Si no se esta editando el post, realiza la promesa
