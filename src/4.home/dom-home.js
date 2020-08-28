@@ -1,13 +1,10 @@
 import view from "./home.html";
 import "./estilos-home.scss";
 import "../firebase-functions/firebaseConfig";
-import { onGetPosts, deletePost, savePost } from "../firebase-functions/firebaseStore";
-import * as firebase from "firebase";
+import { onGetPosts, deletePost, getEditPost } from "../firebase-functions/firebaseStore";
 import { auth } from "../firebase-functions/firebaseConfig";
 
-// const userId = auth.currentUser.uid
 
-const db = firebase.firestore();
 export default () => {
   const divElement = document.createElement("div");
   divElement.innerHTML = view;
@@ -20,12 +17,12 @@ export default () => {
   onGetPosts(async (querySnapshot) => {
 
     postContainer.innerHTML = "";
-    let selectOptions = "";
     const userId = auth.currentUser.uid;
-
+   
     // Con querySnapshot recorremos los objetos que hemos creado en docs
     querySnapshot.forEach((doc) => {
       const post = doc.data();
+      
 
       /* ------ Impresión Calidad -------*/
       if (post.quality === "1") {
@@ -138,6 +135,7 @@ export default () => {
           e.target.textContent = ++count;
         });
       });
+    
 
       /* ------ Eliminar/Borrar post -------*/
       const btnOptions = postContainer.querySelectorAll(".post-options");
@@ -150,31 +148,16 @@ export default () => {
               alert(error);
           }
           }else if (btn.value === "Editar" ){
-            console.log("chevre")
+            const doc =  await getEditPost(e.target.dataset.id);
+            const post = doc.data();
+            localStorage.setItem('docID', JSON.stringify(post))
+            localStorage.setItem('id', doc.id)
+            window.location.hash = "#/post";
+        
           }
         });
       });
 
-      // btnOptions.forEach((btn) => {
-      //   btn.addEventListener("change", async (e) => {
-      //     if (btn.value === "Editar" && e.target.id == userId) {
-      //       // window.location.hash= '#/post'
-      //     }
-
-      // try {
-      //   const doc = await getEditPost(e.target.dataset.id);
-      //   const post = doc.data();
-      //   postForm['post-title'].value = post.title;
-      //   postForm['post-description'].value = post.description;
-
-      //   // El estado del post es true porque ya lo vamos a editar
-      //   editPostStatus = true;
-      //   id = doc.id;
-      //   postForm['btn-post-form'].innerText = 'Actualizar';
-      // } catch (error) {
-      // }
-      //   });
-      // });
 
   });
 

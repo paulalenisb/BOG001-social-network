@@ -89,7 +89,13 @@ body {
 		color: #fff;
     }
 }
+.post-recommendation{
+	display:none;
+}
 
+.hide{
+	display:none;
+}
 // Form
 #post-form {
 	@extend .center;
@@ -253,6 +259,10 @@ footer{
 		background-color: $medium-blue;
 	}
 
+	.post-recommendation{
+		display:block;
+	}
+
 	#nav-desktop ul{
 		display: flex;
 		flex-direction: row;
@@ -363,3 +373,4 @@ footer{
 	position:absolute;
 	z-index:-1;
 }
+

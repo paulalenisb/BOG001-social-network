@@ -42,6 +42,7 @@ export const onGetPosts = callback => db.collection('review').orderBy('date', 'd
 export const deletePost = id => db.collection('review').doc(id).delete();
 
 // Editar el post con su respectivo id
+// Obtener el post segun el id(documento segun id que se le asigna)
 export const getEditPost = id => db.collection('review').doc(id).get();
 
 // Actualizar la tarea, con los datos del id que me esta pasando la const
@@ -56,7 +57,7 @@ export const uploadImgFood = (file, uid) => {
     'state_changed',
     snapshot => {
       const porcentaje = snapshot.bytesTransferred / snapshot.totalBytes * 100
-      console.log(porcentaje)
+      localStorage.setItem('uploadImage', porcentaje)
     },
     err => {
       console.log(err)
