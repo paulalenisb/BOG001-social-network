@@ -1,8 +1,11 @@
 import view from "./home.html";
 import "./estilos-home.scss";
 import "../firebase-functions/firebaseConfig";
+import * as firebase from "firebase";
 import { db, onGetPosts, deletePost, getEditPost,updatePost } from "../firebase-functions/firebaseStore";
 import { auth } from "../firebase-functions/firebaseConfig";
+import { headerTemplate, footerTemplate} from "../header-footer/header-footer";
+// const userId = auth.currentUser.uid;
 
 export default () => {
   const divElement = document.createElement("div");
@@ -82,17 +85,28 @@ export default () => {
         `;
       }
 
-      /* ------ Mostrar los post -------*/
+      /* ------ Literal post -------*/
       postContainer.innerHTML += `
-        <div class="post-container">
+      <div class="post-container">
         <img src="${post.foodPhoto}" class="post-food-photo-web"/>
+
         <div class="post-allinfo">
-        <div class="post-container-info" id="post-main-info">
-          <div class="post-container-info-main">
-            <h3 class="post-title">${post.title}</h3>
-            <div class="post-location">
-              <i class="fas fa-map-marker-alt"></i>
-              <p class="post-location-info">${post.location}</p> 
+          <div class="post-container-info" id="post-main-info">
+            <div class="post-container-info-main">
+              <h3 class="post-title">${post.title}</h3>
+              <div class="post-location">
+                <i class="fas fa-map-marker-alt"></i>
+                <p class="post-location-info">${post.location}</p> 
+              </div>
+            </div>
+            <div class="post-container-food">
+              <p class="post-type-food">${post.typeOfFood}</p>
+            </div>
+            <div class="post-container-price">
+              <p class="post-price">${post.price}</p>
+            </div>
+            <div class="post-container-quality">
+              <p class="post-quality">${post.quality}</p>
             </div>
           </div>
           <div class="post-container-food">
@@ -117,11 +131,11 @@ export default () => {
             <p class="post-container-likes-icon"></p>
             <i type="button" class="far fa-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
           </div>
-        </div>
+
           <p class="post-description">${post.description}</p>
-        ${selectOptions} 
-      </div>
-      </div>
+
+          ${selectOptions} 
+        </div>
       </div>`;
   });
 
@@ -209,14 +223,11 @@ export default () => {
   homeAddEvent();
   })
 
-  
+  divElement.insertAdjacentElement('afterbegin', headerTemplate());
+  divElement.insertAdjacentElement('beforeend', footerTemplate());
+
   return divElement;
 };
-
-      
-
-
-
 
 /* ------ Likes -------*/
 // const btnLike = postContainer.querySelectorAll(".fa-heart");
@@ -226,26 +237,5 @@ export default () => {
 //     let count = 0;
 //     e.target.classList.toggle("fill-heart");
 //     e.target.textContent = ++count;
-//   });
-// });
-
-// btnOptions.forEach((btn) => {
-//   btn.addEventListener("change", async (e) => {
-//     if (btn.value === "Editar" && e.target.id == userId) {
-//       // window.location.hash= '#/post'
-//     }
-
-// try {
-//   const doc = await getEditPost(e.target.dataset.id);
-//   const post = doc.data();
-//   postForm['post-title'].value = post.title;
-//   postForm['post-description'].value = post.description;
-
-//   // El estado del post es true porque ya lo vamos a editar
-//   editPostStatus = true;
-//   id = doc.id;
-//   postForm['btn-post-form'].innerText = 'Actualizar';
-// } catch (error) {
-// }
 //   });
 // });

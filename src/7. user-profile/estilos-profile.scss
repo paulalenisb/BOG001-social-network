@@ -1,6 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile {
+  @extend .center;
+  margin-top: 80px;
+  flex-direction: column;
+}
+
 .profile-picture{
     img{
-      width: 70px;  
+      width: 80px;  
       height: auto;
     }
 }

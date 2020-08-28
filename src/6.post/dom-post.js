@@ -1,9 +1,10 @@
-import view from "./post.html";
-import "./estilos-post.scss";
-import "../firebase-functions/firebaseConfig";
-import firebase from "firebase";
-import { auth } from "../firebase-functions/firebaseConfig";
-import { savePost, uploadImgFood, updatePost,} from "../firebase-functions/firebaseStore";
+import view from './post.html';
+import './estilos-post.scss';
+import '../firebase-functions/firebaseConfig';
+import firebase from 'firebase';
+import {auth} from '../firebase-functions/firebaseConfig'
+import { savePost, uploadImgFood, updatePost,} from '../firebase-functions/firebaseStore';
+import { headerTemplate, footerTemplate} from '../header-footer/header-footer';
 
 export default () => {
   const divElement = document.createElement("div");
@@ -145,6 +146,9 @@ getValuesToEdit(postStorageEditing)
       alert(error);
     }
   });
+
+  divElement.insertAdjacentElement('afterbegin', headerTemplate());
+  divElement.insertAdjacentElement('beforeend', footerTemplate());
 
   return divElement;
 };
