@@ -2,10 +2,10 @@ import view from "./home.html";
 import "./estilos-home.scss";
 import "../firebase-functions/firebaseConfig";
 import * as firebase from "firebase";
-import { onGetPosts, deletePost, savePost } from "../firebase-functions/firebaseStore";
+import { db, onGetPosts, deletePost, getEditPost,updatePost } from "../firebase-functions/firebaseStore";
 import { auth } from "../firebase-functions/firebaseConfig";
 import { headerTemplate, footerTemplate} from "../header-footer/header-footer";
-// const userId = auth.currentUser.uid
+// const userId = auth.currentUser.uid;
 
 export default () => {
   const divElement = document.createElement("div");
@@ -17,13 +17,13 @@ export default () => {
   // Cuando la ventana cargue, traer el contenido del DOM, se ejecuta el evento de getEditPosts
 
   onGetPosts(async (querySnapshot) => {
-
     postContainer.innerHTML = "";
     const userId = auth.currentUser.uid;
-
+   
     // Con querySnapshot recorremos los objetos que hemos creado en docs
     querySnapshot.forEach((doc) => {
       const post = doc.data();
+      
 
       /* ------ Impresión Calidad -------*/
       if (post.quality === "1") {
@@ -35,7 +35,7 @@ export default () => {
       if (post.quality === "3") {
         post.quality = "★★★";
       }
-      
+
       /* ------ Impresión Precio -------*/
       if (post.price === "1") {
         post.price = "$ 0 - 20k";
@@ -70,7 +70,7 @@ export default () => {
         if (userPhotoURL) {
           return userPhotoURL;
         }
-        return 'src/images/userDefault.png';
+        return "src/images/userDefault.png";
       };
 
       /* ------ Literal Select Eliminar/Borrar post -------*/
@@ -79,8 +79,8 @@ export default () => {
         selectOptions = `
         <select name="options" id="${post.uid}" data-id="${doc.id}"class="post-options">
           <option value="" class="post-options-main">...</option>
-          <option value="Editar"  class="post-options-edit" id="${post.uid}" data-id="${doc.id}">Editar</option>
-          <option value="Eliminar" class="post-options-delete" id="delete${post.uid}" data-id="${doc.id}">Eliminar</option>
+          <option value="Editar"  class="post-options-edit" id="${post.uid}" data-id="${doc.id}" onclick>Editar</option>
+          <option value="Eliminar" class="post-options-delete">Eliminar</option>
         </select>  
         `;
       }
@@ -109,18 +109,27 @@ export default () => {
               <p class="post-quality">${post.quality}</p>
             </div>
           </div>
-
-          <img src="${post.foodPhoto}" class="post-food-photo-mobile"/>
-
-          <div class="post-user-info">
-            <div class="post-user-data">
-              <img src="${userProfile(post.userPhoto)}" class="post-user-data-photo"/>
-              <h3 class="post-user-data-name">${post.name} </h3>
-            </div>
-            <div class="post-container-likes">
-              <p class="post-container-likes-icon"></p>
-              <i type="button" id="btn-like" class="far fa-heart"></i>
-            </div>
+          <div class="post-container-food">
+            <p class="post-type-food">${post.typeOfFood}</p>
+          </div>
+          <div class="post-container-price">
+            <p class="post-price">${post.price}</p>
+          </div>
+          <div class="post-container-quality">
+            <p class="post-quality">${post.quality}</p>
+          </div>
+        </div>
+        <img src="${post.foodPhoto}" class="post-food-photo-mobile"/>
+        <div class="post-user-info">
+          <div class="post-user-data">
+            <img src="${userProfile(
+              post.userPhoto
+            )}" class="post-user-data-photo"/>
+            <h3 class="post-user-data-name">${post.name} </h3>
+          </div>
+          <div class="post-container-likes">
+            <p class="post-container-likes-icon"></p>
+            <i type="button" class="far fa-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
           </div>
 
           <p class="post-description">${post.description}</p>
@@ -128,60 +137,105 @@ export default () => {
           ${selectOptions} 
         </div>
       </div>`;
-    });
-
-      /* ------ Likes -------*/
-      const btnLike = postContainer.querySelectorAll(".fa-heart");
-
-      btnLike.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          let count = 0;
-          e.target.classList.toggle("fill-heart");
-          e.target.textContent = ++count;
-        });
-      });
-
-      /* ------ Eliminar/Borrar post -------*/
-      const btnOptions = postContainer.querySelectorAll(".post-options");
-      btnOptions.forEach((btn) => {
-        btn.addEventListener("change", async(e) => {
-          if (btn.value === "Eliminar" ) {
-            try {
-              await deletePost(e.target.dataset.id);
-            } catch (error) {
-              alert(error);
-          }
-          }else if (btn.value === "Editar" ){
-            console.log("chevre")
-          }
-        });
-      });
-
-      // btnOptions.forEach((btn) => {
-      //   btn.addEventListener("change", async (e) => {
-      //     if (btn.value === "Editar" && e.target.id == userId) {
-      //       // window.location.hash= '#/post'
-      //     }
-
-      // try {
-      //   const doc = await getEditPost(e.target.dataset.id);
-      //   const post = doc.data();
-      //   postForm['post-title'].value = post.title;
-      //   postForm['post-description'].value = post.description;
-
-      //   // El estado del post es true porque ya lo vamos a editar
-      //   editPostStatus = true;
-      //   id = doc.id;
-      //   postForm['btn-post-form'].innerText = 'Actualizar';
-      // } catch (error) {
-      // }
-      //   });
-      // });
-
   });
+
+
+    // const btnLike = postContainer.querySelectorAll(".fa-heart");
+
+    // btnLike.forEach((btn) => {
+    //     btn.addEventListener("click", (e) => {
+    //       let count = 0;
+    //       let idDoc= "";
+    //       e.target.classList.toggle("fill-heart");
+    //       e.target.textContent = ++count;
+
+    //       idDoc= e.target.dataset.id
+    //       updatePost(idDoc,{
+    //       likes:count
+    //       })
+
+    //     });
+    //   });
+
+  const homeAddEvent = () => {
+
+    /* ------ Eliminar/Borrar post -------*/
+    const btnOptions = divElement.querySelectorAll(".post-options");
+    const modalDeletePost = divElement.querySelector(".modal-delete");
+    console.log(btnOptions);
+  
+  
+    btnOptions.forEach((btn) => {
+      btn.addEventListener("change", async (e) => {
+        // console.log('Holi');
+        modalDeletePost.innerHTML = "";
+  
+        if (btn.value === "Eliminar") {
+          //Si es eliminar, crear modal
+          console.log("Aqui va el modal");
+          const dataId = e.target.dataset.id;
+          
+          // if (userId === post.uid) {
+
+            modalDeletePost.innerHTML = `
+            <div class="overlay">
+              <div class="modal">
+                <p class="modal-text"> ¿Eliminar publicación? </p>
+                  <div class="btn-modal-confirm-delete">
+                    <button class="btn-modal modal-delete">Eliminar</button>
+                    <button class="btn-modal modal-cancel">Cancelar</button>
+                  </div>
+              </div>
+            </div> `;
+  
+  
+          const btnModalDelete = modalDeletePost.querySelector('.modal-delete');
+            btnModalDelete.addEventListener("click",  async (e) => {
+              console.log(dataId);
+              try {
+                await deletePost(dataId);
+                
+                modalDeletePost.innerHTML= '';
+              } catch (error) {
+                alert(error);
+              }
+            });
+          
+          const btnModalCancel = modalDeletePost.querySelector(".modal-cancel");
+  
+          btnModalCancel.addEventListener('click', () => {
+            modalDeletePost.innerHTML= '';
+          });
+  
+  
+        }else if (btn.value === "Editar" ){
+            const doc =  await getEditPost(e.target.dataset.id);
+            const post = doc.data();
+            localStorage.setItem('docID', JSON.stringify(post))
+            localStorage.setItem('id', doc.id)
+            window.location.hash = "#/post";
+        }
+      });
+    });
+  
+  }
+  
+  homeAddEvent();
+  })
 
   divElement.insertAdjacentElement('afterbegin', headerTemplate());
   divElement.insertAdjacentElement('beforeend', footerTemplate());
 
   return divElement;
 };
+
+/* ------ Likes -------*/
+// const btnLike = postContainer.querySelectorAll(".fa-heart");
+
+// btnLike.forEach((btn) => {
+//   btn.addEventListener("click", (e) => {
+//     let count = 0;
+//     e.target.classList.toggle("fill-heart");
+//     e.target.textContent = ++count;
+//   });
+// });

@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
-.center {
+.filtro{
+    height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: flex-start;
 }
 
-.filtro {
-    @extend .center;
-    margin-top: 80px;
+.img-filter{
+    width: 80%;
+    max-width: 550px;
+    height: auto;
 }
