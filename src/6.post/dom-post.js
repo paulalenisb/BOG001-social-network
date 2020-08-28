@@ -60,6 +60,7 @@ const getValuesToEdit= (postStorageEditing) => {
     btnUploadFile.removeAttribute("required");
     image.classList.add("hide")
     editPostStatus = true;
+    uploadImage.classList.add("hide")
     
   } else {
     console.log("deli");
@@ -116,8 +117,8 @@ getValuesToEdit(postStorageEditing)
           quality.value,
           location.value,
           urlFood,
-          likes,
-          date
+          date,
+          likes
         );
       } //Si se edita el post
       else {

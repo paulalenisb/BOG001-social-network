@@ -124,21 +124,24 @@ export default () => {
       </div>
       </div>`;
   });
-    
-    btnLike.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          let count = 0;
-          let idDoc= "";
-          e.target.classList.toggle("fill-heart");
-          e.target.textContent = ++count;
 
-          idDoc= e.target.dataset.id
-          updatePost(idDoc,{
-             likes:count
-          })
 
-        });
-      });
+    // const btnLike = postContainer.querySelectorAll(".fa-heart");
+
+    // btnLike.forEach((btn) => {
+    //     btn.addEventListener("click", (e) => {
+    //       let count = 0;
+    //       let idDoc= "";
+    //       e.target.classList.toggle("fill-heart");
+    //       e.target.textContent = ++count;
+
+    //       idDoc= e.target.dataset.id
+    //       updatePost(idDoc,{
+    //       likes:count
+    //       })
+
+    //     });
+    //   });
 
   const homeAddEvent = () => {
 
@@ -149,7 +152,7 @@ export default () => {
   
   
     btnOptions.forEach((btn) => {
-      btn.addEventListener("change", (e) => {
+      btn.addEventListener("change", async (e) => {
         // console.log('Holi');
         modalDeletePost.innerHTML = "";
   
