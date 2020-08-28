@@ -142,20 +142,20 @@ footer{
 		}
 	} 
 
-	.btn {
+	/* .btn {
 		fill: none;
 		stroke: $white;
 		stroke-width: 3px;
-		width: 38px;
+		width: 40px;
 		height: auto;
 	}
 
 	.active {
 		fill: $yellow;
 		stroke: none;
-		width: 38px;
+		width: 45px;
 		height: auto;
-	}
+	} */
 
     // Foooter
     footer {
@@ -185,10 +185,28 @@ footer{
 	/* padding: 10px 16px; */
 	background-color: transparent;
 	cursor: pointer;
-	font-size: 18px;
+	margin: 0 20px;
+	p {
+		font-family: $font-lato;
+		margin: 2px 0;
+		color: $white;
+		font-size: 12px;
+	}
+}
+
+
+.btn {
+	fill: none;
+	stroke: $white;
+	stroke-width: 3px;
+	width: 40px;
+	height: auto;
 }
 
 .active {
+	fill: $yellow;
+	stroke: none;
+	width: 40px;
+	height: auto;
 	background-color: transparent;
-	color: red;
 }
