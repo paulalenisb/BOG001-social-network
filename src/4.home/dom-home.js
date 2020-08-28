@@ -1,8 +1,9 @@
 import view from "./home.html";
 import "./estilos-home.scss";
 import "../firebase-functions/firebaseConfig";
-import { onGetPosts, deletePost, getEditPost } from "../firebase-functions/firebaseStore";
+import { onGetPosts, deletePost, getEditPost,updatePost } from "../firebase-functions/firebaseStore";
 import { auth } from "../firebase-functions/firebaseConfig";
+
 
 
 export default () => {
@@ -115,7 +116,7 @@ export default () => {
           </div>
           <div class="post-container-likes">
             <p class="post-container-likes-icon"></p>
-            <i type="button" id="btn-like" class="far fa-heart"></i>
+            <i type="button" class="far fa-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
           </div>
         </div>
           <p class="post-description">${post.description}</p>
@@ -131,12 +132,18 @@ export default () => {
       btnLike.forEach((btn) => {
         btn.addEventListener("click", (e) => {
           let count = 0;
+          let idDoc= "";
           e.target.classList.toggle("fill-heart");
           e.target.textContent = ++count;
+
+          idDoc= e.target.dataset.id
+          updatePost(idDoc,{
+             likes:count
+          })
+
         });
       });
-    
-
+      
       /* ------ Eliminar/Borrar post -------*/
       const btnOptions = postContainer.querySelectorAll(".post-options");
       btnOptions.forEach((btn) => {
@@ -144,8 +151,10 @@ export default () => {
           if (btn.value === "Eliminar" ) {
             try {
               await deletePost(e.target.dataset.id);
+              
             } catch (error) {
               alert(error);
+            
           }
           }else if (btn.value === "Editar" ){
             const doc =  await getEditPost(e.target.dataset.id);
