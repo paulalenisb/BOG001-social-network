@@ -139,10 +139,10 @@ export default () => {
 
       btnOptions.forEach((btn) => {
         btn.addEventListener("change", () => {
+          console.log('Holi');
           modalDeletePost.innerHTML = "";
 
           if (btn.value === "Eliminar") {
-            // const post = doc.data();
             if (userId === post.uid) {
 
             modalDeletePost.innerHTML += `
@@ -168,9 +168,15 @@ export default () => {
                 }
               });
             
+            const btnModalCancel = modalDeletePost.querySelector(".modal-cancel");
 
-            }
-          } else if (btn.value === "Editar") {
+            btnModalCancel.addEventListener('click', () => {
+              modalDeletePost.style.display = 'none';
+            });
+
+            };
+
+          }else if (btn.value === "Editar") {
             console.log("chevre");
           }
         });
@@ -187,34 +193,6 @@ export default () => {
         e.target.textContent = ++count;
       });
     });
-
-    //   const btnDelete = postContainer.querySelectorAll('.btn-delete');
-
-    // btnDelete.forEach((btn) => {
-    //   btn.addEventListener('click', async (e) => {
-    //     try {
-    //       await deletePost(e.target.dataset.id);
-    //       // console.log(e.target.dataset.id)
-    //     } catch (error) {
-    //       alert(error);
-    //     }
-    //   });
-    // });
-
-    // const btnOptions = postContainer.querySelectorAll(".post-options");
-    //   btnOptions.forEach((btn) => {
-    //     btn.addEventListener("change", async(e) => {
-    //       if (btn.value === "Eliminar" ) {
-    //         try {
-    //           await deletePost(e.target.dataset.id);
-    //         } catch (error) {
-    //           alert(error);
-    //       }
-    //       }else if (btn.value === "Editar" ){
-    //         console.log("chevre")
-    //       }
-    //     });
-    //   });
 
     // btnOptions.forEach((btn) => {
     //   btn.addEventListener("change", async (e) => {

@@ -6,5 +6,10 @@ export default () => {
   const divElement = document.createElement('div');
   divElement.innerHTML = view;
 
+  const noFoundBtn = divElement.querySelector('.btn-no-found');
+  noFoundBtn.addEventListener('click', () => {
+    window.location.hash = '#/home';
+  })
+
   return divElement;
 };
