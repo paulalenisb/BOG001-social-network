@@ -132,89 +132,104 @@ export default () => {
       </div>
       </div>
       </div>`;
+  });
 
-      /* ------ Eliminar/Borrar post -------*/
-      const btnOptions = postContainer.querySelectorAll(".post-options");
-      const modalDeletePost = divElement.querySelector(".modal-delete");
+  const homeAddEvent = () => {
 
-      btnOptions.forEach((btn) => {
-        btn.addEventListener("change", () => {
-          console.log('Holi');
-          modalDeletePost.innerHTML = "";
+    /* ------ Eliminar/Borrar post -------*/
+    const btnOptions = divElement.querySelectorAll(".post-options");
+    const modalDeletePost = divElement.querySelector(".modal-delete");
+    console.log(btnOptions);
+  
+  
+    btnOptions.forEach((btn) => {
+      btn.addEventListener("change", (e) => {
+        // console.log('Holi');
+        modalDeletePost.innerHTML = "";
+  
+        if (btn.value === "Eliminar") {
+          //Si es eliminar, crear modal
+          console.log("Aqui va el modal");
+          const dataId = e.target.dataset.id;
+          
+          // if (userId === post.uid) {
 
-          if (btn.value === "Eliminar") {
-            if (userId === post.uid) {
-
-            modalDeletePost.innerHTML += `
+            modalDeletePost.innerHTML = `
             <div class="overlay">
               <div class="modal">
                 <p class="modal-text"> ¿Eliminar publicación? </p>
                   <div class="btn-modal-confirm-delete">
-                    <button class="btn-modal modal-delete" id="delete${post.uid}" data-id="${doc.id}">Eliminar</button>
+                    <button class="btn-modal modal-delete">Eliminar</button>
                     <button class="btn-modal modal-cancel">Cancelar</button>
                   </div>
               </div>
             </div> `;
-
-            const btnModalDelete = modalDeletePost.querySelector(
-              ".modal-delete"
-            );
-              btnModalDelete.addEventListener("click",  async(e) => {
-                try {
-                  await deletePost(e.target.dataset.id);
-                  modalDeletePost.style.display = 'none';
-                } catch (error) {
-                  alert(error);
-                }
-              });
-            
-            const btnModalCancel = modalDeletePost.querySelector(".modal-cancel");
-
-            btnModalCancel.addEventListener('click', () => {
-              modalDeletePost.style.display = 'none';
+  
+  
+          const btnModalDelete = modalDeletePost.querySelector('.modal-delete');
+            btnModalDelete.addEventListener("click",  async (e) => {
+              console.log(dataId);
+              try {
+                await deletePost(dataId);
+                
+                modalDeletePost.innerHTML= '';
+              } catch (error) {
+                alert(error);
+              }
             });
-
-            };
-
-          }else if (btn.value === "Editar") {
-            console.log("chevre");
-          }
-        });
+          
+          const btnModalCancel = modalDeletePost.querySelector(".modal-cancel");
+  
+          btnModalCancel.addEventListener('click', () => {
+            modalDeletePost.innerHTML= '';
+          });
+  
+  
+        }else if (btn.value === "Editar") {
+          console.log("chevre");
+        }
       });
     });
+  
+  }
+  
+  homeAddEvent();
+  })
 
-    /* ------ Likes -------*/
-    const btnLike = postContainer.querySelectorAll(".fa-heart");
-
-    btnLike.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        let count = 0;
-        e.target.classList.toggle("fill-heart");
-        e.target.textContent = ++count;
-      });
-    });
-
-    // btnOptions.forEach((btn) => {
-    //   btn.addEventListener("change", async (e) => {
-    //     if (btn.value === "Editar" && e.target.id == userId) {
-    //       // window.location.hash= '#/post'
-    //     }
-
-    // try {
-    //   const doc = await getEditPost(e.target.dataset.id);
-    //   const post = doc.data();
-    //   postForm['post-title'].value = post.title;
-    //   postForm['post-description'].value = post.description;
-
-    //   // El estado del post es true porque ya lo vamos a editar
-    //   editPostStatus = true;
-    //   id = doc.id;
-    //   postForm['btn-post-form'].innerText = 'Actualizar';
-    // } catch (error) {
-    // }
-    //   });
-    // });
-  });
-
+  
   return divElement;
 };
+
+
+
+/* ------ Likes -------*/
+// const btnLike = postContainer.querySelectorAll(".fa-heart");
+
+// btnLike.forEach((btn) => {
+//   btn.addEventListener("click", (e) => {
+//     let count = 0;
+//     e.target.classList.toggle("fill-heart");
+//     e.target.textContent = ++count;
+//   });
+// });
+
+// btnOptions.forEach((btn) => {
+//   btn.addEventListener("change", async (e) => {
+//     if (btn.value === "Editar" && e.target.id == userId) {
+//       // window.location.hash= '#/post'
+//     }
+
+// try {
+//   const doc = await getEditPost(e.target.dataset.id);
+//   const post = doc.data();
+//   postForm['post-title'].value = post.title;
+//   postForm['post-description'].value = post.description;
+
+//   // El estado del post es true porque ya lo vamos a editar
+//   editPostStatus = true;
+//   id = doc.id;
+//   postForm['btn-post-form'].innerText = 'Actualizar';
+// } catch (error) {
+// }
+//   });
+// });
