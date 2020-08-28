@@ -43,7 +43,7 @@
 
   <form id="post-form">
     <div class="post-form-title">
-      <h2>Crea tu recomendación</h2>
+      <h2 id="post-form-title-main">Crea tu recomendación</h2>
     </div>
 
     <!-- Info -->
@@ -56,19 +56,26 @@
 
       <!-- Title -->
       <div class="post-form-title-container form-group-post">
-        <h2>Crea tu recomendación</h2>
+        <h2 id="post-recommendation" class="post-recommendation">Crea tu recomendación</h2>
       </div>
 
       <!-- Title post -->
       <div class="form-group-post">
 
-          <label for="btn-upload-file">
+          <label for="btn-upload-file" id="post-image">
             <i class="fas fa-image"></i>
           <input required type="file" value="upload" id="btn-upload-file" class="btn-upload-file" />
+          <!-- <img  alt="" id="post-image"> -->
           </label>
         <input  type="text" id="post-title" class="form-control" class="Task Title" placeholder="Restaurante" required>
       </div>
-
+      <!-- <p style="width:60%" data-value="60">CSS3</p> -->
+		  <progress max="100" value="0" class="css3" id="upload-image" placeholder=deli> </progress>
+      
+      <!-- <div class="form-group-post">
+        <progress value="0" max="100" style="width: 100%" id="upload-image"></progress>
+      </div> -->
+      
       <!-- Description post -->
       <div class="form-group-post">
         <textarea required id="post-description"  class="form-control" placeholder="Antoja a todos con tu experiencia gastronómica"></textarea>

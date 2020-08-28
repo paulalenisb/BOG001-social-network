@@ -1,18 +1,9 @@
 import view from "./home.html";
 import "./estilos-home.scss";
 import "../firebase-functions/firebaseConfig";
-import {
-  db,
-  onGetPosts,
-  deletePost,
-  savePost,
-} from "../firebase-functions/firebaseStore";
-import * as firebase from "firebase";
+import { db, onGetPosts, deletePost, getEditPost,updatePost } from "../firebase-functions/firebaseStore";
 import { auth } from "../firebase-functions/firebaseConfig";
 
-// const userId = auth.currentUser.uid
-
-// const db = firebase.firestore();
 export default () => {
   const divElement = document.createElement("div");
   divElement.innerHTML = view;
@@ -24,12 +15,12 @@ export default () => {
 
   onGetPosts(async (querySnapshot) => {
     postContainer.innerHTML = "";
-    let selectOptions = "";
     const userId = auth.currentUser.uid;
-
+   
     // Con querySnapshot recorremos los objetos que hemos creado en docs
     querySnapshot.forEach((doc) => {
       const post = doc.data();
+      
 
       /* ------ Impresión Calidad -------*/
       if (post.quality === "1") {
@@ -124,7 +115,7 @@ export default () => {
           </div>
           <div class="post-container-likes">
             <p class="post-container-likes-icon"></p>
-            <i type="button" id="btn-like" class="far fa-heart"></i>
+            <i type="button" class="far fa-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
           </div>
         </div>
           <p class="post-description">${post.description}</p>
@@ -133,6 +124,21 @@ export default () => {
       </div>
       </div>`;
   });
+    
+    btnLike.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          let count = 0;
+          let idDoc= "";
+          e.target.classList.toggle("fill-heart");
+          e.target.textContent = ++count;
+
+          idDoc= e.target.dataset.id
+          updatePost(idDoc,{
+             likes:count
+          })
+
+        });
+      });
 
   const homeAddEvent = () => {
 
@@ -185,8 +191,12 @@ export default () => {
           });
   
   
-        }else if (btn.value === "Editar") {
-          console.log("chevre");
+        }else if (btn.value === "Editar" ){
+            const doc =  await getEditPost(e.target.dataset.id);
+            const post = doc.data();
+            localStorage.setItem('docID', JSON.stringify(post))
+            localStorage.setItem('id', doc.id)
+            window.location.hash = "#/post";
         }
       });
     });
@@ -199,6 +209,9 @@ export default () => {
   
   return divElement;
 };
+
+      
+
 
 
 
