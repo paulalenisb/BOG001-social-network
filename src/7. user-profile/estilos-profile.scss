@@ -10,11 +10,13 @@
   @extend .center;
   margin-top: 80px;
   flex-direction: column;
+  h2 {margin-bottom: 35px;}
 }
 
 .profile-picture{
     img{
-      width: 80px;  
+      width: 120px;  
       height: auto;
+      border-radius: 50%;
     }
 }

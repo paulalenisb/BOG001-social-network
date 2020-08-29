@@ -19,7 +19,7 @@ export default () => {
   onGetPosts(async (querySnapshot) => {
     postContainer.innerHTML = "";
     const userId = auth.currentUser.uid;
-   
+
     // Con querySnapshot recorremos los objetos que hemos creado en docs
     querySnapshot.forEach((doc) => {
       const post = doc.data();
@@ -89,24 +89,13 @@ export default () => {
       postContainer.innerHTML += `
       <div class="post-container">
         <img src="${post.foodPhoto}" class="post-food-photo-web"/>
-
         <div class="post-allinfo">
-          <div class="post-container-info" id="post-main-info">
-            <div class="post-container-info-main">
-              <h3 class="post-title">${post.title}</h3>
-              <div class="post-location">
-                <i class="fas fa-map-marker-alt"></i>
-                <p class="post-location-info">${post.location}</p> 
-              </div>
-            </div>
-            <div class="post-container-food">
-              <p class="post-type-food">${post.typeOfFood}</p>
-            </div>
-            <div class="post-container-price">
-              <p class="post-price">${post.price}</p>
-            </div>
-            <div class="post-container-quality">
-              <p class="post-quality">${post.quality}</p>
+        <div class="post-container-info" id="post-main-info">
+          <div class="post-container-info-main">
+            <h3 class="post-title">${post.title}</h3>
+            <div class="post-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <p class="post-location-info">${post.location}</p> 
             </div>
           </div>
           <div class="post-container-food">
@@ -131,11 +120,11 @@ export default () => {
             <p class="post-container-likes-icon"></p>
             <i type="button" class="far fa-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
           </div>
-
-          <p class="post-description">${post.description}</p>
-
-          ${selectOptions} 
         </div>
+          <p class="post-description">${post.description}</p>
+        ${selectOptions} 
+      </div>
+      </div>
       </div>`;
   });
 
