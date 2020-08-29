@@ -23,7 +23,7 @@ export default () => {
     // Con querySnapshot recorremos los objetos que hemos creado en docs
     querySnapshot.forEach((doc) => {
       const post = doc.data();
-      
+
 
       /* ------ Impresión Calidad -------*/
       if (post.quality === "1") {
@@ -88,7 +88,8 @@ export default () => {
       /* ------ Literal post -------*/
       postContainer.innerHTML += `
       <div class="post-container">
-        <img src="${post.foodPhoto}" class="post-food-photo-web"/>
+      <div class="post-food-photo-web" style= "background-image:url('${post.foodPhoto}')"></div>
+        <!--<img src="${post.foodPhoto}"/>-->
         <div class="post-allinfo">
         <div class="post-container-info" id="post-main-info">
           <div class="post-container-info-main">
@@ -108,7 +109,7 @@ export default () => {
             <p class="post-quality">${post.quality}</p>
           </div>
         </div>
-        <img src="${post.foodPhoto}" class="post-food-photo-mobile"/>
+        <div class="post-food-photo-mobile" style= "background-image:url('${post.foodPhoto}')"></div>
         <div class="post-user-info">
           <div class="post-user-data">
             <img src="${userProfile(
@@ -152,8 +153,7 @@ export default () => {
     const btnOptions = divElement.querySelectorAll(".post-options");
     const modalDeletePost = divElement.querySelector(".modal-delete");
     console.log(btnOptions);
-  
-  
+
     btnOptions.forEach((btn) => {
       btn.addEventListener("change", async (e) => {
         // console.log('Holi');
@@ -163,7 +163,7 @@ export default () => {
           //Si es eliminar, crear modal
           console.log("Aqui va el modal");
           const dataId = e.target.dataset.id;
-          
+
           // if (userId === post.uid) {
 
             modalDeletePost.innerHTML = `

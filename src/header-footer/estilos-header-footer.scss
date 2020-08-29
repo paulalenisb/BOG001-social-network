@@ -15,6 +15,23 @@ $font-lato: 'Lato', sans-serif;
 	justify-content: center;
 }
 
+// Nav active
+.btn {
+	fill: none;
+	stroke: $white;
+	stroke-width: 3px;
+	width: 40px;
+	height: auto;
+}
+
+.active {
+	fill: $yellow;
+	stroke: none;
+	width: 40px;
+	height: auto;
+	background-color: transparent;
+}
+
 // Header
 header {
     @extend .center;
@@ -102,13 +119,8 @@ footer{
 			text-align: center;
 			font-size: 13px;
 		}
-		img {
-			width: 40px;
-			height: auto;
-		}
 	} 
 }
-
 /*--------- ESTILOS DESKTOP ---------*/
 @media screen and (min-width: 1024px) {	
 	// Header
@@ -177,36 +189,4 @@ footer{
 			p {font-size: 16px;}
 		}
     }
-}
-
-.btn {
-	border: none;
-	outline: none;
-	/* padding: 10px 16px; */
-	background-color: transparent;
-	cursor: pointer;
-	margin: 0 20px;
-	p {
-		font-family: $font-lato;
-		margin: 2px 0;
-		color: $white;
-		font-size: 12px;
-	}
-}
-
-
-.btn {
-	fill: none;
-	stroke: $white;
-	stroke-width: 3px;
-	width: 40px;
-	height: auto;
-}
-
-.active {
-	fill: $yellow;
-	stroke: none;
-	width: 40px;
-	height: auto;
-	background-color: transparent;
 }

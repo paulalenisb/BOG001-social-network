@@ -9,6 +9,7 @@ $yellow: #FDBF04;
 $white: #f4f4f4;
 $font-lato: 'Lato', sans-serif;
 
+// Estilos generales
 .home {
     height: 100vh;
 	display: flex;
@@ -16,17 +17,24 @@ $font-lato: 'Lato', sans-serif;
     align-items: center;
 }
 
+button {
+    font-family: $font-lato;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+//  Posts
 .container{
     margin-top: 80px;
     margin-bottom: 80px;
 }
 
-.post-container{
+.post-container{ //Cada post
     background-color: $medium-blue;
     color: $white;
     margin: 10px;
-    height:345px;
     width: 330px;
+    height:395px;
     box-sizing: border-box;
     border-radius: 20px;
 }
@@ -64,17 +72,15 @@ $font-lato: 'Lato', sans-serif;
     
 }
 
-.post-price{
-    color:$yellow
-}
-
-.post-quality{
+.post-price, .post-quality{
     color:$yellow
 }
 
 .post-food-photo-mobile{
     width: 330px;
-    height:150px;
+    height:200px;
+    background-size: cover;
+    background-position: center;
 }
 
 .post-food-photo-web{
@@ -87,6 +93,7 @@ $font-lato: 'Lato', sans-serif;
     align-items: center;
     margin-right: 10px;
 }
+
 .post-user-data{
     display:flex;
     align-items: center;
@@ -118,6 +125,12 @@ $font-lato: 'Lato', sans-serif;
     letter-spacing: 0.5em;
 }
 
+.fill-heart{
+    font-weight: bold;
+    color:$yellow;
+    transition:0.4s
+}
+
 .post-description{
     margin:0px auto;
     margin-left:10px;
@@ -134,7 +147,7 @@ $font-lato: 'Lato', sans-serif;
     margin-top:-10px;
     color:$yellow;
     background: transparent;
-    border:none;
+    border: none;
     appearance:none;
     width: 40px;
     height: min-content;
@@ -143,12 +156,7 @@ $font-lato: 'Lato', sans-serif;
     font-weight: bold;
 }
 
-.fill-heart{
-    font-weight: bold;
-    color:$yellow;
-    transition:0.4s
-}
-
+// Modal
 .overlay {
     background:$black-opacity;
     position: fixed;
@@ -177,19 +185,10 @@ $font-lato: 'Lato', sans-serif;
     text-align: center;
 }
 
-button {
-    font-family: $font-lato;
-    font-weight: bold;
-    font-size: 18px;
-
-}
-
 .btn-modal-confirm-delete {
     display: flex;
     flex-direction: column;
     width: 100%;
-   
-    
     // align-content: ;
     // justify-content: space-around;
 }
@@ -211,6 +210,7 @@ button {
 // .modal-cancel{
 //     border-bottom: 0.5px solid $medium-gray;
 // }
+
 /*--------- ESTILOS TABLET ---------*/
 @media screen and (min-width: 768px) {
     .container{
@@ -226,6 +226,8 @@ button {
 
 /*--------- ESTILOS DESKTOP ---------*/
 @media screen and (min-width: 1024px) {
+    
+    // Posts
     .post-container{
         width: 900px;
         display: flex;
@@ -235,6 +237,8 @@ button {
 
     .post-food-photo-web{
         display: block;
+        background-size: cover;
+        background-position: center;
         width: 380px;
         height: 230px;
         // position: relative;
@@ -294,5 +298,4 @@ button {
     .post-description{
         margin-left: 0px;
     }
-
 }

@@ -7,8 +7,10 @@ window.addEventListener('hashchange', () => {
   router(window.location.hash)
 });
 
+
+/*------ Button active -------*/
 window.addEventListener('hashchange', () => {
-  /*------ Button active mobile -------*/
+  // Mobile
   const iconHomeMob = document.querySelector('#icon-home-mob');
   const iconFilterMob = document.querySelector('#icon-filter-mob');
   const iconPostMob = document.querySelector('#icon-post-mob');
@@ -30,7 +32,7 @@ window.addEventListener('hashchange', () => {
     iconHomeMob.classList.remove('active')
   } 
 
-  /*------ Button active desktop -------*/
+  // Desktop
   const iconHome = document.querySelector('#icon-home-desk');
   const iconFilter = document.querySelector('#icon-filter-desk');
   const iconPost = document.querySelector('#icon-post-desk');
@@ -53,56 +55,4 @@ window.addEventListener('hashchange', () => {
     iconHome.classList.remove('active')
   } 
 });
-
-/* ------ Button active -------*/
-
-/* const routerNav = (route) => {
-  switch (route) {
-    case '#/home':
-      window.location = "#/home"
-      break;
-    case '#/filtro':
-      window.location = "#/filtro"
-      break;
-    case '#/post':
-      window.location = "#/post"
-      break;
-    case '#/profile':
-      window.location = "#/profile";
-      break;
-    default:
-      window.location = "#/home";
-  }
-}; */ 
-
-/* const header = document.getElementById("nav-desktop");
-const btns = header.getElementsByClassName("btn");
-console.log(btns);
-
-for (let i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-    const current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-    console.log(this.value); */
-
-    /* routerNav(this.value) */
-    /* router(this.value) */
-    
-  /*   if(this.value == "#/home"){
-      window.location = "#/home"
-    } */
-    /* if(this.value == "#/filtro"){
-      window.location = "#/filtro"
-    }
-    if(this.value == "#/post"){
-      window.location = "#/post"
-    }
-    if(this.value == "#/profile"){
-      window.location = "#/profile"
-    } */
-
-
-/*   });
-} */
 
