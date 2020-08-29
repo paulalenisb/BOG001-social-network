@@ -24,53 +24,50 @@ export default () => {
     querySnapshot.forEach((doc) => {
       const post = doc.data();
 
-
       /* ------ Impresión Calidad -------*/
-      if (post.quality === "1") {
-        post.quality = "★☆☆";
-      }
-      if (post.quality === "2") {
-        post.quality = "★★☆";
-      }
-      if (post.quality === "3") {
-        post.quality = "★★★";
+      const changeValueQuality = (value) => {
+        let stars = "";
+        switch (value) {
+          case '1':
+            stars = '★☆☆'
+            break;
+          case '2':
+            stars ='★★☆'
+            break;
+          case '3':
+            stars ='★★★'
+              break;
+          default:
+            '';
+        }
+        return stars
       }
 
       /* ------ Impresión Precio -------*/
-      if (post.price === "1") {
-        post.price = "$ 0 - 20k";
+      const changeValuePrice = (value) => {
+        let pesos = "";
+        switch (value) {
+          case '1':
+            pesos = '$ 0 - 20k'
+            break;
+          case '2':
+            pesos ='$$ 21k - 50k'
+            break;
+          case '3':
+            pesos ='$$$ 51k +'
+              break;
+          default:
+            '';
+        }
+        return pesos
       }
-      if (post.price === "2") {
-        post.price = "$$ 21k - 50k";
-      }
-      if (post.price === "3") {
-        post.price = "$$$ 51k +";
-      }
-
-      //   const changeValueQuality= () => {
-      //   let stars= "";
-      //   switch (post.quality) {
-      //     case '1':
-      //       stars = '★☆☆'
-      //       break;
-      //     case '2':
-      //       stars ='★★☆'
-      //       break;
-      //     case '3':
-      //       stars='★★★'
-      //         break;
-      //     default:
-      //       '';
-      //   }
-      //   return stars
-      // }
 
       /* ------ userPhoto Default -------*/
       const userProfile = (userPhotoURL) => {
         if (userPhotoURL) {
           return userPhotoURL;
         }
-        return "src/images/userDefault.png";
+        return "https://firebasestorage.googleapis.com/v0/b/leratto-sn3.appspot.com/o/assets%2FuserDefault.png?alt=media&token=64b42670-1445-4ff7-8216-5a8093b6fb9e";
       };
 
       /* ------ Literal Select Eliminar/Borrar post -------*/
@@ -103,18 +100,16 @@ export default () => {
             <p class="post-type-food">${post.typeOfFood}</p>
           </div>
           <div class="post-container-price">
-            <p class="post-price">${post.price}</p>
+            <p class="post-price">${changeValuePrice(post.price)}</p>
           </div>
           <div class="post-container-quality">
-            <p class="post-quality">${post.quality}</p>
+            <p class="post-quality">${changeValueQuality(post.quality)}</p>
           </div>
         </div>
         <div class="post-food-photo-mobile" style= "background-image:url('${post.foodPhoto}')"></div>
         <div class="post-user-info">
           <div class="post-user-data">
-            <img src="${userProfile(
-              post.userPhoto
-            )}" class="post-user-data-photo"/>
+            <img src="${userProfile(post.userPhoto)}" class="post-user-data-photo"/>
             <h3 class="post-user-data-name">${post.name} </h3>
           </div>
           <div class="post-container-likes">
@@ -128,7 +123,6 @@ export default () => {
       </div>
       </div>`;
   });
-
 
     // const btnLike = postContainer.querySelectorAll(".fa-heart");
 
@@ -148,7 +142,6 @@ export default () => {
     //   });
 
   const homeAddEvent = () => {
-
     /* ------ Eliminar/Borrar post -------*/
     const btnOptions = divElement.querySelectorAll(".post-options");
     const modalDeletePost = divElement.querySelector(".modal-delete");
@@ -158,7 +151,7 @@ export default () => {
       btn.addEventListener("change", async (e) => {
         // console.log('Holi');
         modalDeletePost.innerHTML = "";
-  
+
         if (btn.value === "Eliminar") {
           //Si es eliminar, crear modal
           console.log("Aqui va el modal");
@@ -176,8 +169,7 @@ export default () => {
                   </div>
               </div>
             </div> `;
-  
-  
+
           const btnModalDelete = modalDeletePost.querySelector('.modal-delete');
             btnModalDelete.addEventListener("click",  async (e) => {
               console.log(dataId);
@@ -195,8 +187,8 @@ export default () => {
           btnModalCancel.addEventListener('click', () => {
             modalDeletePost.innerHTML= '';
           });
-  
-  
+
+        /* ------ Editar post -------*/ 
         }else if (btn.value === "Editar" ){
             const doc =  await getEditPost(e.target.dataset.id);
             const post = doc.data();
@@ -206,7 +198,6 @@ export default () => {
         }
       });
     });
-  
   }
   
   homeAddEvent();

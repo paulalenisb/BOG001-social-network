@@ -1,5 +1,4 @@
 import { pages } from '../views.js';
-import { homeAddEvent } from '../4.home/dom-home';
 
 const content = document.getElementById('root');
 

@@ -3,7 +3,7 @@ import './estilos-header-footer.scss';
 export const headerTemplate = () => {
   const view = `
       <a href="#/home">
-        <img src="./src/images/LogoLeratto_Hor_Blanco.png" class="logo-views" alt="Logo Leratto"/>
+        <img src="https://firebasestorage.googleapis.com/v0/b/leratto-sn3.appspot.com/o/assets%2FLogoLeratto_Hor_Blanco.png?alt=media&token=e8873c44-92db-4a77-ad3a-ee9b648dd58c" class="logo-views" alt="Logo Leratto"/>
       </a>
 
       <nav id="nav-desktop">
