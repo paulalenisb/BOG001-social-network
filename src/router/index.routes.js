@@ -1,4 +1,5 @@
 import { pages } from '../views.js';
+import { homeAddEvent } from '../4.home/dom-home';
 
 const content = document.getElementById('root');
 
@@ -6,7 +7,7 @@ const router = (route) => {
   content.innerHTML = '';
   let nodeDomPages = '';
   switch (route) {
-    case '#/welcome':
+    case '':
       nodeDomPages = pages.welcome();
       break;
     case '#/login':
@@ -15,13 +16,24 @@ const router = (route) => {
     case '#/sign-up':
       nodeDomPages = pages.signup();
       break;
+    case '#/home':
+      nodeDomPages = pages.home();
+      break;
+    case '#/filtro':
+      nodeDomPages = pages.filtro();
+      break;
     case '#/post':
       nodeDomPages = pages.post();
+      break;
+    case '#/profile':
+      nodeDomPages = pages.profile();
       break;
     default:
       nodeDomPages = pages.notFound();
   }
+
   return content.appendChild(nodeDomPages);
+  
 };
 
 export { router };

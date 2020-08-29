@@ -1,56 +1,81 @@
-<section class="sign-up">
+<section class="sign-up-login">
   <div class="overlay">
     <!-- logo -->
     <div class="form-container">
-      <header>
-        <div class="logo">
-        </div>
-      </header>
+      <img src="../images/LogoLeratto.png" alt="Logo Leratto" class="logo">
 
       <form action="" class="form-sign-up" id="form">
         <!-- Name -->
         <div id="group-name">
-          <input type="text" class="form-input" name="username" id="name" placeholder="Nombre" autocomplete="off">
+          <input
+            type="text"
+            class="form-input"
+            name="username"
+            id="name"
+            placeholder="Nombre"
+            autocomplete="off"
+          />
           <p class="form-input-error"></p>
         </div>
 
         <!-- Correo  -->
         <div id="group-email">
-          <input type="email" class="form-input" name="email" id="email" placeholder="correo@correo.com"
-            autocomplete="off">
+          <input
+            type="email"
+            class="form-input"
+            name="email"
+            id="email"
+            placeholder="correo@correo.com"
+            autocomplete="off"
+          />
           <p class="form-input-error"></p>
         </div>
 
         <!-- Password -->
         <div class="form-group" id="group-password">
           <div class="form-group-input" id="password">
-            <input type="password" class="text-password" name="password" id="password-input" placeholder="Contraseña"
-              autocomplete="off">
+            <input
+              type="password"
+              class="text-password"
+              name="password"
+              id="password-input"
+              placeholder="Contraseña"
+              autocomplete="off"
+            />
             <span class="eye">
-              <i class="fas fa-eye-slash" id="eye-close"></i> <i class="fas fa-eye " id="eye-open"></i>
+              <i class="fas fa-eye-slash" id="eye-close"></i>
+              <i class="fas fa-eye" id="eye-open"></i>
             </span>
           </div>
           <p class="form-input-error"></p>
         </div>
 
         <!-- Mensaje validación Form-->
-        <div class="form-message" id="form-message">
-          <!-- <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor llenas los campos correctamente. </p> -->
-        </div>
+        <div class="form-message" id="form-message"></div>
 
         <!-- Botón validación / Google & Facebook -->
         <div class="form-group form-group-btn-sign-up">
-          <button type="submit" class="btn-sign-up">CREAR CUENTA</button>
-          <p class="form-message-successful" id="form-message-successful">Formulario enviado exitosamente!</p>
+          <button type="submit" class="btn-sign-up btn-submit">
+            CREAR CUENTA
+          </button>
+          <p class="form-message-successful" id="form-message-successful">
+            Formulario enviado exitosamente!
+          </p>
         </div>
 
         <p class="text-sn-sign-up">También puedes crear con</p>
         <div class="sn-sign-up">
-          <button class="btn-sn-sign-up" id="sign-in-facebook"><i class="fab fa-facebook-f"></i></button>
-          <button class="btn-sn-sign-up" id="sign-in-google"><i class="fab fa-google"></i></button>
+          <button class="btn-sn-sign-up" id="sign-in-facebook">
+            <i class="fab fa-facebook-f"></i>
+          </button>
+          <button class="btn-sn-sign-up" id="sign-in-google">
+            <i class="fab fa-google"></i>
+          </button>
         </div>
-        <!-- <p id="error-message-auth" class="error-message-auth"></p> -->
-        <p class="text-sn-sign-up">¿Ya tienes cuenta? <b> <a href="#/login">Ingresa</a></b></p>
+
+        <p class="text-sn-sign-up">
+          ¿Ya tienes cuenta? <b> <a href="#/login">Ingresa</a></b>
+        </p>
       </form>
     </div>
   </div>

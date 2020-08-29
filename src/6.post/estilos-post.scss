@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+// Variables
+$dark-blue: #111319;
+$medium-blue: #1D212B;
+$medium-gray: #707070;
+$yellow: #FDBF04;
+$white: #FFFFFF;
+$font-lato: 'Lato', sans-serif;
+
+// Estilos generales
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $dark-blue;
+    font-family: $font-lato;
+    font-size: 14px;
+    color:$white;
+}
+
+.post {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.post-recommendation{
+	display:none;
+}
+
+.hide{
+	display:none;
+}
+
+// Form
+#post-form {
+	@extend .center;
+	flex-direction: column;
+	width: 80%;
+	min-width: 270px;
+	/* max-width: 350px; */
+	margin: auto;
+	background-color: $medium-blue;
+	border-radius: 20px;
+}
+
+.post-form-title {
+	width: 100%;
+	text-align: center;
+	border-bottom: 2px solid #70707069;
+	h2 {margin: 3% 0;}
+}
+
+.post-form-title-container {display:none;}
+
+.info-post-container {
+	width: 80%;
+	.form-group-post {
+		margin-bottom: 10px;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		i {
+			color: $yellow; 
+			font-size: 30px;
+		}
+	}
+	.user-photo-name {
+		display: flex;
+		margin-top: 10px;
+		img {
+			width: 35px;
+			height: 35px;
+			border-radius: 50%;
+			margin-right: 10px;
+		}
+		h3 {margin: auto 0;}	
+	}
+	#post-title {
+		background-color: transparent;
+		width: 80%;
+		margin-left: 10px;
+		border: none;
+		border-bottom: 2px solid $medium-gray;
+		font-family: $font-lato;
+		font-size: 18px;
+		color: $white;
+	}	
+	#post-description {
+		background-color: transparent;
+		width: 100%;
+		border: none;
+		font-family: $font-lato;
+		color: $white;
+	}
+}
+
+.filters-post-container {
+	@extend .center;
+	flex-wrap: wrap;
+	width: 80%;
+	box-sizing: border-box;
+	border: 1px solid $medium-gray;
+	border-radius: 10px;
+	padding: 10px;
+	margin-top: 2%;
+	p {
+		width: 100%;
+		margin: 0 0 2% 0;
+		font-size: 15px;
+		text-align: center;
+	}
+	.select-post {
+		width:45%;
+		height: 30px;
+		background-color: $yellow;
+		border: none;
+		border-radius: 5px;
+		margin: 4% 2%;
+	}
+}
+
+.btn-post {
+	margin: 5% 0;
+	width: 90%;
+}
+
+/*--------- ESTILOS TABLET ---------*/
+@media screen and (min-width: 768px) {
+	// Form
+	#post-form {max-width: 900px;}
+
+	.info-post-container {
+		width: 80%;
+		.form-group-post {
+			width: 100%;
+			margin-bottom: 20px;
+			/* background-color: wheat; */
+		}
+	}
+
+	.filters-post-container {
+		width: 80%;
+		p {
+			margin: 0;
+			font-size: 18px;
+		}
+		.select-post {
+			width:45%;
+			height: 35px;
+			font-size: 15px;
+		}
+	}
+}
+
+/*--------- ESTILOS DESKTOP ---------*/
+@media screen and (min-width: 1024px) {	
+
+	.post-recommendation{
+		display:block;
+	}
+
+	// Form
+	#post-form {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		text-align: center;
+		max-width: 1000px;
+	}
+	
+	.post-form-title {display:none}
+
+	.info-post-container, .filters-post-container {margin-top: 5%;}
+
+	.info-post-container {
+		display: flex;
+		flex-direction: column;
+		width: 40%;
+		.form-group-post {
+			width: 100%;
+			margin-bottom: 25px;
+			/* background-color: yellowgreen; */
+			i {font-size: 40px;}
+		}
+		.post-form-title-container{
+			display: block;
+			width: 100%;
+			text-align: left;
+			h2 {margin: 0;}
+		}
+		.user-photo-name {
+			margin-top: 0;
+			img {
+				width: 45px;
+				height: 45px;
+			}
+			h3 {font-size: 25px;}
+		}
+		#post-title {
+			width: 80%;
+			font-size: 20px;
+		}	
+		#post-description {
+			font-size: 17px;
+			min-width: 380px;
+			min-height: 100px;
+			max-height: 180px;
+		}
+	}
+
+	.filters-post-container {
+		width: 40%;
+		p {
+			margin: 0 0 2% 0;
+			font-size: 20px;
+		}
+		.select-post {
+			width: 70%;
+			height: 40px;
+			margin: 3% 0;
+			font-size: 16px;
+		}
+	}
+
+	.btn-post {
+		max-width: 350px;
+		/* background-color: yellowgreen; */
+	}
+}
+
+.btn-upload-file{
+	width:30px;
+	height:30px;
+	position:absolute;
+	z-index:-1;
+}
+
+progress[value] {
+	appearance: none;
+	border: none;
+	width: 100%; height: 13px;
+	background-color: whiteSmoke;
+	border-radius: 3px;
+	box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+	color: royalblue;
+	position: relative;
+	margin-bottom:10px; 
+}
+
+progress[value]::-webkit-progress-bar {
+	background-color: whiteSmoke;
+	border-radius: 3px;
+	box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+}
+
+progress[value]::-webkit-progress-value {
+	position: relative;
+	background-size: 35px 20px, 100% 100%, 100% 100%;
+	border-radius:3px;
+	animation: animate-stripes 5s linear infinite;
+}
+
+@keyframes animate-stripes { 100% { background-position: -100px 0; } }
+
+
+progress[value]::-webkit-progress-value:after {
+	content: '';
+	position: absolute;
+	
+	width:5px; height:5px;
+	top:7px; right:7px;
+	
+	background-color: white;
+	border-radius: 100%;
+}
+
+.progress-bar {
+	background-color: whiteSmoke;
+	border-radius: 3px;
+	box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+	width: 100%; height:20px;
+}
+
+.progress-bar span {
+	background-color: royalblue;
+	border-radius: 3px;
+	
+	display: block;
+	text-indent: -9999px;
+}
+
+p[data-value] { 
+
+  position: relative; 
+}
+
+/* The percentage will automatically fall in place as soon as we make the width fluid. Now making widths fluid. */
+
+p[data-value]:after {
+	content: attr(data-value) '%';
+	position: absolute; right:0;
+}
+
+
+
+.css3::-webkit-progress-value {
+	/* Gradient background with Stripes */
+	background-image:
+	-webkit-linear-gradient( 135deg,
+													 transparent,
+													 transparent 33%,
+													 rgba(0,0,0,.1) 33%,
+													 rgba(0,0,0,.1) 66%,
+													 transparent 66%),
+    -webkit-linear-gradient( top,
+														rgba(255, 255, 255, .25),
+														rgba(0,0,0,.2)),
+-webkit-linear-gradient( left, #FDBF04, #fd721d,);
+}

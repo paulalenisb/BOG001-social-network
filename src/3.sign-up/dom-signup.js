@@ -1,12 +1,13 @@
 import view from './signup.html';
-import './estilos-signup.css';
-import '../firebase/firebaseConfig';
+import './estilos-signup-login.scss';
+import '../firebase-functions/firebaseConfig';
 import { regularExpressions, fields, validateInputsValue } from './funciones-signup';
 /* import * as firebase from 'firebase'; */
-import { createNewUser, createGoogleAccount } from '../firebase/firebaseAuth';
+import { createNewUser, authGoogleAccount, authWithFacebook } from '../firebase-functions/firebaseAuth';
 
 export default () => {
   const divElement = document.createElement('div');
+  divElement.className = 'logged-out';
   divElement.innerHTML = view;
 
   const form = divElement.querySelector('#form');
@@ -49,6 +50,8 @@ export default () => {
       case 'password':
         validateInputs(regularExpressions.password, e.target, 'password');
         break;
+      default:
+        '';
     }
   };
 
@@ -82,18 +85,11 @@ export default () => {
 
     const email = divElement.querySelector('#email').value;
     const password = divElement.querySelector('#password-input').value;
+    const names = divElement.querySelector('#name').value;
+
 
     if (fields.name && fields.email && fields.password) {
-      /* divElement
-        .querySelector('#form-message-successful')
-        .classList.add('form-message-successful-active');
-      setTimeout(() => {
-        divElement
-          .querySelector('#form-message-successful')
-          .classList.remove('form-message-successful-active');
-      }, 5000); */
-
-      createNewUser(email, password);
+      createNewUser(email, password, names);
       form.reset();
       /* window.location.hash = '#/login'; */
     } else {
@@ -102,12 +98,17 @@ export default () => {
         .classList.add('form-message-active');
     }
   });
+  /* ------ SIGNUP (REGISTRARSE) FACEBOOK -------*/
+  const facebookButtonSignUp = divElement.querySelector('#sign-in-facebook');
 
+  facebookButtonSignUp.addEventListener('click', (e) => {
+    authWithFacebook();
+  });
   /* ------ SIGNUP (REGISTRARSE) GOOGLE -------*/
   const googleButtonSignUp = divElement.querySelector('#sign-in-google');
 
   googleButtonSignUp.addEventListener('click', (e) => {
-    createGoogleAccount();
+    authGoogleAccount();
   });
   return divElement;
 };

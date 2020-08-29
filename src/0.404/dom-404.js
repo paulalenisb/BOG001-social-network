@@ -1,14 +1,15 @@
 import view from './404.html';
-import './estilos-404.css';
+import './estilos-404.scss';
+/* import '../firebase/firebaseConfig'; */
 
 export default () => {
   const divElement = document.createElement('div');
   divElement.innerHTML = view;
 
-  const btnClick = divElement.querySelector('#btnClick');
-  btnClick.addEventListener('click', () => {
-    alert('click');
-  });
+  const noFoundBtn = divElement.querySelector('.btn-no-found');
+  noFoundBtn.addEventListener('click', () => {
+    window.location.hash = '#/home';
+  })
 
   return divElement;
 };

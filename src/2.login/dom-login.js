@@ -1,9 +1,18 @@
 import view from './login.html';
-import { regularExpressions, fields, validateInputsValue } from '../3.sign-up/funciones-signup';
-import { loginUser } from '../firebase/firebaseAuth';
+import {
+  regularExpressions,
+  fields,
+  validateInputsValue,
+} from '../3.sign-up/funciones-signup';
+import {
+  loginUser,
+  authWithFacebook,
+  authGoogleAccount,
+} from '../firebase-functions/firebaseAuth';
 
 export default () => {
   const divElement = document.createElement('div');
+  divElement.className = 'logged-out';
   divElement.innerHTML = view;
 
   const form = divElement.querySelector('#form');
@@ -19,11 +28,17 @@ export default () => {
   const validateInputs = (regularExpressions, input, field) => {
     // console.log(validateInputsValue(regularExpressions, input, field));
     if (validateInputsValue(regularExpressions, input, field)) {
-      divElement.querySelector(`#${field}`).classList.remove('form-group-wrong');
-      divElement.querySelector(`#group-${field} .form-input-error`).textContent = '';
+      divElement
+        .querySelector(`#${field}`)
+        .classList.remove('form-group-wrong');
+      divElement.querySelector(
+        `#group-${field} .form-input-error`,
+      ).textContent = '';
     } else {
       divElement.querySelector(`#${field}`).classList.add('form-group-wrong');
-      divElement.querySelector(`#group-${field} .form-input-error`).textContent = messageError[field];
+      divElement.querySelector(
+        `#group-${field} .form-input-error`,
+      ).textContent = messageError[field];
     }
   };
 
@@ -35,6 +50,8 @@ export default () => {
       case 'password':
         validateInputs(regularExpressions.password, e.target, 'password');
         break;
+      default:
+        '';
     }
   };
 
@@ -63,7 +80,7 @@ export default () => {
   const eyeIcons = divElement.querySelector('.eye');
   eyeIcons.addEventListener('click', togglePassword1);
 
-  /* ------ SIGNUP (REGISTRARSE) -------*/
+  /* ------ lOGIN -------*/
   form.addEventListener('submit', (e) => {
     e.preventDefault(); // Para que no se reinicie el form
 
@@ -72,12 +89,20 @@ export default () => {
 
     if (fields.email && fields.password) {
       loginUser(email, password);
-      window.location.hash = '#/login';
       form.reset();
-    } else {
-      alert('no estas registrado');
-      // divElement.querySelector('#form-message').classList.add('form-message-active');
-    }
+    } 
+  });
+  /* ------ SIGNUP (REGISTRARSE) FACEBOOK -------*/
+  const facebookButtonSignUp = divElement.querySelector('#sign-in-facebook');
+
+  facebookButtonSignUp.addEventListener('click', (e) => {
+    authWithFacebook();
+  });
+  /* ------ SIGNUP (REGISTRARSE) GOOGLE -------*/
+  const googleButtonSignUp = divElement.querySelector('#sign-in-google');
+
+  googleButtonSignUp.addEventListener('click', (e) => {
+    authGoogleAccount();
   });
 
   return divElement;
