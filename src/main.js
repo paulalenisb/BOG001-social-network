@@ -5,10 +5,8 @@ import './main.scss';
 
 router(window.location.hash);
 window.addEventListener('hashchange', () => {
-  router(window.location.hash)
+  router(window.location.hash);
 });
-
-
 
 /* ------ Button active -------*/
 
@@ -29,13 +27,13 @@ window.addEventListener('hashchange', () => {
     default:
       window.location = "#/home";
   }
-}; */ 
+}; */
 
-/*const header = document.getElementById("nav-desktop");
+/* const header = document.getElementById("nav-desktop");
 const btns = header.getElementsByClassName("btn");
-console.log(btns);*/
+console.log(btns); */
 
-/*for (let i = 0; i < btns.length; i++) {
+/* for (let i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", function() {
     const current = document.getElementsByClassName("active");
     current[0].className = current[0].className.replace(" active", "");
@@ -43,12 +41,12 @@ console.log(btns);*/
     console.log(this.value);
 
     /* routerNav(this.value) */
-    /* router(this.value) */
-    
-  /*   if(this.value == "#/home"){
+/* router(this.value) */
+
+/*   if(this.value == "#/home"){
       window.location = "#/home"
     } */
-    /* if(this.value == "#/filtro"){
+/* if(this.value == "#/filtro"){
       window.location = "#/filtro"
     }
     if(this.value == "#/post"){
@@ -56,7 +54,6 @@ console.log(btns);*/
     }
     if(this.value == "#/profile"){
       window.location = "#/profile"
-    } 
+    }
   });
-}*/
-
+} */

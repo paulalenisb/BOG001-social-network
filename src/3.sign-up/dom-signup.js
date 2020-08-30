@@ -20,7 +20,7 @@ export default () => {
     password: 'La contraseña tiene que ser de 8 dígitos.',
   };
 
-  const validateInputs = (regularExpressions, input, field) => {
+  const validateInputs = (input, field) => {
     /* console.log(validateInputsValue(regularExpressions, input, field)); */
     if (validateInputsValue(regularExpressions, input, field)) {
       divElement
@@ -51,7 +51,6 @@ export default () => {
         validateInputs(regularExpressions.password, e.target, 'password');
         break;
       default:
-        '';
     }
   };
 
@@ -87,7 +86,6 @@ export default () => {
     const password = divElement.querySelector('#password-input').value;
     const names = divElement.querySelector('#name').value;
 
-
     if (fields.name && fields.email && fields.password) {
       createNewUser(email, password, names);
       form.reset();
@@ -101,13 +99,13 @@ export default () => {
   /* ------ SIGNUP (REGISTRARSE) FACEBOOK -------*/
   const facebookButtonSignUp = divElement.querySelector('#sign-in-facebook');
 
-  facebookButtonSignUp.addEventListener('click', (e) => {
+  facebookButtonSignUp.addEventListener('click', () => {
     authWithFacebook();
   });
   /* ------ SIGNUP (REGISTRARSE) GOOGLE -------*/
   const googleButtonSignUp = divElement.querySelector('#sign-in-google');
 
-  googleButtonSignUp.addEventListener('click', (e) => {
+  googleButtonSignUp.addEventListener('click', () => {
     authGoogleAccount();
   });
   return divElement;

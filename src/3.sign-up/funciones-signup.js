@@ -10,7 +10,7 @@ export const fields = {
   password: false,
 };
 
-export const validateInputsValue = (regularExpressions, input, field) => {
+export const validateInputsValue = (input, field) => {
   if (regularExpressions.test(input.value)) {
     fields[field] = true;
     return true;

@@ -1,8 +1,7 @@
 import view from './profile.html';
 import { exit } from '../firebase-functions/firebaseAuth';
-import { auth } from '../firebase-functions/firebaseConfig';
 import './estilos-profile.scss';
-import { headerTemplate, footerTemplate} from '../header-footer/header-footer';
+import { headerTemplate, footerTemplate } from '../header-footer/header-footer';
 
 export default () => {
   const divElement = document.createElement('div');
@@ -12,22 +11,21 @@ export default () => {
   const btnClick = divElement.querySelector('#btn-sign-out');
   const userNameProfile = divElement.querySelector('#user-name-profile');
   const userPhotoProfile = divElement.querySelector('#user-picture');
-  
-  const userLocalStorage = localStorage.getItem("userSession");
+
+  const userLocalStorage = localStorage.getItem('userSession');
   const convertObjJson = JSON.parse(userLocalStorage);
   const userName = convertObjJson.displayName;
   const userPhotoURL = convertObjJson.photoURL;
-  
-  const userProfile = (userPhotoURL) => {
+
+  const userProfile = () => {
     if (userPhotoURL) {
       return userPhotoURL;
     }
-    return "src/images/userDefault.png";
+    return 'src/images/userDefault.png';
   };
 
-
-  userNameProfile.textContent= userName; 
-  userPhotoProfile.src = userProfile(userPhotoURL)
+  userNameProfile.textContent = userName;
+  userPhotoProfile.src = userProfile(userPhotoURL);
 
   btnClick.addEventListener('click', () => {
     exit();

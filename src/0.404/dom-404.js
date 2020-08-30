@@ -9,7 +9,7 @@ export default () => {
   const noFoundBtn = divElement.querySelector('.btn-no-found');
   noFoundBtn.addEventListener('click', () => {
     window.location.hash = '#/home';
-  })
+  });
 
   return divElement;
 };
