@@ -4,7 +4,7 @@ const firestore = () => {
             return {
                 doc: (newDocument) => {
                     return {
-                        set: (objData) => {
+                        add: (objData) => {
                             return new Promise((resolve) => {
                                 resolve('El post fue agregado')
                             })

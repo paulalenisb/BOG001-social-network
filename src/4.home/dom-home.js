@@ -1,7 +1,7 @@
 import view from './home.html';
 import './estilos-home.scss';
 import { auth } from '../firebase-functions/firebaseConfig';
-import { onGetPosts, deletePost, getEditPost } from '../firebase-functions/firebaseStore';
+import { onGetPosts, deletePost } from '../firebase-functions/firebaseStore.js';
 
 import { headerTemplate, footerTemplate } from '../header-footer/header-footer';
 // const userId = auth.currentUser.uid;
@@ -15,76 +15,76 @@ export default () => {
 
   // Cuando la ventana cargue, traer el contenido del DOM, se ejecuta el evento de getEditPosts
 
-  onGetPosts(async (querySnapshot) => {
+  onGetPosts(async (doc) => {
     postContainer.innerHTML = '';
     const userId = auth.currentUser.uid;
 
     // Con querySnapshot recorremos los objetos que hemos creado en docs
-    querySnapshot.forEach((doc) => {
-      const post = doc.data();
+    // querySnapshot.forEach((doc) => {
+    const post = doc.data();
 
-      /* ------ Impresión Calidad -------*/
-      if (post.quality === '1') {
-        post.quality = '★☆☆';
-      }
-      if (post.quality === '2') {
-        post.quality = '★★☆';
-      }
-      if (post.quality === '3') {
-        post.quality = '★★★';
-      }
+    /* ------ Impresión Calidad -------*/
+    if (post.quality === '1') {
+      post.quality = '★☆☆';
+    }
+    if (post.quality === '2') {
+      post.quality = '★★☆';
+    }
+    if (post.quality === '3') {
+      post.quality = '★★★';
+    }
 
-      /* ------ Impresión Precio -------*/
-      if (post.price === '1') {
-        post.price = '$ 0 - 20k';
-      }
-      if (post.price === '2') {
-        post.price = '$$ 21k - 50k';
-      }
-      if (post.price === '3') {
-        post.price = '$$$ 51k +';
-      }
+    /* ------ Impresión Precio -------*/
+    if (post.price === '1') {
+      post.price = '$ 0 - 20k';
+    }
+    if (post.price === '2') {
+      post.price = '$$ 21k - 50k';
+    }
+    if (post.price === '3') {
+      post.price = '$$$ 51k +';
+    }
 
-      //   const changeValueQuality= () => {
-      //   let stars= "";
-      //   switch (post.quality) {
-      //     case '1':
-      //       stars = '★☆☆'
-      //       break;
-      //     case '2':
-      //       stars ='★★☆'
-      //       break;
-      //     case '3':
-      //       stars='★★★'
-      //         break;
-      //     default:
-      //       '';
-      //   }
-      //   return stars
-      // }
+    //   const changeValueQuality= () => {
+    //   let stars= "";
+    //   switch (post.quality) {
+    //     case '1':
+    //       stars = '★☆☆'
+    //       break;
+    //     case '2':
+    //       stars ='★★☆'
+    //       break;
+    //     case '3':
+    //       stars='★★★'
+    //         break;
+    //     default:
+    //       '';
+    //   }
+    //   return stars
+    // }
 
-      /* ------ userPhoto Default -------*/
-      const userProfile = (userPhotoURL) => {
-        if (userPhotoURL) {
-          return userPhotoURL;
-        }
-        return 'src/images/userDefault.png';
-      };
+    /* ------ userPhoto Default -------*/
+    const userProfile = (userPhotoURL) => {
+      if (userPhotoURL) {
+        return userPhotoURL;
+      }
+      return 'src/images/userDefault.png';
+    };
 
-      /* ------ Literal Select Eliminar/Borrar post -------*/
-      let selectOptions = '';
-      if (userId === post.uid) {
-        selectOptions = `
+    /* ------ Literal Select Eliminar/Borrar post -------*/
+    let selectOptions = '';
+    if (userId === post.uid) {
+      selectOptions = `
         <select name="options" id="${post.uid}" data-id="${doc.id}"class="post-options">
           <option value="" class="post-options-main">...</option>
           <option value="Editar"  class="post-options-edit" id="${post.uid}" data-id="${doc.id}" onclick>Editar</option>
           <option value="Eliminar" class="post-options-delete">Eliminar</option>
         </select>  
         `;
-      }
+    }
 
-      /* ------ Literal post -------*/
-      postContainer.innerHTML += `
+    /* ------ Literal post -------*/
+    postContainer.innerHTML += `
       <div class="post-container">
         <img src="${post.foodPhoto}" class="post-food-photo-web"/>
         <div class="post-allinfo">
@@ -124,7 +124,7 @@ export default () => {
       </div>
       </div>
       </div>`;
-    });
+    // });
 
     // const btnLike = postContainer.querySelectorAll(".fa-heart");
 
@@ -187,11 +187,11 @@ export default () => {
               modalDeletePost.innerHTML = '';
             });
           } else if (btn.value === 'Editar') {
-            const doc = await getEditPost(e.target.dataset.id);
-            const post = doc.data();
-            localStorage.setItem('docID', JSON.stringify(post));
-            localStorage.setItem('id', doc.id);
-            window.location.hash = '#/post';
+            // const doc = await getEditPost(e.target.dataset.id);
+            // const post = doc.data();
+            // localStorage.setItem('docID', JSON.stringify(post));
+            // localStorage.setItem('id', doc.id);
+            // window.location.hash = '#/post';
           }
         });
       });
