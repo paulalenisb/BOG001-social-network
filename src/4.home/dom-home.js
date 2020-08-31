@@ -20,7 +20,7 @@ export default () => {
     const userId = auth.currentUser.uid;
 
     // Con querySnapshot recorremos los objetos que hemos creado en docs
-    // querySnapshot.forEach((doc) => {
+    querySnapshot.forEach((doc) => {
     const post = doc.data();
 
     /* ------ Impresión Calidad -------*/
@@ -124,7 +124,7 @@ export default () => {
       </div>
       </div>
       </div>`;
-    // });
+    });
 
     // const btnLike = postContainer.querySelectorAll(".fa-heart");
 

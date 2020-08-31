@@ -1,4 +1,4 @@
-// import * as firebase from 'firebase';
+import * as firebase from 'firebase';
 
 // export const db = firebase.firestore();
 
@@ -35,13 +35,15 @@ export const getPosts = () => firebase.firestore().collection('review').get();
 
 /* Cada vez que mis posts se actualicen, agreguen o borren, actualizar en tiempo real
 el timeline con el método onSnapshot() */
-export const onGetPosts = (callback) => firebase.firestore().collection('review').orderBy('date', 'desc').onSnapshot((querySnapshot) => {
-  const data = [];
-  querySnapshot.forEach((doc) => {
-    data.push({ id: doc.id, ...doc.data() });
-  });
-  callback(data);
-});
+export const onGetPosts = (callback) => firebase.firestore().collection('review').orderBy('date', 'desc').onSnapshot(
+//   () => {
+//   // const data = [];
+//   // querySnapshot.forEach((doc) => {
+//   //   data.push({ id: doc.id, ...doc.data() });
+//   // });
+//   // callback(data);
+// }
+);
 
 // Para eliminar un post necesito su id
 export const deletePost = (id) => firebase.firestore().collection('review').doc(id).delete();
