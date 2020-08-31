@@ -22,7 +22,7 @@ export default () => {
     if (userPhotoURL) {
       return userPhotoURL;
     }
-    return "src/images/userDefault.png";
+    return "https://firebasestorage.googleapis.com/v0/b/leratto-sn3.appspot.com/o/assets%2FuserDefault.png?alt=media&token=64b42670-1445-4ff7-8216-5a8093b6fb9e";
   };
 
 
