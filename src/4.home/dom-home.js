@@ -74,7 +74,7 @@ export default () => {
           `
       } else{
         likesIcons=`
-            <i type="button" class="far fa-heart " id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
+            <i type="button" class="far fa-heart without-fill" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
          `
       }
 
@@ -143,48 +143,32 @@ export default () => {
       </div>`;
   });
 
-  const btnLike = postContainer.querySelectorAll(".fa-heart");
+  const btnLike = postContainer.querySelectorAll(".without-fill");
 
   btnLike.forEach((btn) => {
       btn.addEventListener("click", async (e) => {
-        // if (usersLike.includes(userId)){
-        // const doc =  await getEditPost(e.target.dataset.id);
-        // const post = doc.data();
-        // const los =post.users
-        // los.includes("userId")
-        console.log("ohsi")
-        let count = 0;
-        // let idDoc= "";
-        let users=[];
+        
+        const doc =  await getEditPost(e.target.dataset.id);
+        const post = doc.data();
+  
+        // let count = 0;
+        let idDoc= doc.id;
+        let users=post.users;
+        let likes = post.likes
         users.push(userId)
         console.log(users)
         e.target.classList.add("fill-heart");
-        e.target.textContent = ++count;
+        e.target.textContent = ++likes;
 
-        idDoc= e.target.dataset.id
+       
         updatePost(idDoc,{
-        likes:count,
+        likes:likes,
         users:users
         })
 
       });
     });
-    // const btnLike = postContainer.querySelectorAll(".fa-heart");
-
-    // btnLike.forEach((btn) => {
-    //     btn.addEventListener("click", (e) => {
-    //       let count = 0;
-    //       let idDoc= "";
-    //       e.target.classList.toggle("fill-heart");
-    //       e.target.textContent = ++count;
-
-    //       idDoc= e.target.dataset.id
-    //       updatePost(idDoc,{
-    //       likes:count
-    //       })
-
-    //     });
-    //   });
+    
 
   const homeAddEvent = () => {
 
