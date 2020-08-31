@@ -23,47 +23,45 @@ export default () => {
     // Con querySnapshot recorremos los objetos que hemos creado en docs
     querySnapshot.forEach((doc) => {
       const post = doc.data();
-      
 
       /* ------ Impresión Calidad -------*/
-      if (post.quality === "1") {
-        post.quality = "★☆☆";
-      }
-      if (post.quality === "2") {
-        post.quality = "★★☆";
-      }
-      if (post.quality === "3") {
-        post.quality = "★★★";
+      const changeValueQuality = (value) => {
+        let stars = "";
+        switch (value) {
+          case '1':
+            stars = '★☆☆'
+            break;
+          case '2':
+            stars ='★★☆'
+            break;
+          case '3':
+            stars ='★★★'
+              break;
+          default:
+            '';
+        }
+        return stars
       }
 
       /* ------ Impresión Precio -------*/
-      if (post.price === "1") {
-        post.price = "$ 0 - 20k";
-      }
-      if (post.price === "2") {
-        post.price = "$$ 21k - 50k";
-      }
-      if (post.price === "3") {
-        post.price = "$$$ 51k +";
+      const changeValuePrice = (value) => {
+        let pesos = "";
+        switch (value) {
+          case '1':
+            pesos = '$ 0 - 20k'
+            break;
+          case '2':
+            pesos ='$$ 21k - 50k'
+            break;
+          case '3':
+            pesos ='$$$ 51k +'
+              break;
+          default:
+            '';
+        }
+        return pesos
       }
 
-      //   const changeValueQuality= () => {
-      //   let stars= "";
-      //   switch (post.quality) {
-      //     case '1':
-      //       stars = '★☆☆'
-      //       break;
-      //     case '2':
-      //       stars ='★★☆'
-      //       break;
-      //     case '3':
-      //       stars='★★★'
-      //         break;
-      //     default:
-      //       '';
-      //   }
-      //   return stars
-      // }
       const usersLike= post.users
       let likesIcon = "";
       let likesIcons= "";
@@ -83,7 +81,7 @@ export default () => {
         if (userPhotoURL) {
           return userPhotoURL;
         }
-        return "src/images/userDefault.png";
+        return "https://firebasestorage.googleapis.com/v0/b/leratto-sn3.appspot.com/o/assets%2FuserDefault.png?alt=media&token=64b42670-1445-4ff7-8216-5a8093b6fb9e";
       };
 
       /* ------ Literal Select Eliminar/Borrar post -------*/
@@ -101,7 +99,8 @@ export default () => {
       /* ------ Literal post -------*/
       postContainer.innerHTML += `
       <div class="post-container">
-        <img src="${post.foodPhoto}" class="post-food-photo-web"/>
+      <div class="post-food-photo-web" style= "background-image:url('${post.foodPhoto}')"></div>
+        <!--<img src="${post.foodPhoto}"/>-->
         <div class="post-allinfo">
         <div class="post-container-info" id="post-main-info">
           <div class="post-container-info-main">
@@ -115,21 +114,18 @@ export default () => {
             <p class="post-type-food">${post.typeOfFood}</p>
           </div>
           <div class="post-container-price">
-            <p class="post-price">${post.price}</p>
+            <p class="post-price">${changeValuePrice(post.price)}</p>
           </div>
           <div class="post-container-quality">
-            <p class="post-quality">${post.quality}</p>
+            <p class="post-quality">${changeValueQuality(post.quality)}</p>
           </div>
         </div>
-        <img src="${post.foodPhoto}" class="post-food-photo-mobile"/>
+        <div class="post-food-photo-mobile" style= "background-image:url('${post.foodPhoto}')"></div>
         <div class="post-user-info">
           <div class="post-user-data">
-            <img src="${userProfile(
-              post.userPhoto
-            )}" class="post-user-data-photo"/>
+            <img src="${userProfile(post.userPhoto)}" class="post-user-data-photo"/>
             <h3 class="post-user-data-name">${post.name} </h3>
           </div>
-          <div class="post-container-likes">
           <div class="post-container-likes">
             ${likesIcon}
             ${likesIcons}
@@ -143,8 +139,8 @@ export default () => {
       </div>`;
   });
 
+  /* ------ Funcionalidad likes -------*/
   const btnLike = postContainer.querySelectorAll(".without-fill");
-
   btnLike.forEach((btn) => {
       btn.addEventListener("click", async (e) => {
         
@@ -164,30 +160,27 @@ export default () => {
         updatePost(idDoc,{
         likes:likes,
         users:users
-        })
-
+        });
       });
     });
     
 
   const homeAddEvent = () => {
-
     /* ------ Eliminar/Borrar post -------*/
     const btnOptions = divElement.querySelectorAll(".post-options");
     const modalDeletePost = divElement.querySelector(".modal-delete");
     console.log(btnOptions);
-  
-  
+
     btnOptions.forEach((btn) => {
       btn.addEventListener("change", async (e) => {
         // console.log('Holi');
         modalDeletePost.innerHTML = "";
-  
+
         if (btn.value === "Eliminar") {
           //Si es eliminar, crear modal
           console.log("Aqui va el modal");
           const dataId = e.target.dataset.id;
-          
+
           // if (userId === post.uid) {
 
             modalDeletePost.innerHTML = `
@@ -200,8 +193,7 @@ export default () => {
                   </div>
               </div>
             </div> `;
-  
-  
+
           const btnModalDelete = modalDeletePost.querySelector('.modal-delete');
             btnModalDelete.addEventListener("click",  async (e) => {
               console.log(dataId);
@@ -219,8 +211,8 @@ export default () => {
           btnModalCancel.addEventListener('click', () => {
             modalDeletePost.innerHTML= '';
           });
-  
-  
+
+        /* ------ Editar post -------*/ 
         }else if (btn.value === "Editar" ){
             const doc =  await getEditPost(e.target.dataset.id);
             const post = doc.data();
@@ -230,7 +222,6 @@ export default () => {
         }
       });
     });
-  
   }
   
   homeAddEvent();
@@ -242,13 +233,3 @@ export default () => {
   return divElement;
 };
 
-/* ------ Likes -------*/
-// const btnLike = postContainer.querySelectorAll(".fa-heart");
-
-// btnLike.forEach((btn) => {
-//   btn.addEventListener("click", (e) => {
-//     let count = 0;
-//     e.target.classList.toggle("fill-heart");
-//     e.target.textContent = ++count;
-//   });
-// });
