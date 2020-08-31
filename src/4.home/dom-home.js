@@ -62,6 +62,20 @@ export default () => {
         return pesos
       }
 
+      const usersLike= post.users
+      let likesIcon = "";
+      let likesIcons= "";
+
+      if (usersLike.includes(userId)){
+        likesIcon=`
+            <i type="button" class="far fa-heart fill-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
+          `
+      } else{
+        likesIcons=`
+            <i type="button" class="far fa-heart without-fill" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
+         `
+      }
+
       /* ------ userPhoto Default -------*/
       const userProfile = (userPhotoURL) => {
         if (userPhotoURL) {
@@ -113,8 +127,9 @@ export default () => {
             <h3 class="post-user-data-name">${post.name} </h3>
           </div>
           <div class="post-container-likes">
-            <p class="post-container-likes-icon"></p>
-            <i type="button" class="far fa-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
+            ${likesIcon}
+            ${likesIcons}
+          </div>
           </div>
         </div>
           <p class="post-description">${post.description}</p>
@@ -124,22 +139,31 @@ export default () => {
       </div>`;
   });
 
-    // const btnLike = postContainer.querySelectorAll(".fa-heart");
+  /* ------ Funcionalidad likes -------*/
+  const btnLike = postContainer.querySelectorAll(".without-fill");
+  btnLike.forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        
+        const doc =  await getEditPost(e.target.dataset.id);
+        const post = doc.data();
+  
+        // let count = 0;
+        let idDoc= doc.id;
+        let users=post.users;
+        let likes = post.likes
+        users.push(userId)
+        console.log(users)
+        e.target.classList.add("fill-heart");
+        e.target.textContent = ++likes;
 
-    // btnLike.forEach((btn) => {
-    //     btn.addEventListener("click", (e) => {
-    //       let count = 0;
-    //       let idDoc= "";
-    //       e.target.classList.toggle("fill-heart");
-    //       e.target.textContent = ++count;
-
-    //       idDoc= e.target.dataset.id
-    //       updatePost(idDoc,{
-    //       likes:count
-    //       })
-
-    //     });
-    //   });
+       
+        updatePost(idDoc,{
+        likes:likes,
+        users:users
+        });
+      });
+    });
+    
 
   const homeAddEvent = () => {
     /* ------ Eliminar/Borrar post -------*/
@@ -209,13 +233,3 @@ export default () => {
   return divElement;
 };
 
-/* ------ Likes -------*/
-// const btnLike = postContainer.querySelectorAll(".fa-heart");
-
-// btnLike.forEach((btn) => {
-//   btn.addEventListener("click", (e) => {
-//     let count = 0;
-//     e.target.classList.toggle("fill-heart");
-//     e.target.textContent = ++count;
-//   });
-// });

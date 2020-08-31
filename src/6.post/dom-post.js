@@ -93,6 +93,7 @@ getValuesToEdit(postStorageEditing)
     userPhotoURL
   ); /* userProfile(userPhotoURL) */ /* 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg' */
   let likes= 0;
+  let users=[];
   postForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -119,7 +120,8 @@ getValuesToEdit(postStorageEditing)
           location.value,
           urlFood,
           date,
-          likes
+          likes,
+          users
         );
       } //Si se edita el post
       else {
