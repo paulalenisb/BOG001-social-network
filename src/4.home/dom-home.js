@@ -1,8 +1,8 @@
+// import * as firebase from "firebase";
 import view from "./home.html";
 import "./estilos-home.scss";
 import "../firebase-functions/firebaseConfig";
-import * as firebase from "firebase";
-import { db, onGetPosts, deletePost, getEditPost,updatePost } from "../firebase-functions/firebaseStore";
+import { onGetPosts, deletePost, getEditPost } from "../firebase-functions/firebaseStore";
 import { auth } from "../firebase-functions/firebaseConfig";
 import { headerTemplate, footerTemplate} from "../header-footer/header-footer";
 // const userId = auth.currentUser.uid;
