@@ -112,7 +112,6 @@ button {
     display:flex;
     align-items: center;
     font-size: 16px;
-    // margin-right: 5px;
     &-icon{
         margin-left: 10px;
     }
@@ -143,7 +142,6 @@ button {
 
 .post-options{
     float: right;
-    // margin-right: 10px;
     margin-top:-10px;
     color:$yellow;
     background: transparent;
@@ -189,8 +187,6 @@ button {
     display: flex;
     flex-direction: column;
     width: 100%;
-    // align-content: ;
-    // justify-content: space-around;
 }
 
 .btn-modal{
@@ -198,18 +194,12 @@ button {
     outline: none;
     background-color: transparent;
     color: $white;
-    // border-radius: 5px;
-    // margin-bottom: 10px;
     border-top: 0.1px solid #f4f4f43b;
     height: 50px;
 }
 .modal-delete{
     color: $yellow;
 }
-
-// .modal-cancel{
-//     border-bottom: 0.5px solid $medium-gray;
-// }
 
 /*--------- ESTILOS TABLET ---------*/
 @media screen and (min-width: 768px) {
@@ -219,9 +209,6 @@ button {
         flex-wrap: wrap;
     }
 
-    // .post-container{
-    //    box-sizing: content-box;
-    // }
 }
 
 /*--------- ESTILOS DESKTOP ---------*/
@@ -232,7 +219,6 @@ button {
         width: 900px;
         display: flex;
         height: 230px;
-        // justify-content: space-between;
     }
 
     .post-food-photo-web{
@@ -241,8 +227,6 @@ button {
         background-position: center;
         width: 380px;
         height: 230px;
-        // position: relative;
-        // top: -65px;
         border-radius: 20px 0px 0px 20px;
     }
 
@@ -259,10 +243,6 @@ button {
     .post-location{
         margin-top: 10px; 
     }
-
-    // .post-user-info{
-        
-    // }
 
     .post-container-info{
         margin-right: 10px;

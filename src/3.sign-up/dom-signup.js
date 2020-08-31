@@ -2,7 +2,6 @@ import view from './signup.html';
 import './estilos-signup-login.scss';
 import '../firebase-functions/firebaseConfig';
 import { regularExpressions, fields, validateInputsValue } from './funciones-signup';
-/* import * as firebase from 'firebase'; */
 import { createNewUser, authGoogleAccount, authWithFacebook } from '../firebase-functions/firebaseAuth';
 
 export default () => {
@@ -20,9 +19,8 @@ export default () => {
     password: 'La contraseña tiene que ser de 8 dígitos.',
   };
 
-  const validateInputs = (regularExpressions, input, field) => {
-    /* console.log(validateInputsValue(regularExpressions, input, field)); */
-    if (validateInputsValue(regularExpressions, input, field)) {
+  const validateInputs = (regularExpression, input, field) => {
+    if (validateInputsValue(regularExpression, input, field)) {
       divElement
         .querySelector(`#${field}`)
         .classList.remove('form-group-wrong');
@@ -51,7 +49,7 @@ export default () => {
         validateInputs(regularExpressions.password, e.target, 'password');
         break;
       default:
-        '';
+        alert('campo invalido');
     }
   };
 
@@ -87,11 +85,9 @@ export default () => {
     const password = divElement.querySelector('#password-input').value;
     const names = divElement.querySelector('#name').value;
 
-
     if (fields.name && fields.email && fields.password) {
       createNewUser(email, password, names);
       form.reset();
-      /* window.location.hash = '#/login'; */
     } else {
       divElement
         .querySelector('#form-message')
@@ -101,13 +97,13 @@ export default () => {
   /* ------ SIGNUP (REGISTRARSE) FACEBOOK -------*/
   const facebookButtonSignUp = divElement.querySelector('#sign-in-facebook');
 
-  facebookButtonSignUp.addEventListener('click', (e) => {
+  facebookButtonSignUp.addEventListener('click', () => {
     authWithFacebook();
   });
   /* ------ SIGNUP (REGISTRARSE) GOOGLE -------*/
   const googleButtonSignUp = divElement.querySelector('#sign-in-google');
 
-  googleButtonSignUp.addEventListener('click', (e) => {
+  googleButtonSignUp.addEventListener('click', () => {
     authGoogleAccount();
   });
   return divElement;

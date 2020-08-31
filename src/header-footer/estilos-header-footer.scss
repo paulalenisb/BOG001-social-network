@@ -104,7 +104,6 @@ footer{
 	height: 60px;
 	position: fixed;
 	bottom: 0;
-	/* background-color: red; */
 	.footer-container {display: none;}
 	#nav-mobile-tablet ul{
 		display: flex;
@@ -127,6 +126,7 @@ footer{
 		}
 	} 
 }
+
 /*--------- ESTILOS DESKTOP ---------*/
 @media screen and (min-width: 1024px) {	
 	// Header

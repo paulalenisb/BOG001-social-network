@@ -1,21 +1,17 @@
 import * as firebase from 'firebase';
 import { auth } from './firebaseConfig';
 import { revealErrorMessage, sendEmailMessage } from './firebaseErrors';
-// import { setupUI } from '../views';
 import { userSave } from './firebaseStore';
-
-// export const lerattoUser = auth.currentUser;
-
 
 /* ------ LOGOUT -------*/
 export const exit = () => {
   auth
     .signOut()
     .then(() => {
-      localStorage.clear()
+      localStorage.clear();
     })
     .catch((error) => {
-      // An error happened.
+      alert(error);// An error happened.
     });
 };
 
@@ -32,7 +28,7 @@ const sendEmail = () => {
       // Email sent.
     })
     .catch((error) => {
-      // An error happened.
+      alert(error);// An error happened.
     });
 };
 
@@ -42,26 +38,26 @@ export const createNewUser = (email, password, username) => {
     .createUserWithEmailAndPassword(email, password)
     .then((result) => {
       result.user.updateProfile({
-        displayName: username,   
+        displayName: username,
+      })
+        .then(() => {
+          const user = {
+            id: result.user.uid,
+            usuario: result.user.displayName,
+            correo: result.user.email,
+            photo: 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg',
+          };
+          userSave(user);
+          /* console.log(user); */
+
+          sendEmail();
+          exit();
+        })
+        .catch((error) => {
+          revealErrorMessage(error.code);
+          throw error;
+        });
     })
-    .then(()=>{
-      const user = {
-        id: result.user.uid,
-        usuario: result.user.displayName,
-        correo: result.user.email,
-        photo: 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg'
-      };
-      userSave(user);
-      /* console.log(user); */
-      
-      sendEmail();
-      exit();
-    })
-    .catch((error) => {
-      revealErrorMessage(error.code);
-      throw error;
-    });
-  })
     .catch((error) => {
       revealErrorMessage(error.code);
       throw error;
@@ -104,7 +100,7 @@ export const authGoogleAccount = () => {
       window.location.hash = '#/home';
     })
     .catch((error) => {
-      console.error(error);
+      alert(error);
     });
 };
 
@@ -123,10 +119,9 @@ export const authWithFacebook = () => {
       userSave(user);
       localStorage.setItem('userSession', JSON.stringify(result.user));
       window.location.hash = '#/home';
-
     })
     .catch((error) => {
-      console.error(error);
+      alert(error);
     });
 };
 
@@ -143,7 +138,6 @@ export const authWithFacebook = () => {
 //     // console.log(displayName, email);
 //   }
 // });
-
 
 // auth.onAuthStateChanged((user) => {
 //   console.log(user);
@@ -162,14 +156,12 @@ export const authWithFacebook = () => {
 //   const uid = currentUser.uid;
 
 //   const userData = {
-//     // lastloginTime: new Date(), 
+//     // lastloginTime: new Date(),
 //     name:name,
 //     email: email,
-//     photo:photo  
+//     photo:photo
 //   }
 //   return db.doc(`/users/${uid}`).set(userData,  {merge: true});
 // }
 
 // console.log(userSave(user))
-
-

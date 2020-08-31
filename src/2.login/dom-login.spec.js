@@ -11,7 +11,7 @@ describe('Login', () => {
     const el = Login();
     expect(el.querySelector('form')).toBeTruthy();
     const emailInput = el.querySelector('#email');
-    expect(emailInput.placeholder).toBe('correo@correo.com')
+    expect(emailInput.placeholder).toBe('correo@correo.com');
 
     expect(emailInput.classList.contains('form-group-wrong')).toBe(false);
 

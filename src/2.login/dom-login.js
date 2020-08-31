@@ -17,7 +17,6 @@ export default () => {
 
   const form = divElement.querySelector('#form');
   const inputs = divElement.querySelectorAll('#form input');
-  // console.log(inputs)
 
   const messageError = {
     email: 'El correo es inválido',
@@ -25,9 +24,8 @@ export default () => {
   };
 
   /* ------ VALIDACIÓN INPUTS FORMULARIO -------*/
-  const validateInputs = (regularExpressions, input, field) => {
-    // console.log(validateInputsValue(regularExpressions, input, field));
-    if (validateInputsValue(regularExpressions, input, field)) {
+  const validateInputs = (regularExpression, input, field) => {
+    if (validateInputsValue(regularExpression, input, field)) {
       divElement
         .querySelector(`#${field}`)
         .classList.remove('form-group-wrong');
@@ -51,7 +49,7 @@ export default () => {
         validateInputs(regularExpressions.password, e.target, 'password');
         break;
       default:
-        '';
+        alert('campo invalido');
     }
   };
 
@@ -90,18 +88,18 @@ export default () => {
     if (fields.email && fields.password) {
       loginUser(email, password);
       form.reset();
-    } 
+    }
   });
   /* ------ SIGNUP (REGISTRARSE) FACEBOOK -------*/
   const facebookButtonSignUp = divElement.querySelector('#sign-in-facebook');
 
-  facebookButtonSignUp.addEventListener('click', (e) => {
+  facebookButtonSignUp.addEventListener('click', () => {
     authWithFacebook();
   });
   /* ------ SIGNUP (REGISTRARSE) GOOGLE -------*/
   const googleButtonSignUp = divElement.querySelector('#sign-in-google');
 
-  googleButtonSignUp.addEventListener('click', (e) => {
+  googleButtonSignUp.addEventListener('click', () => {
     authGoogleAccount();
   });
 

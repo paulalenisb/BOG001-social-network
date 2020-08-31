@@ -32,7 +32,6 @@ const router = (route) => {
   }
 
   return content.appendChild(nodeDomPages);
-  
 };
 
 export { router };
