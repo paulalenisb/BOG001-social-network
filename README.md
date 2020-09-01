@@ -1,4 +1,5 @@
 <p align="center"> <img src="src/images/readme-img/banner_Leratto.png" width="1000"> </p>
+
 # Leratto
 
 ## Índice
@@ -31,9 +32,10 @@ En nuestra paleta de colores, existe un contraste de colores calidos con colores
 #### Protipo de baja
 
 #### Protipo de alta
+<p align="center"> <img src="src/images/readme-img/Leratto_prototipo_baja.jpg" width="500" style="box-shadow: 5px 10px 8px #00000011"> </p>
 
 ##### Mobile
-<p align="center"> <img src="src/images/readme-img/Mobile_Welcome.png" width="300" style="margin:10px"> <img style="margin:10px" src="src/images/readme-img/Mobile_Login.png" width="300"> <img style="margin:10px" src="src/images/readme-img/Mobile_Registro.png" width="300"> <img style="margin:10px" src="src/images/readme-img/Mobile_Post.png" width="300"> <img style="margin:10px" src="src/images/readme-img/Mobile_Home.png" width="300"></p>
+<p align="center"> <img src="src/images/readme-img/Mobile_Welcome.png" width="300" style="margin:10px"> <img style="margin:10px" src="src/images/readme-img/Mobile_Login.png" width="300"> <img style="margin:10px" src="src/images/readme-img/Mobile_Registro.png" width="300"> <img style="margin:10px" src="src/images/readme-img/Mobile_404.png" width="300"> <img style="margin:10px" src="src/images/readme-img/Mobile_Post.png" width="300"> <img style="margin:10px" src="src/images/readme-img/Mobile_Home.png" width="300"></p>
 
 ##### Web
 <p align="center"> <img src="src/images/readme-img/Web_Login.jpg" width="500" style="margin:10px"> <img style="margin:10px" src="src/images/readme-img/Web_Signup.jpg" width="500"> <img style="margin:10px" src="src/images/readme-img/Web_Home.png" width="500"> <img style="margin:10px" src="src/images/readme-img/Web_Post.png" width="500"></p>
