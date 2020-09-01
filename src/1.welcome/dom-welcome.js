@@ -7,9 +7,10 @@ export default () => {
 
   window.addEventListener('load', () => {
     setTimeout(() => {
-      window.location.hash = '#/login';
+      window.location.hash ='#/login';
     }, 4000);
   });
+
 
   return divElement;
 };
