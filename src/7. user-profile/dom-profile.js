@@ -1,5 +1,5 @@
-import view from './profile.html';
 import { exit } from '../firebase-functions/firebaseAuth';
+import view from './profile.html';
 import './estilos-profile.scss';
 import { headerTemplate, footerTemplate } from '../header-footer/header-footer';
 
@@ -8,7 +8,6 @@ export default () => {
   divElement.className = 'logged-in';
   divElement.innerHTML = view;
 
-  const btnClick = divElement.querySelector('#btn-sign-out');
   const userNameProfile = divElement.querySelector('#user-name-profile');
   const userPhotoProfile = divElement.querySelector('#user-picture');
 
@@ -29,6 +28,8 @@ export default () => {
   userPhotoProfile.src = userProfile(userPhotoURL);
 
   /* ------ Cerrar sesión -------*/
+  const btnClick = divElement.querySelector('#btn-sign-out');
+
   btnClick.addEventListener('click', () => {
     exit();
     window.location.hash = '#/login';

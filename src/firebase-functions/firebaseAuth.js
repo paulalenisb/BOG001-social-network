@@ -18,7 +18,7 @@ export const exit = () => {
 /* ------ SEND EMAIL -------*/
 const sendEmail = () => {
   const config = {
-    url: 'http://localhost:8080/',
+    url: 'https://tatianatorog.github.io/BOG001-social-network/',
   };
   const user = firebase.auth().currentUser;
   user
@@ -45,11 +45,8 @@ export const createNewUser = (email, password, username) => {
             id: result.user.uid,
             usuario: result.user.displayName,
             correo: result.user.email,
-            photo: 'https://i.pinimg.com/originals/74/8d/ab/748dab62c4448f6d50cb92981e6f2708.jpg',
           };
           userSave(user);
-          /* console.log(user); */
-
           sendEmail();
           exit();
         })
@@ -104,26 +101,26 @@ export const authGoogleAccount = () => {
     });
 };
 
-/* ------ AUTH FACEBOOK-------*/
-export const authWithFacebook = () => {
-  const provider = new firebase.auth.FacebookAuthProvider();
-  auth
-    .signInWithPopup(provider)
-    .then((result) => {
-      const user = {
-        id: result.user.uid,
-        usuario: result.user.displayName,
-        correo: result.user.email,
-        photo: result.user.photoURL,
-      };
-      userSave(user);
-      localStorage.setItem('userSession', JSON.stringify(result.user));
-      window.location.hash = '#/home';
-    })
-    .catch((error) => {
-      alert(error);
-    });
-};
+// /* ------ AUTH FACEBOOK-------*/
+// export const authWithFacebook = () => {
+//   const provider = new firebase.auth.FacebookAuthProvider();
+//   auth
+//     .signInWithPopup(provider)
+//     .then((result) => {
+//       const user = {
+//         id: result.user.uid,
+//         usuario: result.user.displayName,
+//         correo: result.user.email,
+//         photo: result.user.photoURL,
+//       };
+//       userSave(user);
+//       localStorage.setItem('userSession', JSON.stringify(result.user));
+//       window.location.hash = '#/home';
+//     })
+//     .catch((error) => {
+//       alert(error);
+//     });
+// };
 
 // /* ------ AUTH STATE CHANGED -------*/
 // firebase.auth().onAuthStateChanged((user) => {
@@ -147,21 +144,3 @@ export const authWithFacebook = () => {
 //     setupUI();
 //   }
 // });
-
-// const updateUserInfo = ( ) => {
-//   const currentUser = auth.currentUser;
-//   const name = currentUser.displayName;
-//   const photo = currentUser.photoURL
-//   const email = currentUser.email;
-//   const uid = currentUser.uid;
-
-//   const userData = {
-//     // lastloginTime: new Date(),
-//     name:name,
-//     email: email,
-//     photo:photo
-//   }
-//   return db.doc(`/users/${uid}`).set(userData,  {merge: true});
-// }
-
-// console.log(userSave(user))

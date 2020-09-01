@@ -57,18 +57,19 @@ export default () => {
         }
         return pesos;
       };
-      /* ------ likes según el usuario -------*/
+
+      /* ------ Mostrar icon de like según el usuario -------*/
       const usersLike = post.users;
-      let likesIcon = '';
-      let likesIcons = '';
+      let likeIconFill = '';
+      let likeIconStroke = ''; // Corazoncito vacío
 
       if (usersLike.includes(userId)) {
-        likesIcon = `
+        likeIconFill = `
             <i type="button" class="far fa-heart fill-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
           `;
       } else {
-        likesIcons = `
-            <i type="button" class="far fa-heart without-fill" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
+        likeIconStroke = `
+            <i type="button" class="far fa-heart stroke-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
         `;
       }
 
@@ -86,7 +87,7 @@ export default () => {
         selectOptions = `
         <select name="options" id="${post.uid}" data-id="${doc.id}"class="post-options">
           <option value="" class="post-options-main">...</option>
-          <option value="Editar"  class="post-options-edit" id="${post.uid}" data-id="${doc.id}" onclick>Editar</option>
+          <option value="Editar" class="post-options-edit" id="${post.uid}" data-id="${doc.id}">Editar</option>
           <option value="Eliminar" class="post-options-delete">Eliminar</option>
         </select>  
         `;
@@ -96,7 +97,6 @@ export default () => {
       postContainer.innerHTML += `
       <div class="post-container">
       <div class="post-food-photo-web" style= "background-image:url('${post.foodPhoto}')"></div>
-        <!--<img src="${post.foodPhoto}"/>-->
         <div class="post-allinfo">
         <div class="post-container-info" id="post-main-info">
           <div class="post-container-info-main">
@@ -123,8 +123,8 @@ export default () => {
             <h3 class="post-user-data-name">${post.name} </h3>
           </div>
           <div class="post-container-likes">
-            ${likesIcon}
-            ${likesIcons}
+            ${likeIconFill}
+            ${likeIconStroke}
           </div>
         </div>
           <p class="post-description">${post.description}</p>
@@ -134,27 +134,50 @@ export default () => {
       </div>`;
     });
 
-    /* ------ Funcionalidad likes -------*/
-    const btnLike = postContainer.querySelectorAll('.without-fill');
+    /* ------ Funcionalidad like -------*/
+    const btnLike = postContainer.querySelectorAll('.stroke-heart');
     btnLike.forEach((btn) => {
       btn.addEventListener('click', async (e) => {
         const doc = await getEditPost(e.target.dataset.id);
         const post = doc.data();
         const idDoc = doc.id;
-        const users = post.users;
+        let users = post.users;
         let likes = post.likes;
         users.push(userId);
         e.target.classList.add('fill-heart');
         e.target.textContent = ++likes;
         updatePost(idDoc, {
           likes,
-          users,
+          users
         });
       });
     });
 
-    const homeAddEvent = () => {
-    /* ------ Eliminar/Borrar post -------*/
+    /* ------ Funcionalidad dislike -------*/
+    const btnDislike = postContainer.querySelectorAll('.fill-heart');
+    btnDislike.forEach((btn) => {
+      btn.addEventListener('click', async (e) => {
+        const doc = await getEditPost(e.target.dataset.id);
+        e.target.classList.remove('fill-heart');
+        const post = doc.data();
+        const idDoc = doc.id;
+        let users = post.users;
+        let likes = post.likes;
+        e.target.textContent = --likes;
+        const userPosition = users.indexOf(userId);
+        if (userPosition > -1) {
+        users.splice(userPosition, 1);
+          }
+        updatePost(idDoc, {
+          likes,
+          users
+        });
+      });
+    });
+
+
+    /* ------ Función eliminar/editar post -------*/
+    const editDeletePost = () => {
       const btnOptions = divElement.querySelectorAll('.post-options');
       const modalDeletePost = divElement.querySelector('.modal-delete');
 
@@ -162,9 +185,8 @@ export default () => {
         btn.addEventListener('change', async (e) => {
           modalDeletePost.innerHTML = '';
 
+          /* ------ Borrar post -------*/
           if (btn.value === 'Eliminar') {
-          // Si es eliminar, crear modal
-
             const dataId = e.target.dataset.id;
 
             modalDeletePost.innerHTML = `
@@ -177,20 +199,20 @@ export default () => {
                   </div>
               </div>
             </div> `;
-
+            
+            // Opción borrar en modal
             const btnModalDelete = modalDeletePost.querySelector('.modal-delete');
             btnModalDelete.addEventListener('click', async () => {
               try {
                 await deletePost(dataId);
-
                 modalDeletePost.innerHTML = '';
               } catch (error) {
                 alert(error);
               }
             });
 
+            // Opción cancelar en modal
             const btnModalCancel = modalDeletePost.querySelector('.modal-cancel');
-
             btnModalCancel.addEventListener('click', () => {
               modalDeletePost.innerHTML = '';
             });
@@ -207,7 +229,7 @@ export default () => {
       });
     };
 
-    homeAddEvent();
+    editDeletePost();
   });
 
   divElement.insertAdjacentElement('afterbegin', headerTemplate());

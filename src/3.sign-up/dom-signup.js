@@ -6,10 +6,9 @@ import { createNewUser, authGoogleAccount, authWithFacebook } from '../firebase-
 
 export default () => {
   const divElement = document.createElement('div');
-  divElement.className = 'logged-out';
   divElement.innerHTML = view;
-
   const form = divElement.querySelector('#form');
+  
   // querySelectorAll nos devuelve un array con cada uno de los inputs
   const inputs = divElement.querySelectorAll('#form input');
 
@@ -95,11 +94,11 @@ export default () => {
     }
   });
   /* ------ SIGNUP (REGISTRARSE) FACEBOOK -------*/
-  const facebookButtonSignUp = divElement.querySelector('#sign-in-facebook');
+  // const facebookButtonSignUp = divElement.querySelector('#sign-in-facebook');
 
-  facebookButtonSignUp.addEventListener('click', () => {
-    authWithFacebook();
-  });
+  // facebookButtonSignUp.addEventListener('click', () => {
+  //   authWithFacebook();
+  // });
   /* ------ SIGNUP (REGISTRARSE) GOOGLE -------*/
   const googleButtonSignUp = divElement.querySelector('#sign-in-google');
 

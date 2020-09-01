@@ -9,12 +9,14 @@ window.addEventListener('hashchange', () => {
 
 /* ------ Button active -------*/
 window.addEventListener('hashchange', () => {
+
   // Mobile
   const iconHomeMob = document.querySelector('#icon-home-mob');
   const iconFilterMob = document.querySelector('#icon-filter-mob');
   const iconPostMob = document.querySelector('#icon-post-mob');
   const iconProfileMob = document.querySelector('#icon-user-mob');
 
+  // Web
   const iconHome = document.querySelector('#icon-home-desk');
   const iconFilter = document.querySelector('#icon-filter-desk');
   const iconPost = document.querySelector('#icon-post-desk');

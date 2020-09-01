@@ -1,5 +1,4 @@
 import { pages } from "../views.js";
-// import * as firebase from 'firebase';
 
 const content = document.getElementById("root");
 const router = (route) => {

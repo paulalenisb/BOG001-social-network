@@ -8,11 +8,10 @@ export const createUserProfile = async () => {
   const userLocalStorage = localStorage.getItem('userSession');
   const convertObjJson = JSON.parse(userLocalStorage);
   const userId = convertObjJson.user.uid;
-
   return db.collection('users').where('id', '==', userId).get();
 };
 
-export const updateUserInfo = async (user) => db.collection('users').doc(user.id).update(user);
+// export const updateUserInfo = async (user) => db.collection('users').doc(user.id).update(user);
 
 // Creamos el post en firebase con su colecciones y el objeto del doc
 export const savePost = (uid, name, userPhoto, title, description, typeOfFood, price, quality, location, foodPhoto, date, likes, users) => db.collection('review').doc().set({
@@ -32,7 +31,7 @@ export const savePost = (uid, name, userPhoto, title, description, typeOfFood, p
 });
 
 // De mi colección de reviews traeme todo
-export const getPosts = () => db.collection('review').get();
+// export const getPosts = () => db.collection('review').get();
 
 /* Cada vez que mis posts se actualicen, agreguen o borren, actualizar 
 en tiempo real el timeline con el método onSnapshot() */

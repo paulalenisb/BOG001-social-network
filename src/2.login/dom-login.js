@@ -6,13 +6,11 @@ import {
 } from '../3.sign-up/funciones-signup';
 import {
   loginUser,
-  authWithFacebook,
   authGoogleAccount,
 } from '../firebase-functions/firebaseAuth';
 
 export default () => {
   const divElement = document.createElement('div');
-  divElement.className = 'logged-out';
   divElement.innerHTML = view;
 
   const form = divElement.querySelector('#form');
@@ -91,11 +89,11 @@ export default () => {
     }
   });
   /* ------ SIGNUP (REGISTRARSE) FACEBOOK -------*/
-  const facebookButtonSignUp = divElement.querySelector('#sign-in-facebook');
+  // const facebookButtonSignUp = divElement.querySelector('#sign-in-facebook');
 
-  facebookButtonSignUp.addEventListener('click', () => {
-    authWithFacebook();
-  });
+  // facebookButtonSignUp.addEventListener('click', () => {
+  //   authWithFacebook();
+  // });
   /* ------ SIGNUP (REGISTRARSE) GOOGLE -------*/
   const googleButtonSignUp = divElement.querySelector('#sign-in-google');
 

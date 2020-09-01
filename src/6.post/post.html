@@ -6,6 +6,7 @@
 
     <!-- Info -->
     <div class="info-post-container">
+      
       <!-- User -->
       <div class="form-group-post user-photo-name">
         <img alt="Profile Picture" id="post-user-photo">
@@ -17,22 +18,17 @@
         <h2 id="post-recommendation" class="post-recommendation">Crea tu recomendación</h2>
       </div>
 
-      <!-- Title post -->
+      <!-- Title post + icon image -->
       <div class="form-group-post">
-
-          <label for="btn-upload-file" id="post-image">
-            <i class="fas fa-image"></i>
+        <label for="btn-upload-file" id="post-image">
+          <i class="fas fa-image"></i>
           <input required type="file" value="upload" id="btn-upload-file" class="btn-upload-file" />
-          <!-- <img  alt="" id="post-image"> -->
-          </label>
+        </label>
         <input  type="text" id="post-title" class="form-control" class="Task Title" placeholder="Restaurante" required>
       </div>
-      <!-- <p style="width:60%" data-value="60">CSS3</p> -->
-		  <progress max="100" value="0" class="css3" id="upload-image" placeholder=deli> </progress>
-      
-      <!-- <div class="form-group-post">
-        <progress value="0" max="100" style="width: 100%" id="upload-image"></progress>
-      </div> -->
+
+      <!-- Barra de carga imagen-->
+        <progress max="100" value="0" class="css3" id="upload-image"> </progress>
       
       <!-- Description post -->
       <div class="form-group-post">
@@ -45,7 +41,6 @@
       <p>Agrega a tu recomentación</p>
 
       <!-- Select #TipoDeComida -->
-
       <select required class="select-post" id="post-type-food"> 
         <option value="">#Categoría</option>
         <option value="#FastFood">#FastFood</option>
@@ -70,7 +65,6 @@
       </select>
 
       <!-- Select Calidad -->
-
       <select required class="select-post" id="post-quality"> 
         <option value="">Calidad</option>
         <option value="1">★☆☆</option> 
