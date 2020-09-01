@@ -1,8 +1,8 @@
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
 
-export const db = firebase.firestore();
+// export const db = ;
 
-export const userSave = (user) => db.collection('users').doc(user.id).set(user);
+export const userSave = (user) => firebase.firestore().collection('users').doc(user.id).set(user);
 
 export const createUserProfile = async () => {
   const userLocalStorage = localStorage.getItem('userSession');
@@ -14,7 +14,7 @@ export const createUserProfile = async () => {
 // export const updateUserInfo = async (user) => db.collection('users').doc(user.id).update(user);
 
 // Creamos el post en firebase con su colecciones y el objeto del doc
-export const savePost = (uid, name, userPhoto, title, description, typeOfFood, price, quality, location, foodPhoto, date, likes, users) => db.collection('review').doc().set({
+export const savePost = (uid, name, userPhoto, title, description, typeOfFood, price, quality, location, foodPhoto, likes, users) => firebase.firestore().collection('review').doc().set({
   uid,
   name,
   userPhoto,
@@ -25,7 +25,7 @@ export const savePost = (uid, name, userPhoto, title, description, typeOfFood, p
   quality,
   location,
   foodPhoto,
-  date: firebase.firestore.Timestamp.now(),
+  // date: firebase.firestore.Timestamp.now(),
   likes,
   users,
 });
@@ -35,17 +35,17 @@ export const savePost = (uid, name, userPhoto, title, description, typeOfFood, p
 
 /* Cada vez que mis posts se actualicen, agreguen o borren, actualizar 
 en tiempo real el timeline con el método onSnapshot() */
-export const onGetPosts = (callback) => db.collection('review').orderBy('date', 'desc').onSnapshot(callback);
+export const onGetPosts = (callback) => firebase.firestore().collection('review').orderBy('date', 'desc').onSnapshot(callback);
 
 // Para eliminar un post necesito su id
-export const deletePost = (id) => db.collection('review').doc(id).delete();
+export const deletePost = (id) => firebase.firestore().collection('review').doc(id).delete();
 
 // Editar el post con su respectivo id
 // Obtener el post segun el id(documento segun id que se le asigna)
-export const getEditPost = (id) => db.collection('review').doc(id).get();
+export const getEditPost = (id) => firebase.firestore().collection('review').doc(id).get();
 
 // Actualizar la tarea, con los datos del id que me esta pasando la const
-export const updatePost = (id, updatePostFood) => db.collection('review').doc(id).update(updatePostFood);
+export const updatePost = (id, updatePostFood) => firebase.firestore().collection('review').doc(id).update(updatePostFood);
 
 export const uploadImgFood = (file, uid) => {
   const refStorage = firebase.storage().ref(`imgsPosts/${uid}/${file.name}`);
