@@ -1,3 +1,5 @@
+// importamos la funcion que vamos a testear
+// import mockFirebase from '../_mocks_/firebase-mock.js';
 import MockFirebase from 'mock-cloud-firestore';
 
 import { savePost, onGetPosts} from '../src/firebase-functions/firebaseStore.js';
@@ -89,9 +91,10 @@ describe('savePost', () => {
 //         // console.log(result);
 //         done()
 //       // })
+      
 //     }
 //     const getReviews = await onGetPosts(callback)
-
+  
 //       // const callback = (review) => {
         
 //         // done();
