@@ -1,8 +1,6 @@
-import { pages } from '../views.js';
-import { homeAddEvent } from '../4.home/dom-home';
+import { pages } from "../views.js";
 
-const content = document.getElementById('root');
-
+const content = document.getElementById("root");
 const router = (route) => {
   content.innerHTML = '';
   let nodeDomPages = '';

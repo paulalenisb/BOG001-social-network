@@ -1,85 +1,93 @@
-// import * as firebase from "firebase";
-import view from "./home.html";
-import "./estilos-home.scss";
-import "../firebase-functions/firebaseConfig";
-import { onGetPosts, deletePost, getEditPost } from "../firebase-functions/firebaseStore";
-import { auth } from "../firebase-functions/firebaseConfig";
-import { headerTemplate, footerTemplate} from "../header-footer/header-footer";
-// const userId = auth.currentUser.uid;
+import view from './home.html';
+import './estilos-home.scss';
+import { auth } from '../firebase-functions/firebaseConfig';
+import {
+  onGetPosts, deletePost, getEditPost, updatePost,
+} from '../firebase-functions/firebaseStore';
+import { headerTemplate, footerTemplate } from '../header-footer/header-footer';
 
 export default () => {
-  const divElement = document.createElement("div");
+  const divElement = document.createElement('div');
   divElement.innerHTML = view;
 
-  const postContainer = divElement.querySelector("#post-container");
-  const id = "";
-
-  // Cuando la ventana cargue, traer el contenido del DOM, se ejecuta el evento de getEditPosts
+  const postContainer = divElement.querySelector('#post-container');
 
   onGetPosts(async (querySnapshot) => {
-    postContainer.innerHTML = "";
+    postContainer.innerHTML = '';
     const userId = auth.currentUser.uid;
 
     // Con querySnapshot recorremos los objetos que hemos creado en docs
     querySnapshot.forEach((doc) => {
       const post = doc.data();
-      
 
       /* ------ Impresión Calidad -------*/
-      if (post.quality === "1") {
-        post.quality = "★☆☆";
-      }
-      if (post.quality === "2") {
-        post.quality = "★★☆";
-      }
-      if (post.quality === "3") {
-        post.quality = "★★★";
-      }
+      const changeValueQuality = (value) => {
+        let stars = '';
+        switch (value) {
+          case '1':
+            stars = '★☆☆';
+            break;
+          case '2':
+            stars = '★★☆';
+            break;
+          case '3':
+            stars = '★★★';
+            break;
+          default:
+            alert('campo no válido');
+        }
+        return stars;
+      };
 
       /* ------ Impresión Precio -------*/
-      if (post.price === "1") {
-        post.price = "$ 0 - 20k";
-      }
-      if (post.price === "2") {
-        post.price = "$$ 21k - 50k";
-      }
-      if (post.price === "3") {
-        post.price = "$$$ 51k +";
-      }
+      const changeValuePrice = (value) => {
+        let pesos = '';
+        switch (value) {
+          case '1':
+            pesos = '$ 0 - 20k';
+            break;
+          case '2':
+            pesos = '$$ 21k - 50k';
+            break;
+          case '3':
+            pesos = '$$$ 51k +';
+            break;
+          default:
+            alert('campo no válido');
+        }
+        return pesos;
+      };
 
-      //   const changeValueQuality= () => {
-      //   let stars= "";
-      //   switch (post.quality) {
-      //     case '1':
-      //       stars = '★☆☆'
-      //       break;
-      //     case '2':
-      //       stars ='★★☆'
-      //       break;
-      //     case '3':
-      //       stars='★★★'
-      //         break;
-      //     default:
-      //       '';
-      //   }
-      //   return stars
-      // }
+      /* ------ Mostrar icon de like según el usuario -------*/
+      const usersLike = post.users;
+      let likeIconFill = '';
+      let likeIconStroke = ''; // Corazoncito vacío
+
+      if (usersLike.includes(userId)) {
+        likeIconFill = `
+            <i type="button" class="far fa-heart fill-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
+          `;
+      } else {
+        likeIconStroke = `
+            <i type="button" class="far fa-heart stroke-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
+        `;
+      }
 
       /* ------ userPhoto Default -------*/
-      const userProfile = (userPhotoURL) => {
-        if (userPhotoURL) {
-          return userPhotoURL;
+      const userProfile = (photoURL) => {
+        if (photoURL) {
+          return photoURL;
         }
-        return "src/images/userDefault.png";
+        return 'https://firebasestorage.googleapis.com/v0/b/leratto-sn3.appspot.com/o/assets%2FuserDefault.png?alt=media&token=64b42670-1445-4ff7-8216-5a8093b6fb9e';
       };
 
       /* ------ Literal Select Eliminar/Borrar post -------*/
-      let selectOptions = "";
+      let selectOptions = '';
       if (userId === post.uid) {
         selectOptions = `
         <select name="options" id="${post.uid}" data-id="${doc.id}"class="post-options">
           <option value="" class="post-options-main">...</option>
-          <option value="Editar"  class="post-options-edit" id="${post.uid}" data-id="${doc.id}" onclick>Editar</option>
+          <option value="Editar" class="post-options-edit" id="${post.uid}" data-id="${doc.id}">Editar</option>
           <option value="Eliminar" class="post-options-delete">Eliminar</option>
         </select>  
         `;
@@ -88,7 +96,7 @@ export default () => {
       /* ------ Literal post -------*/
       postContainer.innerHTML += `
       <div class="post-container">
-        <img src="${post.foodPhoto}" class="post-food-photo-web"/>
+      <div class="post-food-photo-web" style= "background-image:url('${post.foodPhoto}')"></div>
         <div class="post-allinfo">
         <div class="post-container-info" id="post-main-info">
           <div class="post-container-info-main">
@@ -102,23 +110,21 @@ export default () => {
             <p class="post-type-food">${post.typeOfFood}</p>
           </div>
           <div class="post-container-price">
-            <p class="post-price">${post.price}</p>
+            <p class="post-price">${changeValuePrice(post.price)}</p>
           </div>
           <div class="post-container-quality">
-            <p class="post-quality">${post.quality}</p>
+            <p class="post-quality">${changeValueQuality(post.quality)}</p>
           </div>
         </div>
-        <img src="${post.foodPhoto}" class="post-food-photo-mobile"/>
+        <div class="post-food-photo-mobile" style= "background-image:url('${post.foodPhoto}')"></div>
         <div class="post-user-info">
           <div class="post-user-data">
-            <img src="${userProfile(
-              post.userPhoto
-            )}" class="post-user-data-photo"/>
+            <img src="${userProfile(post.userPhoto)}" class="post-user-data-photo"/>
             <h3 class="post-user-data-name">${post.name} </h3>
           </div>
           <div class="post-container-likes">
-            <p class="post-container-likes-icon"></p>
-            <i type="button" class="far fa-heart" id="${post.uid}" data-id="${doc.id}">${post.likes}</i>
+            ${likeIconFill}
+            ${likeIconStroke}
           </div>
         </div>
           <p class="post-description">${post.description}</p>
@@ -126,45 +132,62 @@ export default () => {
       </div>
       </div>
       </div>`;
-  });
+    });
+
+    /* ------ Funcionalidad like -------*/
+    const btnLike = postContainer.querySelectorAll('.stroke-heart');
+    btnLike.forEach((btn) => {
+      btn.addEventListener('click', async (e) => {
+        const doc = await getEditPost(e.target.dataset.id);
+        const post = doc.data();
+        const idDoc = doc.id;
+        let users = post.users;
+        let likes = post.likes;
+        users.push(userId);
+        e.target.classList.add('fill-heart');
+        e.target.textContent = ++likes;
+        updatePost(idDoc, {
+          likes,
+          users
+        });
+      });
+    });
+
+    /* ------ Funcionalidad dislike -------*/
+    const btnDislike = postContainer.querySelectorAll('.fill-heart');
+    btnDislike.forEach((btn) => {
+      btn.addEventListener('click', async (e) => {
+        const doc = await getEditPost(e.target.dataset.id);
+        e.target.classList.remove('fill-heart');
+        const post = doc.data();
+        const idDoc = doc.id;
+        let users = post.users;
+        let likes = post.likes;
+        e.target.textContent = --likes;
+        const userPosition = users.indexOf(userId);
+        if (userPosition > -1) {
+        users.splice(userPosition, 1);
+          }
+        updatePost(idDoc, {
+          likes,
+          users
+        });
+      });
+    });
 
 
-    // const btnLike = postContainer.querySelectorAll(".fa-heart");
+    /* ------ Función eliminar/editar post -------*/
+    const editDeletePost = () => {
+      const btnOptions = divElement.querySelectorAll('.post-options');
+      const modalDeletePost = divElement.querySelector('.modal-delete');
 
-    // btnLike.forEach((btn) => {
-    //     btn.addEventListener("click", (e) => {
-    //       let count = 0;
-    //       let idDoc= "";
-    //       e.target.classList.toggle("fill-heart");
-    //       e.target.textContent = ++count;
+      btnOptions.forEach((btn) => {
+        btn.addEventListener('change', async (e) => {
+          modalDeletePost.innerHTML = '';
 
-    //       idDoc= e.target.dataset.id
-    //       updatePost(idDoc,{
-    //       likes:count
-    //       })
-
-    //     });
-    //   });
-
-  const homeAddEvent = () => {
-
-    /* ------ Eliminar/Borrar post -------*/
-    const btnOptions = divElement.querySelectorAll(".post-options");
-    const modalDeletePost = divElement.querySelector(".modal-delete");
-    console.log(btnOptions);
-  
-  
-    btnOptions.forEach((btn) => {
-      btn.addEventListener("change", async (e) => {
-        // console.log('Holi');
-        modalDeletePost.innerHTML = "";
-  
-        if (btn.value === "Eliminar") {
-          //Si es eliminar, crear modal
-          console.log("Aqui va el modal");
-          const dataId = e.target.dataset.id;
-          
-          // if (userId === post.uid) {
+          /* ------ Borrar post -------*/
+          if (btn.value === 'Eliminar') {
+            const dataId = e.target.dataset.id;
 
             modalDeletePost.innerHTML = `
             <div class="overlay">
@@ -176,55 +199,41 @@ export default () => {
                   </div>
               </div>
             </div> `;
-  
-  
-          const btnModalDelete = modalDeletePost.querySelector('.modal-delete');
-            btnModalDelete.addEventListener("click",  async (e) => {
-              console.log(dataId);
+            
+            // Opción borrar en modal
+            const btnModalDelete = modalDeletePost.querySelector('.modal-delete');
+            btnModalDelete.addEventListener('click', async () => {
               try {
                 await deletePost(dataId);
-                
-                modalDeletePost.innerHTML= '';
+                modalDeletePost.innerHTML = '';
               } catch (error) {
                 alert(error);
               }
             });
-          
-          const btnModalCancel = modalDeletePost.querySelector(".modal-cancel");
-  
-          btnModalCancel.addEventListener('click', () => {
-            modalDeletePost.innerHTML= '';
-          });
-  
-  
-        }else if (btn.value === "Editar" ){
-            const doc =  await getEditPost(e.target.dataset.id);
+
+            // Opción cancelar en modal
+            const btnModalCancel = modalDeletePost.querySelector('.modal-cancel');
+            btnModalCancel.addEventListener('click', () => {
+              modalDeletePost.innerHTML = '';
+            });
+
+            /* ------ Editar post -------*/
+          } else if (btn.value === 'Editar') {
+            const doc = await getEditPost(e.target.dataset.id);
             const post = doc.data();
-            localStorage.setItem('docID', JSON.stringify(post))
-            localStorage.setItem('id', doc.id)
-            window.location.hash = "#/post";
-        }
+            localStorage.setItem('docID', JSON.stringify(post));
+            localStorage.setItem('id', doc.id);
+            window.location.hash = '#/post';
+          }
+        });
       });
-    });
-  
-  }
-  
-  homeAddEvent();
-  })
+    };
+
+    editDeletePost();
+  });
 
   divElement.insertAdjacentElement('afterbegin', headerTemplate());
   divElement.insertAdjacentElement('beforeend', footerTemplate());
 
   return divElement;
 };
-
-/* ------ Likes -------*/
-// const btnLike = postContainer.querySelectorAll(".fa-heart");
-
-// btnLike.forEach((btn) => {
-//   btn.addEventListener("click", (e) => {
-//     let count = 0;
-//     e.target.classList.toggle("fill-heart");
-//     e.target.textContent = ++count;
-//   });
-// });

@@ -1,62 +1,45 @@
-// Este es el punto de entrada de tu aplicacion
-
 import { router } from './router/index.routes.js';
 import './main.scss';
 
+/* ------ Router views -------*/
 router(window.location.hash);
 window.addEventListener('hashchange', () => {
-  router(window.location.hash)
+  router(window.location.hash);
 });
 
-
-
 /* ------ Button active -------*/
+window.addEventListener('hashchange', () => {
 
-/* const routerNav = (route) => {
-  switch (route) {
-    case '#/home':
-      window.location = "#/home"
-      break;
-    case '#/filtro':
-      window.location = "#/filtro"
-      break;
-    case '#/post':
-      window.location = "#/post"
-      break;
-    case '#/profile':
-      window.location = "#/profile";
-      break;
-    default:
-      window.location = "#/home";
-  }
-}; */ 
+  // Mobile
+  const iconHomeMob = document.querySelector('#icon-home-mob');
+  const iconFilterMob = document.querySelector('#icon-filter-mob');
+  const iconPostMob = document.querySelector('#icon-post-mob');
+  const iconProfileMob = document.querySelector('#icon-user-mob');
 
-/*const header = document.getElementById("nav-desktop");
-const btns = header.getElementsByClassName("btn");
-console.log(btns);*/
+  // Web
+  const iconHome = document.querySelector('#icon-home-desk');
+  const iconFilter = document.querySelector('#icon-filter-desk');
+  const iconPost = document.querySelector('#icon-post-desk');
+  const iconProfile = document.querySelector('#icon-user-desk');
 
-/*for (let i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-    const current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-    console.log(this.value);
-
-    /* routerNav(this.value) */
-    /* router(this.value) */
-    
-  /*   if(this.value == "#/home"){
-      window.location = "#/home"
-    } */
-    /* if(this.value == "#/filtro"){
-      window.location = "#/filtro"
+  const changeRoutes = (iconHomeMobile, iconFilterMobile, iconPostMobile, iconProfileMobile) => {
+    if (window.location.hash === '#/home') {
+      iconHomeMobile.classList.add('active');
     }
-    if(this.value == "#/post"){
-      window.location = "#/post"
+    if (window.location.hash === '#/filtro') {
+      iconFilterMobile.classList.add('active');
+      iconHomeMobile.classList.remove('active');
     }
-    if(this.value == "#/profile"){
-      window.location = "#/profile"
-    } 
-  });
-}*/
+    if (window.location.hash === '#/post') {
+      iconPostMobile.classList.add('active');
+      iconHomeMobile.classList.remove('active');
+    }
+    if (window.location.hash === '#/profile') {
+      iconProfileMobile.classList.add('active');
+      iconHomeMobile.classList.remove('active');
+    }
+  };
 
+  changeRoutes(iconHomeMob, iconFilterMob, iconPostMob, iconProfileMob);
+  changeRoutes(iconHome, iconFilter, iconPost, iconProfile);
+});
