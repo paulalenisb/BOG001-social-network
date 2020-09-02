@@ -50,7 +50,7 @@ En nuestro proyecto recibimos feedback de nuestras compañeras, equipo de Labora
 * [x] [Uso de HTML semántico.](https://developer.mozilla.org/en-US/docs/Glossary/Semantics#Semantics_in_HTML)
 * [x] Uso de selectores de CSS.
 * [x] Construir tu aplicación respetando el diseño realizado (maquetación).
-* [x] [Uso de flexbox en CSS.](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+* [ ] [Uso de flexbox en CSS.](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
 ### DOM y Web APIs
 
@@ -59,7 +59,7 @@ En nuestro proyecto recibimos feedback de nuestras compañeras, equipo de Labora
 * [x] [Manipulación dinámica del DOM.](https://developer.mozilla.org/es/docs/Referencia_DOM_de_Gecko/Introducci%C3%B3n)
 (appendChild |createElement | createTextNode| innerHTML | textContent | etc.)
 * [ ] [History API.](https://developer.mozilla.org/es/docs/DOM/Manipulando_el_historial_del_navegador)
-* [x] [localStorage.](https://developer.mozilla.org/es/docs/Web/API/Window/localStorage)
+* [ ] [localStorage.](https://developer.mozilla.org/es/docs/Web/API/Window/localStorage)
 
 ### JavaScript
 
@@ -72,7 +72,7 @@ En nuestro proyecto recibimos feedback de nuestras compañeras, equipo de Labora
 * [ ] Diferenciar entre expression y statements.
 * [ ] Diferenciar entre tipos de datos primitivos y no primitivos.
 * [x] [Uso de callbacks.](https://developer.mozilla.org/es/docs/Glossary/Callback_function)
-* [x] [Consumo de Promesas.](https://scotch.io/tutorials/javascript-promises-for-dummies#toc-consuming-promises)
+* [ ] [Consumo de Promesas.](https://scotch.io/tutorials/javascript-promises-for-dummies#toc-consuming-promises)
 
 ### Testing
 
