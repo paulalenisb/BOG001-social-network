@@ -30,9 +30,9 @@ Red social para amantes de la comida. En Leratto podrás compartir y encontrar r
 En nuestra paleta de colores, existe un contraste de colores calidos con colores frios. Nuestros colores representan la tendencia de las aplicaciones en modo oscuro, porque deseamos que nuestros usuarios reduzcan la fatiga visual provocada por la prolongada exposición al brillo de las pantallas además ayuda a tener un aspecto más agradable. El color amarillo genera más apetito en las personas.
 
 #### Protipo de baja
+<p align="center"> <img src="src/images/readme-img/Leratto_prototipo_baja.jpg" width="500" style="box-shadow: 5px 10px 8px #00000011"> </p>
 
 #### Protipo de alta
-<p align="center"> <img src="src/images/readme-img/Leratto_prototipo_baja.jpg" width="500" style="box-shadow: 5px 10px 8px #00000011"> </p>
 
 ##### Mobile
 <p align="center"> <img src="src/images/readme-img/Mobile_Welcome.png" width="300" style="margin:10px"> <img style="margin:10px" src="src/images/readme-img/Mobile_Login.png" width="300"> <img style="margin:10px" src="src/images/readme-img/Mobile_Registro.png" width="300"> <img style="margin:10px" src="src/images/readme-img/Mobile_404.png" width="300"> <img style="margin:10px" src="src/images/readme-img/Mobile_Post.png" width="300"> <img style="margin:10px" src="src/images/readme-img/Mobile_Home.png" width="300"></p>
@@ -40,9 +40,8 @@ En nuestra paleta de colores, existe un contraste de colores calidos con colores
 ##### Web
 <p align="center"> <img src="src/images/readme-img/Web_Login.jpg" width="500" style="margin:10px"> <img style="margin:10px" src="src/images/readme-img/Web_Signup.jpg" width="500"> <img style="margin:10px" src="src/images/readme-img/Web_Home.png" width="500"> <img style="margin:10px" src="src/images/readme-img/Web_Post.png" width="500"></p>
 
-
 ## 4. Feedback
-En nuestro proyecto recibimos feedback de nuestras compañeras, equipo de <L> y diferentes usuarios potenciales de nuestra app. En los diferentes comentarios nos recomendaron aumentar el tamaño de la tipografía, botones y diagramación de textos en las tarjetas de post.
+En nuestro proyecto recibimos feedback de nuestras compañeras, equipo de Laboratoria y diferentes usuarios potenciales de nuestra app. En los diferentes comentarios nos recomendaron aumentar el tamaño de la tipografía, botones y diagramación de textos en las tarjetas de post.
 
 ## 5. Objetivos de aprendizaje
 
@@ -79,7 +78,7 @@ En nuestro proyecto recibimos feedback de nuestras compañeras, equipo de <L> y 
 
 * [ ] [Testeo unitario.](https://jestjs.io/docs/es-ES/getting-started)
 * [ ] [Testeo asíncrono.](https://jestjs.io/docs/es-ES/asynchronous)
-* [x] [Uso de librerias de Mock.](https://jestjs.io/docs/es-ES/manual-mocks)
+* [ ] [Uso de librerias de Mock.](https://jestjs.io/docs/es-ES/manual-mocks)
 
 ### Estructura del código y guía de estilo
 
