@@ -1,7 +1,6 @@
 const errorAuth = {
   'auth/email-already-in-use': 'El correo ya existe, inicia sesión',
   'auth/user-not-found': 'El usuario no existe, regístrate',
-  // 'auth/email-not-verified': 'Valida tu correo para poder ingresar',
   'auth/wrong-password': 'Tu contraseña es incorrecta',
 };
 
