@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+// Variables
+$dark-blue: #111319;
+$medium-blue: #1D212B;
+$black-opacity: rgba(0,0,0,0.5);
+$medium-gray: #707070;
+$yellow: #FDBF04;
+$white: #f4f4f4;
+$font-lato: 'Lato', sans-serif;
+
+// Estilos generales
+.home {
+    height: 100vh;
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+}
+
+button {
+    font-family: $font-lato;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+//  Posts
+.container{
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.post-container{ //Cada post
+    background-color: $medium-blue;
+    color: $white;
+    margin: 10px;
+    width: 330px;
+    height:395px;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+.post-container-info{
+    display: flex;
+    justify-content: space-around;
+}
+
+.post-title{
+    margin-top: 15px;
+    margin-left:3px;
+    margin-bottom: 0px;
+}
+
+.post-location{
+    display:flex;
+    align-items: center;
+    margin-top: -10px;
+    margin-left:3px;
+    color:$yellow;
+    &-info{
+    margin-left:5px;
+    margin-bottom: 10px;
+    }    
+}
+
+.post-type-food{
+    margin-left: -10px;
+    background-color: $yellow;
+    color:$dark-blue;
+    font-weight:bold;
+    border-radius:5px;
+    padding: 1px 3px;
+    
+}
+
+.post-price, .post-quality{
+    color:$yellow
+}
+
+.post-food-photo-mobile{
+    width: 330px;
+    height:200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.post-food-photo-web{
+    display: none;
+}
+
+.post-user-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.post-user-data{
+    display:flex;
+    align-items: center;
+    &-photo {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        margin-left:10px;
+    }
+    &-name {
+        margin-left:15px;
+    }
+}
+
+.post-container-likes{
+    color:$yellow;
+    display:flex;
+    align-items: center;
+    font-size: 16px;
+    &-icon{
+        margin-left: 10px;
+    }
+    
+}
+
+.fa-heart{
+    font-size: 16px;
+    margin-left: 5px;
+    letter-spacing: 0.5em;
+}
+
+.fill-heart{
+    font-weight: bold;
+    color:$yellow;
+    transition:0.4s
+}
+
+.post-description{
+    margin:0px auto;
+    margin-left:10px;
+    margin-right: 10px;
+    height:50px;
+    text-align: justify;
+    display: flex;
+    align-items: center;
+}
+
+.post-options{
+    float: right;
+    margin-top:-10px;
+    color:$yellow;
+    background: transparent;
+    border: none;
+    appearance:none;
+    width: 40px;
+    height: min-content;
+    font-size:1.7em;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+}
+
+// Modal
+.overlay {
+    background:$black-opacity;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+}
+
+.modal {
+    background-color: $medium-blue;
+    width: 300px;
+    height: auto;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.modal-text {
+    color: $white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.btn-modal-confirm-delete {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.btn-modal{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: $white;
+    border-top: 0.1px solid #f4f4f43b;
+    height: 50px;
+}
+
+.modal-delete{
+    color: $yellow;
+}
+
+/*--------- ESTILOS TABLET ---------*/
+@media screen and (min-width: 768px) {
+    .container{
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+
+}
+
+/*--------- ESTILOS DESKTOP ---------*/
+@media screen and (min-width: 1024px) {
+    
+    // Posts
+    .post-container{
+        width: 900px;
+        display: flex;
+        height: 230px;
+    }
+
+    .post-food-photo-web{
+        display: block;
+        background-size: cover;
+        background-position: center;
+        width: 380px;
+        height: 230px;
+        border-radius: 20px 0px 0px 20px;
+    }
+
+    .post-food-photo-mobile{
+        display: none;
+    }
+
+    .post-allinfo{
+        margin-left: 20px;
+        width: 500px;
+        font-size: 1.3em;
+    }
+
+    .post-location{
+        margin-top: 10px; 
+    }
+
+    .post-container-info{
+        margin-right: 10px;
+        justify-content: space-between;
+    }
+
+    .post-location-info{
+        margin: 0px;
+        margin-left: 10px;
+    }
+
+    .post-options{
+        margin-right: 0;
+        font-size: 1.7em;
+    }
+
+    .fa-heart, .post-quality {
+        font-size: 20px;
+    }
+
+    .post-user-data-photo, .post-description{
+        margin-left: 0;
+    }
+    
+    .post-container-likes{
+        margin-right: 0;
+    }
+
+}
